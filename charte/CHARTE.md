@@ -44,3 +44,7 @@ Les zones masquées sont une approximation raisonnable de l'interface des trois 
 - Voix off de l'utilisateur prioritaire ; musique fournie par l'utilisateur, abaissée sous la voix (ducking).
 - Cible interne : ≈ −14 LUFS intégré, crêtes ≤ −1 dBTP (cible interne, pas une exigence officielle des plateformes).
 - Fondus en entrée et en sortie.
+
+## Crédits
+- Aucun crédit affiché sur les images.
+- Tous les crédits (photos de l'auteur « jeremineralogie », images externes avec auteur et licence, musique, sources) figurent dans un court générique défilant en fin de vidéo, sur le fond de la charte.
