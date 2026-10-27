@@ -72,7 +72,7 @@ class Projet:
     nom: str
     dossier: Path
     texte_voix: Path
-    audio_voix: Path
+    audio_voix: Path  # None : vidéo muette
     mots: Path  # JSON [{t, d, w}] : horodatage des mots prononcés
     plans: list
     generique: list  # lignes ; "# Titre" pour une rubrique
@@ -94,7 +94,9 @@ def aligner_texte(texte, mots):
     """Associe chaque mot du texte écrit (ponctuation, accents exacts) à un horodatage."""
     # ponctuation isolée (« ? : ») : collée au mot voisin par une espace insécable
     jetons, ouvrant = [], ""
-    for j in texte.split():
+    for j in re.split(r"[ \t\n]+", texte):  # l'espace insécable lie (« 70 000 »)
+        if j == "//":  # coupure de sous-titre imposée (vidéo muette), non affichée
+            continue
         if _normaliser(j):
             jetons.append(ouvrant + j)
             ouvrant = ""
@@ -122,8 +124,9 @@ def _largeur(texte, police):
     return police.getlength(texte)
 
 
-def decouper_sous_titres(alignes):
-    """Phrases courtes, 2 lignes maximum, coupées aux frontières de sens."""
+def decouper_sous_titres(alignes, ponctuation=True, seuil_blanc=0.6):
+    """Phrases courtes, 2 lignes maximum, coupées aux frontières de sens.
+    ponctuation=False (vidéo muette) : une ligne de texte = un sous-titre, sauf si trop longue."""
     # libass dimensionne la police sur sa hauteur totale : ≈ 0,727 x la taille Pillow (mesuré)
     police = _police(POLICE_SOUS_TITRE, round(TAILLE_SOUS_TITRE * 0.727))
     blocs, courant = [], []
@@ -131,19 +134,48 @@ def decouper_sous_titres(alignes):
     def tient(jetons):
         return len(_repartir_lignes([j for j, _ in jetons], police)) <= 2
 
+    if not ponctuation:
+        return _finir_sous_titres(_blocs_par_ligne(alignes, tient, seuil_blanc), police)
+
     for i, (jeton, t) in enumerate(alignes):
-        if courant and (not tient(courant + [(jeton, t)]) or t[0] - courant[-1][1][1] > 0.6):
+        if courant and (not tient(courant + [(jeton, t)]) or t[0] - courant[-1][1][1] > seuil_blanc):
             blocs.append(courant)
             courant = []
         courant.append((jeton, t))
         fin_phrase = re.search(r"[.?!…]»?$", jeton)
         virgule = re.search(r"[,:;]$", jeton) and len(" ".join(j for j, _ in courant)) >= 14
-        if fin_phrase or virgule:
+        if ponctuation and (fin_phrase or virgule):
             blocs.append(courant)
             courant = []
     if courant:
         blocs.append(courant)
 
+    return _finir_sous_titres(blocs, police)
+
+
+def _blocs_par_ligne(alignes, tient, seuil_blanc):
+    """Une ligne de texte par bloc ; une ligne trop longue est coupée en parts équilibrées,
+    de préférence après une virgule, sans laisser de mot orphelin."""
+    lignes, courant = [], []
+    for jeton, t in alignes:
+        if courant and t[0] - courant[-1][1][1] > seuil_blanc:
+            lignes.append(courant)
+            courant = []
+        courant.append((jeton, t))
+    if courant:
+        lignes.append(courant)
+
+    def couper(bloc):
+        if tient(bloc) or len(bloc) < 2:
+            return [bloc]
+        milieu = len(bloc) / 2
+        k = min(range(1, len(bloc)), key=lambda i: abs(i - milieu) - (1.5 if re.search(r"[,:;…]$", bloc[i - 1][0]) else 0))
+        return couper(bloc[:k]) + couper(bloc[k:])
+
+    return [b for ligne in lignes for b in couper(ligne)]
+
+
+def _finir_sous_titres(blocs, police):
     sous_titres = []
     for k, bloc in enumerate(blocs):
         debut, fin = bloc[0][1][0], bloc[-1][1][1] + 0.15
@@ -213,6 +245,21 @@ def surligner(ligne, cles, deja):
     return " ".join(sortie)
 
 
+def mots_lecture(texte, chemin, par_mot=0.36, base=0.9, mini=2.2, maxi=5.2, blanc=0.25):
+    """Vidéo sans voix : horodatage fictif, une ligne de texte = un sous-titre,
+    affiché le temps de le lire confortablement. « // » impose une coupure dans une ligne."""
+    mots, t = [], 0.4
+    for ligne in (m for l in texte.splitlines() for m in l.split("//")):
+        jetons = [j for j in re.split(r"[ \t]+", ligne) if _normaliser(j)]
+        if not jetons:
+            continue
+        duree = min(max(par_mot * len(jetons) + base, mini), maxi)
+        pas = (duree - blanc) / len(jetons)
+        mots += [{"t": t + k * pas, "d": pas * 0.9, "w": j} for k, j in enumerate(jetons)]
+        t += duree
+    Path(chemin).write_text(json.dumps(mots, ensure_ascii=False), encoding="utf-8")
+
+
 # ---------------------------------------------------------------- images
 
 def fond_degrade():
@@ -221,12 +268,15 @@ def fond_degrade():
     return np.repeat(fond[:, None, :], W, axis=1).reshape(H, W, 3)
 
 
+VOILE_FORCE = 0.55  # assombrissement maximal derrière les sous-titres (photos claires : cartes, fonds crème)
+
+
 def _voile_sous_titres():
     """Assombrissement doux derrière les sous-titres, pour les photos en plein cadre."""
     y = np.arange(H, dtype=np.float32)
     montee = np.clip((y - 1080) / 170, 0, 1)
     descente = np.clip((1600 - y) / 140, 0, 1)
-    return (1 - 0.42 * adoucir_tableau(np.minimum(montee, descente)))[:, None, None]
+    return (1 - VOILE_FORCE * adoucir_tableau(np.minimum(montee, descente)))[:, None, None]
 
 
 def adoucir_tableau(t):
@@ -426,7 +476,10 @@ def rendre(projet, apercu=None):
 
     mots = json.loads(Path(projet.mots).read_text())
     alignes = aligner_texte(Path(projet.texte_voix).read_text(encoding="utf-8"), mots)
-    sous_titres = decouper_sous_titres(alignes)
+    if projet.audio_voix is None:
+        sous_titres = decouper_sous_titres(alignes, ponctuation=False, seuil_blanc=0.2)
+    else:
+        sous_titres = decouper_sous_titres(alignes)
     ass = travail / f"{projet.nom}.ass"
     ecrire_ass(sous_titres, set(projet.mots_cles), ass)
 
@@ -482,6 +535,14 @@ def rendre(projet, apercu=None):
     ff.stdin.close()
     if ff.wait():
         raise RuntimeError("Échec de l'encodage vidéo")
+
+    if projet.audio_voix is None:  # vidéo muette : piste son silencieuse, pour la compatibilité des plateformes
+        subprocess.run([
+            "ffmpeg", "-y", "-loglevel", "error", "-i", str(video_brute),
+            "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo",
+            "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "aac", "-b:a", "128k",
+            "-t", f"{duree_totale:.3f}", "-movflags", "+faststart", str(sortie)], check=True)
+        return sortie
 
     subprocess.run([
         "ffmpeg", "-y", "-loglevel", "error", "-i", str(video_brute), "-i", str(projet.audio_voix),

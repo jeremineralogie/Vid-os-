@@ -1,6 +1,6 @@
 # La mine de La Barre — script et découpage
 
-Version 1, **en attente de validation**. Format 9:16, 1080 × 1920, durée ≈ 2 min (texte ≈ 1 min 57 + logo 3,5 s).
+Version 1, validée par l'auteur le 2026-10-27 (« crée une vidéo professionnelle »). Cadrages exacts : `montage_projet.py`. Format 9:16, 1080 × 1920, durée ≈ 2 min (texte ≈ 1 min 57 + logo 3,5 s).
 
 Décisions de l'auteur (2026-10-27) :
 - **Vidéo muette** : ni voix ni musique. Le texte à l'écran porte tout le propos ; durée de chaque texte calée sur le temps de lecture (≈ 0,36 s par mot + 0,9 s, entre 2,2 et 5,2 s).
@@ -9,7 +9,7 @@ Décisions de l'auteur (2026-10-27) :
 - Toutes les photos sont de l'auteur, et toutes les pièces viennent de La Barre.
 - Photo 14 (coupe) : recadrée pour retirer l'échelle.
 
-Texte seul : `texte_ecran.txt`. Les textes de plus de deux lignes s'enchaînent automatiquement en deux temps.
+Texte seul : `texte_ecran.txt` (« // » = coupure en deux sous-titres, non affichée ; espaces insécables dans « 70 000 », « 400 mètres »). Une ligne = un sous-titre de 2 lignes au plus. La phrase 15 commence par « mais » (le « … » d'ouverture a été retiré pour l'affichage).
 
 | # | ≈ Temps | Texte à l'écran | Photo | Mouvement / titre en haut |
 |---|---|---|---|---|
@@ -43,3 +43,6 @@ Texte seul : `texte_ecran.txt`. Les textes de plus de deux lignes s'enchaînent 
 | 28 | 1:50 | Étiquettes, historique, matrice et minéraux associés font la provenance. | 05 | Zoom sur la matrice |
 | 29 | 1:54 | Et vous, vous connaissiez La Barre ? | 01 | Zoom avant final, fondu |
 | 30 | 1:57 | — | Logo | Logo seul, 3,5 s |
+
+## Fabrication
+`python3 projets/la_barre/montage_projet.py`, puis `outils/verifier.sh projets/la_barre/exports/la_barre_v1_9x16.mp4`.
