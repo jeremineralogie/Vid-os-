@@ -13,6 +13,7 @@ Claude Code charge automatiquement les skills placés dans `.claude/skills/` lor
 ## Outils de montage
 - `outils/montage.py` : moteur de montage 9:16 (plans animés calés sur la voix off, sous-titres de la charte, titres, générique défilant avec logo).
 - `outils/transcrire.py` : horodatage mot à mot d'une voix off (faster-whisper).
+- `outils/voix_synthese.py` : voix off de synthèse plus naturelle (pauses, respirations, timbre), avec horodatage des mots.
 - `outils/verifier.sh` : contrôles d'export (métadonnées, décodage, noirs, sonie).
 
 Les médias sources et les exports vidéo ne sont pas versionnés (dépôt public).

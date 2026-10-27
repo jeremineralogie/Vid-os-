@@ -9,6 +9,7 @@ Lire avant toute nouvelle vidéo. Ces choix ont été validés par l'auteur sur 
 4. Écrire le script (`voix_off.txt`, environ 380 mots pour environ 2 min 30) et le découpage (`SCRIPT.md`), puis **attendre la validation** de l'auteur.
 5. Monter une **maquette avec voix de synthèse provisoire** (edge-tts, voix `fr-FR-HenriNeural` ; le certificat du proxy est corrigé dans le script de synthèse) pour valider les images et le rythme.
 6. Version finale : voix de l'auteur, horodatée par `outils/transcrire.py`, plus la musique fournie par l'auteur, abaissée sous la voix.
+   Variante demandée par l'auteur : voix de synthèse travaillée (`outils/voix_synthese.py`, voix `fr-FR-RemyMultilingualNeural`, phrase par phrase, pauses variées, respirations générées, traitement du timbre). Elle doit être créditée comme synthèse vocale au générique, et signalée comme contenu généré par IA sur les plateformes si leurs règles l'exigent.
 7. Lancer `outils/verifier.sh` et rédiger un compte rendu honnête de ce qui a été vérifié et de ce qui reste à faire.
 
 ## Choix validés

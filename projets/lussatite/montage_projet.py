@@ -1,6 +1,7 @@
 """Lussatite, l'opale d'Auvergne — découpage (voir SCRIPT.md).
 
 Maquette : python3 projets/lussatite/montage_projet.py maquette
+Voix de synthèse travaillée : python3 projets/lussatite/montage_projet.py synthese
 Version finale (voix de l'auteur) : python3 projets/lussatite/montage_projet.py finale
 """
 import sys
@@ -84,7 +85,7 @@ PLANS = [
 
 GENERIQUE = [
     "# Lussatite, l'opale d'Auvergne",
-    "Texte, voix et montage : jeremineralogie",
+    "{credit_voix}",
     "# Photographies",
     "Spécimens, mine des Rois, illustrations et schémas : © jeremineralogie",
     "Ernest Mallard, portrait (XIXe siècle) — domaine public, via Wikimedia Commons",
@@ -103,16 +104,27 @@ GENERIQUE = [
 MOTS_CLES = ["lussatite", "Mallard", "opales-CT", "pépérites", "Helix", "ramondi", "Brésil", "bitume"]
 
 
+# version : (fichier audio, horodatage des mots, crédit de la voix au générique)
+VERSIONS = {
+    "maquette": ("exports/_travail/voix_guide.mp3", "exports/_travail/voix_guide_mots.json",
+                 "Texte et montage : jeremineralogie|Voix provisoire : synthèse vocale"),
+    "synthese": ("exports/_travail/voix_synthese.wav", "exports/_travail/voix_synthese_mots.json",
+                 "Texte et montage : jeremineralogie|Voix : synthèse vocale Microsoft (voix\u00a0«\u00a0Rémy\u00a0»)"),
+    "finale": ("sources/voix_off.wav", "exports/_travail/voix_off_mots.json",
+               "Texte, voix et montage : jeremineralogie"),
+}
+
+
 def projet(version):
-    maquette = version == "maquette"
+    audio, mots, credit_voix = VERSIONS[version]
     return Projet(
-        nom=f"lussatite_v1_{'maquette' if maquette else 'finale'}_9x16",
+        nom=f"lussatite_v1_{version}_9x16",
         dossier=ICI,
         texte_voix=ICI / "voix_off.txt",
-        audio_voix=ICI / ("exports/_travail/voix_guide.mp3" if maquette else "sources/voix_off.wav"),
-        mots=ICI / ("exports/_travail/voix_guide_mots.json" if maquette else "exports/_travail/voix_off_mots.json"),
+        audio_voix=ICI / audio,
+        mots=ICI / mots,
         plans=PLANS,
-        generique=GENERIQUE,
+        generique=[l for ligne in GENERIQUE for l in ligne.format(credit_voix=credit_voix).split("|")],
         logo="LOGO_jeremineralogie.jpg",
         mots_cles=MOTS_CLES,
     )

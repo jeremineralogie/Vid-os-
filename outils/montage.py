@@ -92,7 +92,16 @@ def _normaliser(mot):
 
 def aligner_texte(texte, mots):
     """Associe chaque mot du texte écrit (ponctuation, accents exacts) à un horodatage."""
-    jetons = [j for j in texte.split() if _normaliser(j)]
+    # ponctuation isolée (« ? : ») : collée au mot voisin par une espace insécable
+    jetons, ouvrant = [], ""
+    for j in texte.split():
+        if _normaliser(j):
+            jetons.append(ouvrant + j)
+            ouvrant = ""
+        elif j in ("«", "(") or not jetons:
+            ouvrant += j + " "
+        else:
+            jetons[-1] += " " + j
     a = [_normaliser(j) for j in jetons]
     b = [_normaliser(m["w"]) for m in mots]
     temps = [None] * len(jetons)
@@ -357,7 +366,7 @@ def image_generique(lignes, logo_chemin):
 
 
 def _couper(texte, police, largeur):
-    mots, lignes, cour = texte.split(), [], ""
+    mots, lignes, cour = texte.split(" "), [], ""
     for m in mots:
         essai = (cour + " " + m).strip()
         if police.getlength(essai) > largeur and cour:
@@ -479,6 +488,6 @@ def rendre(projet, apercu=None):
         "-filter_complex",
         f"[1:a]loudnorm=I=-14:TP=-1.5:LRA=9,afade=t=out:st={fin_visuel - 0.6:.2f}:d=0.6,"
         f"apad=whole_dur={duree_totale:.3f}[a]",
-        "-map", "0:v", "-map", "[a]", "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-ar", "48000",
+        "-map", "0:v", "-map", "[a]", "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-ar", "48000", "-ac", "2",
         "-t", f"{duree_totale:.3f}", "-movflags", "+faststart", str(sortie)], check=True)
     return sortie
