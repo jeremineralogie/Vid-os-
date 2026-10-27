@@ -1,6 +1,6 @@
 # Lussatite, l'opale d'Auvergne — script et découpage
 
-Version 1 — en attente de validation. Format 9:16, 1080 × 1920, cible ≈ 2 min 45 s (voix ≈ 2 min 33 s, 382 mots à ~150 mots/min + générique ≈ 12 s).
+Version 1 — validée par l'auteur le 2026-10-27. Découpage détaillé (cadrages, zooms, titres) : `montage_projet.py`. Format 9:16, 1080 × 1920, cible ≈ 2 min 45 s (voix ≈ 2 min 33 s, 382 mots à ~150 mots/min + générique ≈ 12 s).
 Le texte à lire seul est dans `voix_off.txt`. Les minutages sont indicatifs : le montage final suivra votre enregistrement.
 
 Mouvements : zooms/dézooms lents (≈ 3–8 % par plan, courbe adoucie), fondus courts ≈ 0,4 s ou coupes franches. Aucun crédit sur les images : tout est dans le générique final.
@@ -32,9 +32,17 @@ Mouvements : zooms/dézooms lents (≈ 3–8 % par plan, courbe adoucie), fondus
 - Sources : E. Mallard, Bull. Soc. fr. Minéral. 13 (1890) ; Le Règne Minéral, hors-série (2015) ; Mindat ; Encyclopaedia Britannica
 
 ## Points ouverts
-- Rosette concentrique : non utilisée tant que sa provenance n'est pas connue (Limagne ou Brésil ?).
-- Logo et musique : à fournir.
-- 4 images Wikimedia (W1–W4) : à télécharger par l'auteur (serveur bloqué par Wikimedia).
+- Rosette concentrique : rose de calcédoine du Brésil (confirmé par l'auteur) → plan « Méfiez-vous ».
+- Logo : reçu, utilisé en fin de générique. Musique : à fournir.
+- Voix off : à enregistrer par l'auteur (la maquette utilise une voix de synthèse provisoire).
 - Helix ramondi : nom courant chez les collectionneurs ; nomenclature actuelle non vérifiée.
 - Os de flamant : identification fournie par l'auteur.
 - Agate au microscope (Imaggeo, CC BY-NC-ND 3.0) : exclue — licence « pas de modification » incompatible avec une vidéo, et ce n'est pas de la lussatite.
+
+## Fabrication
+- Maquette (voix de synthèse provisoire) : `python3 projets/lussatite/montage_projet.py maquette`
+- Version finale :
+  1. déposer la voix dans `sources/voix_off.wav` ;
+  2. `python3 outils/transcrire.py projets/lussatite/sources/voix_off.wav projets/lussatite/exports/_travail/voix_off_mots.json` ;
+  3. `python3 projets/lussatite/montage_projet.py finale` ;
+  4. `outils/verifier.sh projets/lussatite/exports/lussatite_v1_finale_9x16.mp4`.
