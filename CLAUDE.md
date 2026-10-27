@@ -17,7 +17,9 @@ Lire avant toute nouvelle vidéo. Ces choix ont été validés par l'auteur sur 
 - **Voix off :** enregistrée par l'auteur. **Musique et logo :** fournis par l'auteur (`LOGO_jeremineralogie.jpg`, fond sombre, fondu en cercle).
 - **Identité :** fond noir violacé (`#0B0710` → `#1A0F2A`), violet `#7B2CBF`, violet clair `#C77DFF`. Ne jamais modifier les couleurs réelles des minéraux. Détails dans `charte/CHARTE.md`.
 - **Sous-titres :** Montserrat SemiBold, taille M (66), blancs avec contour noir, centrés, ligne de base vers 1 400 px. Jamais en bas ni à gauche. Deux lignes maximum, mots-clés en violet clair à leur première apparition.
-- **Crédits :** aucun crédit sur les images. Un générique défilant en fin de vidéo regroupe toutes les sources ; les photos de l'auteur sont créditées « © jeremineralogie ». Le logo apparaît à la fin.
+- **Crédits :** aucun crédit sur les images. Depuis La Barre (oct. 2026), l'auteur cite les sources dans la **description** de la vidéo : pas de générique de sources, fin sur le logo seul. (La lussatite garde son générique défilant.)
+- **Voix et musique :** à confirmer pour chaque vidéo. La Barre est **muette** (texte à l'écran seul, durée calée sur le temps de lecture).
+- **Sujets à ne pas aborder :** l'accès aux anciennes mines (entrées, visites, prospection), même si l'article en parle.
 - **Plans :** photos en plein cadre pour les formats portrait, en « carte » arrondie sur fond de charte pour les formats paysage. Zooms lents et doux, fondus de 0,4 s, titres courts en haut de l'écran.
 - **Faits :** ne rien ajouter qui ne figure pas dans l'article. Formulations prudentes (« nommée par », non « découverte par », sans preuve). Toute image générée ou illustrative doit être annoncée comme telle.
 
