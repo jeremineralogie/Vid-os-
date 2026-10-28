@@ -60,3 +60,15 @@ Sujets : Margnac (Haute-Vienne), Les Oudots (Saône-et-Loire), Margabal (Aveyron
 | Ouraline | Photos de verre à l'uranium sous UV | Wikimedia Commons | Licences libres, à vérifier fichier par fichier |
 
 Non consultable depuis la session : Gallica (403), mineralogie-auvergnate-jpk.fr.
+
+## Hyverneresse (Croze et Gioux, Creuse) — ajout du 28 oct. 2026
+- ✔ Fiche MIMAUSA (p. 156) :
+  - sites d'Hyverneresse et de La Brousse ;
+  - travaux miniers souterrains et mine à ciel ouvert ;
+  - **1970-1986** ;
+  - ex-concession d'Hyverneresse (4 août 1982, 20 ans), titulaire CFM (Compagnie française de Mokta) ;
+  - cours d'eau récepteur : la Creuse.
+- ⚠ Uranium extrait : **484 t** selon l'IRSN (2007) et **551 t** selon la DREAL (2017 : 162 t en souterrain et 389 t à ciel ouvert). Formulation proposée : « environ 500 t ».
+- ✔ Minéraux (Mindat) : autunite, uranophane.
+- ⚠ D'après un forum : torbernite, gummite, fluorine, pechblende.
+- Exploitants successifs (forum, d'après le dossier d'arrêt des travaux) : CFMU (1955), CFM (1981), COGEMA (1986), puis AREVA et Orano.
