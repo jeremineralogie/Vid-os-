@@ -31,6 +31,13 @@ Lire avant toute nouvelle vidéo. Ces choix ont été validés par l'auteur sur 
   - Un compteur HyperFrames accompagne chaque chiffre affiché.
   - Fin sur le logo avec **jeremineralogie.fr** en dessous (`Projet(texte_logo=...)`).
   - L'auteur ne veut pas de vues aériennes IGN. Archives privilégiées : rapports du CEA numérisés (OSTI/ETDEWEB).
+- **Depuis Barytes (oct. 2026) :**
+  - **Toujours une image en rapport avec le sujet en fond, jamais de fond violet.** Les plans « carte » utilisent `Plan(fond="flou")`, c'est-à-dire leur image floutée et assombrie. Les séquences HyperFrames, même chiffrées, ont une photo ou un document en fond.
+  - Quand une vidéo présente plusieurs gisements, elle montre une carte du département avec un point et une photo par gisement, qui apparaissent l'un après l'autre (voir `projets/barytes/hyperframes_scenes.py`, `carte_gisements`). Les points sont placés sur la commune, jamais sur l'emplacement précis du gisement.
+  - Le minéral s'écrit toujours **« baryte »**, avec un Y : jamais « barytine » ni « barite » à l'écran.
+  - Illustrer avec des portraits de savants et des documents anciens du domaine public : archive.org, Wellcome Collection, musée de Cleveland. Le serveur ne peut pas télécharger Wikimedia Commons ni Gallica.
+  - Cartes géologiques : services WMS du BRGM (`geoservices.brgm.fr/geologie`), cartes scannées au 1/50 000, harmonisées et au 1/1 000 000. Données BRGM en Licence Ouverte, à citer en description.
+  - Ne pas utiliser Planet-Terre (ENS Lyon).
 - **Plans :** photos en plein cadre pour les formats portrait, en « carte » arrondie sur fond de charte pour les formats paysage. Zooms lents et doux, fondus de 0,4 s, titres courts en haut de l'écran.
 - **Faits :** ne rien ajouter qui ne figure pas dans l'article. Formulations prudentes (« nommée par », non « découverte par », sans preuve). Toute image générée ou illustrative doit être annoncée comme telle.
 

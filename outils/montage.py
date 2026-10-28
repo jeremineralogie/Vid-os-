@@ -66,6 +66,7 @@ class Plan:
     titres: list = field(default_factory=list)  # (texte, début relatif 0-1, fin relative 0-1)
     hauteur_carte: int = CARTE_HAUTEUR_MAX
     coupe_franche: bool = False  # True : pas de fondu à l'entrée du plan
+    fond: str = None  # plans « carte » : "flou" (l'image elle-même, floutée) ou une autre image, au lieu du fond de charte
 
 
 @dataclass
@@ -322,6 +323,20 @@ def adoucir_tableau(t):
 VOILE_SOUS_TITRES = _voile_sous_titres()
 
 
+def image_floue(src, flou=38, lumiere=0.38):
+    """Image recadrée en 9:16 plein cadre, très floutée et assombrie : fond des plans « carte »."""
+    h, w = src.shape[:2]
+    if w / h > W / H:
+        bw = h * W / H
+        src = src[:, int((w - bw) / 2):int((w + bw) / 2)]
+    else:
+        bh = w * H / W
+        src = src[int((h - bh) / 2):int((h + bh) / 2)]
+    fond = cv2.resize(src, (W // 4, H // 4), interpolation=cv2.INTER_AREA)
+    fond = cv2.GaussianBlur(fond, (0, 0), flou / 4)
+    return cv2.resize(fond, (W, H), interpolation=cv2.INTER_CUBIC) * lumiere
+
+
 class Rendu:
     """Prépare un plan une fois, puis produit chacune de ses images."""
 
@@ -347,16 +362,22 @@ class Rendu:
                 wc = hc * ratio
             x0, y0 = (W - wc) / 2, CARTE_CENTRE_Y - hc / 2
             self.vue = (int(round(x0)), int(round(y0)), int(round(wc)), int(round(hc)))
-            self.fond = self._fond_carte()
+            self.fond = self._fond_carte(dossier)
             self.masque = self._masque_carte()
 
-    def _fond_carte(self):
-        """Fond uni de la charte, avec une ombre douce sous la carte."""
+    def _fond_carte(self, dossier):
+        """Fond de charte (ou image floutée et assombrie), avec une ombre douce sous la carte."""
         x, y, w, h = self.vue
         ombre = np.zeros((H, W), np.float32)
         ombre[y + 18:y + h + 18, x:x + w] = 1
         ombre = cv2.GaussianBlur(ombre, (0, 0), 28)[..., None]
-        return fond_degrade() * (1 - 0.6 * ombre)
+        if self.plan.fond:
+            src = self.src if self.plan.fond == "flou" else np.asarray(
+                Image.open(dossier / self.plan.fond).convert("RGB"), np.float32)
+            fond = image_floue(src)
+        else:
+            fond = fond_degrade()
+        return fond * (1 - 0.6 * ombre)
 
     def _masque_carte(self):
         x, y, w, h = self.vue
