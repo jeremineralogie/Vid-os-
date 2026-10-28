@@ -323,8 +323,9 @@ def adoucir_tableau(t):
 VOILE_SOUS_TITRES = _voile_sous_titres()
 
 
-def image_floue(src, flou=38, lumiere=0.38):
-    """Image recadrée en 9:16 plein cadre, très floutée et assombrie : fond des plans « carte »."""
+def image_floue(src, flou=38, lumiere=0.38, moyenne_max=42):
+    """Image recadrée en 9:16 plein cadre, très floutée et assombrie : fond des plans « carte ».
+    Les documents clairs (pages, planches) sont assombris davantage, pour que titres et sous-titres restent lisibles."""
     h, w = src.shape[:2]
     if w / h > W / H:
         bw = h * W / H
@@ -334,6 +335,7 @@ def image_floue(src, flou=38, lumiere=0.38):
         src = src[int((h - bh) / 2):int((h + bh) / 2)]
     fond = cv2.resize(src, (W // 4, H // 4), interpolation=cv2.INTER_AREA)
     fond = cv2.GaussianBlur(fond, (0, 0), flou / 4)
+    lumiere = min(lumiere, moyenne_max / max(float(fond.mean()), 1.0))
     return cv2.resize(fond, (W, H), interpolation=cv2.INTER_CUBIC) * lumiere
 
 

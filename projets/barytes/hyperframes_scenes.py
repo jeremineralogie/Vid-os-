@@ -251,7 +251,7 @@ def annee(duree, assets, source, surtitre, titre, depart, arrivee, legende, badg
 
 
 def gonnard_18(duree, assets):
-    preparer_fond(SRC / "archives" / "gonnard1870_p-18.png", assets)
+    preparer_fond(SRC / "archives" / "gonnard1870_p-18.png", assets, flou=True)
     noms = ["primitive", "binaire", "trapézienne", "épointée", "progressive", "octotrigésimale"]
     corps = [tete("Gonnard, 1870", "Formes de la baryte"),
              '        <div id="mesure" style="position:absolute;top:520px;width:100%;text-align:center">'

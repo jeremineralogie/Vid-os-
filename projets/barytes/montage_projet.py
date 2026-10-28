@@ -35,6 +35,13 @@ def archive(fichier, debut_sur, titre, depart, arrivee, mode="carte"):
                 titres=[(titre, 0.05, 0.95)] if titre else [], fond="flou" if mode == "carte" else None)
 
 
+def page_gonnard(n, debut_sur, cy):
+    """Page du livre de Gonnard en large carte, cadrée sur le paragraphe cité, sur fond de sa couverture."""
+    return Plan(ARCH + f"gonnard1870_p-{n}.png", debut_sur, "carte", format_carte=(920, 760),
+                depart=(0.5, cy, 1.0), arrivee=(0.5, cy, 1.3), titres=[("Gonnard, 1870", 0.05, 0.95)],
+                fond=ARCH + "gonnard1870_couverture_recadree.png")
+
+
 PLANS = [
     photo(1, "Dans le Puy-de-Dôme", "Barytes miel", (0.5, 0.45, 1.0), (0.48, 0.4, 1.3)),
     hf("carte_gisements", "Ses gisements"),
@@ -44,12 +51,12 @@ PLANS = [
     archive("hauy1823_pdf135-135.png", "Parmi eux, la variété", "Haüy, 1823 · planche 37",
             (0.5, 0.5, 1.0), (0.78, 0.84, 2.6)),
     hf("gonnard_1870", "En 1870"),
-    archive("gonnard1870_p-16.png", "Il juge la baryte", "Gonnard, 1870", (0.5, 0.5, 1.0), (0.5, 0.74, 2.2)),
+    page_gonnard(16, "Il juge la baryte", 0.75),
     hf("gonnard_18", "Il y décrit 18"),
-    archive("gonnard1870_p-17.png", "Dans les fentes des arkoses", "Gonnard, 1870", (0.5, 0.45, 1.0), (0.5, 0.3, 2.2)),
+    page_gonnard(17, "Dans les fentes des arkoses", 0.29),
     # Royat · puy Chateix
     archive("gorge_royat_1830_cleveland.jpg", "À Royat, le puy", "Royat, 1830", (0.5, 0.45, 1.0), (0.42, 0.45, 1.25)),
-    archive("gonnard1870_p-19.png", "Une variété très complexe", "Gonnard, 1870", (0.5, 0.5, 1.0), (0.5, 0.36, 2.3)),
+    page_gonnard(19, "Une variété très complexe", 0.34),
     archive("g50_chateix.png", "Selon le BRGM", "Carte géologique · Royat", (0.5, 0.5, 1.0), (0.45, 0.5, 1.35), "plein"),
     photo(3, "Gonnard y note", "Baryte · puy Chateix", (0.5, 0.45, 1.0), (0.5, 0.38, 1.35)),
     photo(4, "Ici, de grands cristaux", "Baryte · puy Chateix", (0.5, 0.42, 1.0), (0.45, 0.38, 1.35)),
