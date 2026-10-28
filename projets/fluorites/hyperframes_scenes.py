@@ -274,7 +274,7 @@ def carte(k, duree, instants, assets, fin=False):
                      f'{commune}</span></div>')
         script.append(apparition("#commune", t_arr - 0.1, 10, 0.4))
     # photo de la collection, reliée au point
-    cx, cy = (820, 640) if k % 2 == 0 else (260, 640)
+    cx, cy = (850, 640) if k % 2 == 0 else (230, 640)
     corps.append(f'        <svg width="1080" height="1920" style="position:absolute;left:0;top:0"><line id="trait" x1="{CIBLE[0]}" y1="{CIBLE[1]}" '
                  f'x2="{cx}" y2="{cy}" stroke="rgba(255,255,255,0.85)" stroke-width="3"/></svg>')
     corps.append(f'        <div id="vignette" style="position:absolute;left:{cx - 115}px;top:{cy - 115}px;width:230px;height:230px;border-radius:50%;'
