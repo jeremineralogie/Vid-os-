@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+:root { --fond-haut:#0b0710; --fond-bas:#1a0f2a; --violet:#7b2cbf; --violet-clair:#c77dff; --gris:#b9b3c6; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:1080px; height:1920px; overflow:hidden; background:var(--fond-haut); }
+#root { position:relative; width:100%; height:100%; font-family:"Montserrat", sans-serif; color:#fff; }
+#fond { position:absolute; inset:0;
+  background: radial-gradient(900px 700px at 50% 34%, rgba(123,44,191,0.22), rgba(0,0,0,0) 70%),
+              linear-gradient(180deg, var(--fond-haut), var(--fond-bas)); }
+/* zone utile : x 110-970, y 250-1120 (au-dessus des sous-titres, hors marges des réseaux) */
+.tete { position:absolute; top:250px; left:110px; width:860px; text-align:center; }
+.surtitre { font-size:30px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--violet-clair); }
+.titre { margin-top:14px; font-size:80px; font-weight:800; letter-spacing:-0.01em; }
+.filet { width:120px; height:8px; margin:22px auto 0; border-radius:4px; background:var(--violet-clair); }
+
+.vignette { position:absolute; width:250px; text-align:center; }
+.vignette img { width:250px; height:250px; object-fit:cover; border-radius:26px; box-shadow:0 18px 40px rgba(0,0,0,0.5);
+  border:3px solid rgba(199,125,255,0.5); }
+.vignette div { margin-top:12px; font-size:32px; font-weight:700; }
+</style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="4.26" data-width="1080" data-height="1920">
+      <div id="fond" class="clip" data-start="0" data-duration="4.26" data-track-index="0" style="z-index:1"></div>
+      <div id="scene" class="clip" data-start="0" data-duration="4.26" data-track-index="1" style="z-index:2">
+        <div class="tete" id="tete"><div class="surtitre">Collection jeremineralogie</div><div class="titre">Montebras</div><div class="filet"></div></div>
+        <div class="vignette" id="v0" style="left:125px;top:500px"><img src="assets/photo_03_quartz.jpg" alt="" /><div>Quartz</div></div>
+        <div class="vignette" id="v1" style="left:415px;top:500px"><img src="assets/photo_06_apatite.jpg" alt="" /><div>Apatite</div></div>
+        <div class="vignette" id="v2" style="left:705px;top:500px"><img src="assets/photo_08_fluorite.jpg" alt="" /><div>Fluorite</div></div>
+        <div class="vignette" id="v3" style="left:270px;top:830px"><img src="assets/photo_10_turquoise.jpg" alt="" /><div>Turquoise</div></div>
+        <div class="vignette" id="v4" style="left:560px;top:830px"><img src="assets/photo_12_wavellite_sur_turquoise.jpg" alt="" /><div>Wavellite</div></div>
+      </div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      // lente avancée de caméra sur toute la séquence
+      tl.fromTo("#scene", { scale: 1 }, { scale: 1.035, duration: 4.26, ease: "none" }, 0);
+      tl.fromTo("#tete", { opacity: 0, y: -26 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.15);
+
+      tl.fromTo("#v0", { opacity: 0, y: 30, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "power3.out" }, 0.35);
+      tl.fromTo("#v1", { opacity: 0, y: 30, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "power3.out" }, 0.50);
+      tl.fromTo("#v2", { opacity: 0, y: 30, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "power3.out" }, 0.65);
+      tl.fromTo("#v3", { opacity: 0, y: 30, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "power3.out" }, 0.80);
+      tl.fromTo("#v4", { opacity: 0, y: 30, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.55, ease: "power3.out" }, 0.95);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

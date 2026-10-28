@@ -58,7 +58,8 @@ def adoucir(t):
 class Plan:
     image: str
     debut_sur: str  # premiers mots de la phrase qui déclenche le plan
-    mode: str = "plein"  # "plein" (cadre entier) ou "carte" (image dans un cadre arrondi)
+    mode: str = "plein"  # "plein" (cadre entier), "carte" (image dans un cadre arrondi) ou "video"
+    # "video" : séquence 1080 x 1920 déjà composée (HyperFrames), étirée sur toute la durée visible du plan
     format_carte: tuple = None  # (largeur, hauteur) imposées ; sinon format de l'image
     depart: tuple = (0.5, 0.5, 1.0)  # centre x, centre y (0-1 dans l'image), zoom
     arrivee: tuple = (0.5, 0.5, 1.08)
@@ -80,6 +81,7 @@ class Projet:
     mots_cles: list = field(default_factory=list)
     sortie: Path = None
     duree_generique: float = 12.0
+    karaoke: bool = False  # sous-titres mot à mot
 
 
 # ---------------------------------------------------------------- sous-titres
@@ -184,10 +186,10 @@ def _finir_sous_titres(blocs, police):
             fin = suivant if suivant - fin < 0.35 else fin
         fin = max(fin, debut + 0.9)
         lignes = _repartir_lignes([j for j, _ in bloc], police)
-        sous_titres.append((debut, fin, lignes))
+        sous_titres.append((debut, fin, lignes, bloc))
     for k in range(len(sous_titres) - 1):  # pas de chevauchement
-        d, f, l = sous_titres[k]
-        sous_titres[k] = (d, min(f, sous_titres[k + 1][0]), l)
+        d, f, l, b = sous_titres[k]
+        sous_titres[k] = (d, min(f, sous_titres[k + 1][0]), l, b)
     return sous_titres
 
 
@@ -207,7 +209,11 @@ def _repartir_lignes(jetons, police):
     return meilleur[1] if meilleur else [texte, "", ""]
 
 
-def ecrire_ass(sous_titres, mots_cles, chemin):
+GRIS_KARAOKE = "&H00C8C8C8"  # mots pas encore lus (karaoké), BGR
+
+
+def ecrire_ass(sous_titres, mots_cles, chemin, karaoke=False):
+    """karaoke=True : chaque mot passe du gris au blanc au moment où il est lu."""
     def ts(s):
         h, r = divmod(s, 3600)
         m, s = divmod(r, 60)
@@ -221,17 +227,42 @@ def ecrire_ass(sous_titres, mots_cles, chemin):
         "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, "
         "Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, "
         "Shadow, Alignment, MarginL, MarginR, MarginV, Encoding",
-        f"Style: Sous-titre,{POLICE_SOUS_TITRE},{TAILLE_SOUS_TITRE},&H00FFFFFF,&H00FFFFFF,&H00000000,"
-        f"&H96000000,0,0,0,0,100,100,0,0,1,3.5,2,2,150,150,{marge_v},1",
+        f"Style: Sous-titre,{POLICE_SOUS_TITRE},{TAILLE_SOUS_TITRE},&H00FFFFFF,"
+        f"{GRIS_KARAOKE if karaoke else '&H00FFFFFF'},&H00000000,"
+        f"&H96000000,0,0,0,0,100,100,0,0,1,{4.5 if karaoke else 3.5},2,2,150,150,{marge_v},1",
         "", "[Events]",
         "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text",
     ]
     # mot-clé en violet clair, à sa première apparition seulement
     cles, deja = {_normaliser(m) for m in mots_cles}, set()
-    for debut, fin, texte in sous_titres:
-        texte = "\\N".join(surligner(l, cles, deja) for l in texte)
+    for debut, fin, texte, bloc in sous_titres:
+        if karaoke:
+            texte = _karaoke(texte, bloc, debut, cles, deja)
+        else:
+            texte = "\\N".join(surligner(l, cles, deja) for l in texte)
         lignes.append(f"Dialogue: 0,{ts(debut)},{ts(fin)},Sous-titre,,0,0,0,,{{\\fad(80,80)}}{texte}")
     Path(chemin).write_text("\n".join(lignes) + "\n", encoding="utf-8")
+
+
+def _karaoke(lignes, bloc, debut, cles, deja):
+    """Balises \\kf (centièmes de s) : balayage progressif de chaque mot, à son horaire.
+    Les lignes sont faites des jetons du bloc joints par des espaces (l'insécable reste dans le jeton)."""
+    debuts = [t[0] for _, t in bloc]
+    durees = [b - a for a, b in zip(debuts, debuts[1:])] + [bloc[-1][1][1] - debuts[-1]]
+    k, rendu = 0, []
+    for ligne in (l for l in lignes if l):
+        mots = []
+        for mot in ligne.split(" "):
+            cs = max(1, round(durees[min(k, len(durees) - 1)] * 100))
+            cle = _normaliser(mot)
+            if cle in cles and cle not in deja:  # mot-clé : violet clair une fois lu
+                deja.add(cle)
+                mots.append(f"{{\\kf{cs}\\1c&H00FF7DC7&}}{mot}{{\\1c&H00FFFFFF&}}")
+            else:
+                mots.append(f"{{\\kf{cs}}}{mot}")
+            k += 1
+        rendu.append(" ".join(mots))
+    return f"{{\\k{max(0, round((debuts[0] - debut) * 100))}}}" + "\\N".join(rendu)
 
 
 def surligner(ligne, cles, deja):
@@ -254,8 +285,12 @@ def mots_lecture(texte, chemin, par_mot=0.36, base=0.9, mini=2.2, maxi=5.2, blan
         if not jetons:
             continue
         duree = min(max(par_mot * len(jetons) + base, mini), maxi)
-        pas = (duree - blanc) / len(jetons)
-        mots += [{"t": t + k * pas, "d": pas * 0.9, "w": j} for k, j in enumerate(jetons)]
+        # rythme de lecture : un mot long prend plus de temps qu'un mot court
+        poids = [2 + len(_normaliser(j)) for j in jetons]
+        unite, cumul = (duree - blanc) / sum(poids), 0
+        for j, p in zip(jetons, poids):
+            mots.append({"t": t + cumul * unite, "d": p * unite * 0.9, "w": j})
+            cumul += p
         t += duree
     Path(chemin).write_text(json.dumps(mots, ensure_ascii=False), encoding="utf-8")
 
@@ -291,6 +326,11 @@ class Rendu:
 
     def __init__(self, plan, dossier):
         self.plan = plan
+        if plan.mode == "video":
+            self.lecteur = cv2.VideoCapture(str(dossier / plan.image))
+            self.n = int(self.lecteur.get(cv2.CAP_PROP_FRAME_COUNT))
+            self.pos, self.derniere = 0, None
+            return
         src = Image.open(dossier / plan.image).convert("RGB")
         self.src = np.asarray(src, np.float32)
         self.h_src, self.w_src = self.src.shape[:2]
@@ -323,8 +363,24 @@ class Rendu:
         ImageDraw.Draw(m).rounded_rectangle((0, 0, w * 2 - 1, h * 2 - 1), radius=44, fill=255)
         return np.asarray(m.resize((w, h), Image.LANCZOS), np.float32)[..., None] / 255
 
+    def _video(self, u):
+        i = min(int(round(u * (self.n - 1))), self.n - 1)
+        if self.derniere is None or i < self.pos - 1 or i > self.pos + 30:
+            self.lecteur.set(cv2.CAP_PROP_POS_FRAMES, i)
+            self.pos = i
+            self.derniere = None
+        while self.pos <= i or self.derniere is None:
+            ok, img = self.lecteur.read()
+            if not ok:
+                break
+            self.derniere = cv2.cvtColor(img, cv2.COLOR_BGR2RGB).astype(np.float32)
+            self.pos += 1
+        return self.derniere.copy()
+
     def image(self, u):
         """u : avancement 0-1 dans le plan."""
+        if self.plan.mode == "video":
+            return self._video(u)
         p = self.plan
         k = adoucir(u)
         cx, cy, z = (a + (b - a) * k for a, b in zip(p.depart, p.arrivee))
@@ -467,6 +523,21 @@ def _horaires(projet, alignes):
     return debuts, fin_voix + 1.2
 
 
+def plages(projet):
+    """[(début, fin)] visibles de chaque plan, fondus compris ; et la durée totale."""
+    mots = json.loads(Path(projet.mots).read_text())
+    alignes = aligner_texte(Path(projet.texte_voix).read_text(encoding="utf-8"), mots)
+    debuts, fin_visuel = _horaires(projet, alignes)
+    fins = debuts[1:] + [fin_visuel]
+    res = []
+    for i, (p, d, f) in enumerate(zip(projet.plans, debuts, fins)):
+        entree = 0 if (i == 0 or p.coupe_franche) else FONDU / 2
+        suivant = projet.plans[i + 1] if i + 1 < len(projet.plans) else None
+        sortie_ = FONDU / 2 if suivant and not suivant.coupe_franche else 0
+        res.append((d - entree, f + sortie_))
+    return res, alignes
+
+
 def rendre(projet, apercu=None):
     """apercu : liste de temps (s) -> n'enregistre que ces images en PNG."""
     sortie = projet.sortie or projet.dossier / "exports" / f"{projet.nom}.mp4"
@@ -481,7 +552,7 @@ def rendre(projet, apercu=None):
     else:
         sous_titres = decouper_sous_titres(alignes)
     ass = travail / f"{projet.nom}.ass"
-    ecrire_ass(sous_titres, set(projet.mots_cles), ass)
+    ecrire_ass(sous_titres, set(projet.mots_cles), ass, karaoke=projet.karaoke)
 
     debuts, fin_visuel = _horaires(projet, alignes)
     fins = debuts[1:] + [fin_visuel]

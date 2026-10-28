@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+:root { --fond-haut:#0b0710; --fond-bas:#1a0f2a; --violet:#7b2cbf; --violet-clair:#c77dff; --gris:#b9b3c6; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:1080px; height:1920px; overflow:hidden; background:var(--fond-haut); }
+#root { position:relative; width:100%; height:100%; font-family:"Montserrat", sans-serif; color:#fff; }
+#fond { position:absolute; inset:0;
+  background: radial-gradient(900px 700px at 50% 34%, rgba(123,44,191,0.22), rgba(0,0,0,0) 70%),
+              linear-gradient(180deg, var(--fond-haut), var(--fond-bas)); }
+/* zone utile : x 110-970, y 250-1120 (au-dessus des sous-titres, hors marges des réseaux) */
+.tete { position:absolute; top:250px; left:110px; width:860px; text-align:center; }
+.surtitre { font-size:30px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--violet-clair); }
+.titre { margin-top:14px; font-size:80px; font-weight:800; letter-spacing:-0.01em; }
+.filet { width:120px; height:8px; margin:22px auto 0; border-radius:4px; background:var(--violet-clair); }
+
+#axe { position:absolute; left:214px; top:520px; width:6px; height:560px; border-radius:3px; background:rgba(255,255,255,0.12); }
+#axe-plein { position:absolute; inset:0; border-radius:3px; background:linear-gradient(180deg, var(--violet-clair), var(--violet)); transform-origin:top center; }
+.etape { position:absolute; left:190px; width:780px; height:120px; }
+.point { position:absolute; left:0; top:20px; width:54px; height:54px; border-radius:50%; background:var(--fond-haut);
+  border:6px solid var(--violet-clair); box-shadow:0 0 26px rgba(199,125,255,0.55); }
+.annee { position:absolute; left:92px; top:0; font-size:60px; font-weight:800; white-space:nowrap; }
+.legende { position:absolute; left:94px; top:76px; font-size:34px; font-weight:500; color:var(--gris); white-space:nowrap; }
+</style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="10.92" data-width="1080" data-height="1920">
+      <div id="fond" class="clip" data-start="0" data-duration="10.92" data-track-index="0" style="z-index:1"></div>
+      <div id="scene" class="clip" data-start="0" data-duration="10.92" data-track-index="1" style="z-index:2">
+        <div class="tete" id="tete"><div class="surtitre">Montebras</div><div class="titre">Histoire de la mine</div><div class="filet"></div></div>
+        <div id="axe"><div id="axe-plein"></div></div>
+        <div class="etape" id="e0" style="top:500px"><div class="point"></div><div class="annee">Antiquité</div><div class="legende">Étain extrait, selon les sources</div></div>
+        <div class="etape" id="e1" style="top:660px"><div class="point"></div><div class="annee">1858</div><div class="legende">Redécouverte par F.-E. Mallard</div></div>
+      </div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      // lente avancée de caméra sur toute la séquence
+      tl.fromTo("#scene", { scale: 1 }, { scale: 1.035, duration: 10.92, ease: "none" }, 0);
+      tl.fromTo("#tete", { opacity: 0, y: -26 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.15);
+
+      tl.fromTo("#axe-plein", { scaleY: 0 }, { scaleY: 0.084, duration: 0.9, ease: "power2.out" }, 0.2);
+      tl.fromTo("#e0", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.55, ease: "power3.out" }, 0.30);
+      tl.to("#axe-plein", { scaleY: 0.370, duration: 0.7, ease: "power2.inOut" }, 5.59);
+      tl.fromTo("#e1", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" }, 5.94);
+      tl.fromTo("#e1 .point", { scale: 0.4 }, { scale: 1, duration: 0.5, ease: "back.out(2)" }, 5.94);
+      tl.to("#axe-plein", { scaleY: 0.370, duration: 0.01 }, 10.87);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

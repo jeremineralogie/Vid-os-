@@ -20,6 +20,11 @@ Lire avant toute nouvelle vidéo. Ces choix ont été validés par l'auteur sur 
 - **Crédits :** aucun crédit sur les images. Depuis La Barre (oct. 2026), l'auteur cite les sources dans la **description** de la vidéo : pas de générique de sources, fin sur le logo seul. (La lussatite garde son générique défilant.)
 - **Voix et musique :** à confirmer pour chaque vidéo. La Barre est **muette** (texte à l'écran seul, durée calée sur le temps de lecture).
 - **Sujets à ne pas aborder :** l'accès aux anciennes mines (entrées, visites, prospection), même si l'article en parle.
+- **Depuis Montebras (oct. 2026) :**
+  - Sous-titres **karaoké** : chaque mot passe du gris au blanc au rythme de lecture (`Projet(karaoke=True)`). Contour de 4,5 ; voile renforcé à 0,68 sur les photos claires.
+  - Les **informations chiffrées** et les **compositions chimiques** sont animées avec **HyperFrames**. Chaque séquence est composée à la durée exacte de son plan, puis insérée comme `Plan(..., "video")`. Voir `projets/montebras/hyperframes_scenes.py`.
+  - Les éléments animés restent dans la zone x 110-970, y 250-1120. Aucun texte ne recouvre un autre texte, et aucun texte n'entre dans les marges des réseaux.
+  - **Chaque fait affiché est vérifié** et consigné dans `SOURCES.md`, avec la source à citer en description.
 - **Plans :** photos en plein cadre pour les formats portrait, en « carte » arrondie sur fond de charte pour les formats paysage. Zooms lents et doux, fondus de 0,4 s, titres courts en haut de l'écran.
 - **Faits :** ne rien ajouter qui ne figure pas dans l'article. Formulations prudentes (« nommée par », non « découverte par », sans preuve). Toute image générée ou illustrative doit être annoncée comme telle.
 
