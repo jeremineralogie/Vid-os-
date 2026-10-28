@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+:root { --fond-haut:#0b0710; --fond-bas:#1a0f2a; --violet:#7b2cbf; --violet-clair:#c77dff; --gris:#c3bdd0; --uranium:#d4f25a; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:1080px; height:1920px; overflow:hidden; background:var(--fond-haut); }
+#root { position:relative; width:100%; height:100%; font-family:"Montserrat", sans-serif; color:#fff; }
+#fond { position:absolute; inset:0;
+  background: radial-gradient(900px 700px at 50% 34%, rgba(123,44,191,0.22), rgba(0,0,0,0) 70%),
+              linear-gradient(180deg, var(--fond-haut), var(--fond-bas)); }
+#photo { position:absolute; inset:0; overflow:hidden; }
+#photo img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(0.5) saturate(1.05); }
+#photo-voile { position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(11,7,16,0.55) 0%, rgba(11,7,16,0.15) 30%, rgba(11,7,16,0.25) 60%, rgba(11,7,16,0.75) 100%); }
+/* zone utile : x 110-970, y 250-1120 (au-dessus des sous-titres, hors marges des réseaux) */
+.tete { position:absolute; top:250px; left:110px; width:860px; text-align:center; }
+.surtitre { font-size:30px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--violet-clair); }
+.titre { margin-top:14px; font-size:80px; font-weight:800; letter-spacing:-0.01em; text-shadow:0 4px 18px rgba(0,0,0,0.6); }
+.filet { width:120px; height:8px; margin:22px auto 0; border-radius:4px; background:var(--violet-clair); }
+.grand { font-weight:800; line-height:1; color:var(--violet-clair); font-variant-numeric:tabular-nums; letter-spacing:-0.03em; }
+.unite { font-size:50px; font-weight:700; }
+.petit { font-size:34px; font-weight:600; color:var(--gris); }
+.periode { position:absolute; left:150px; width:780px; }
+.barre { position:relative; height:22px; border-radius:11px; background:rgba(255,255,255,0.12); overflow:hidden; }
+.barre-plein { position:absolute; inset:0; border-radius:11px; background:linear-gradient(90deg, var(--violet), var(--violet-clair)); transform-origin:left center; }
+.bornes { display:flex; justify-content:space-between; margin-top:14px; font-size:36px; font-weight:700; color:var(--gris); }
+.badge { display:inline-block; padding:12px 26px; border-radius:40px; font-size:32px; font-weight:700;
+  background:rgba(123,44,191,0.28); border:2px solid rgba(199,125,255,0.7); }
+</style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="10.93" data-width="1080" data-height="1920">
+      <div id="fond" class="clip" data-start="0" data-duration="10.93" data-track-index="0" style="z-index:1"></div>
+      <div id="scene" class="clip" data-start="0" data-duration="10.93" data-track-index="1" style="z-index:2">
+        <div class="tete" id="tete"><div class="surtitre">Aveyron</div><div class="titre">Margabal</div><div class="filet"></div></div>
+        <div id="mesure" style="position:absolute;top:500px;left:110px;width:860px;text-align:center"><div id="nombre" class="grand" style="font-size:210px">0</div><div class="unite">tonnes d'uranium</div></div>
+        <div class="periode" id="per" style="top:840px"><div class="barre"><div class="barre-plein" id="per-plein"></div></div><div class="bornes"><span>1957</span><span>1960</span></div></div>
+        <div id="badges" style="position:absolute;top:1120px;display:none;left:110px;width:860px;text-align:center"><span class="badge" style="margin:0 8px">Travaux de reconnaissance</span></div>
+        <div id="comp" style="position:absolute;top:990px;left:150px;width:780px"><div class="petit" style="font-size:28px;margin-bottom:8px">Margnac · 9 454 t</div><div class="barre" style="height:26px"><div class="barre-plein" id="comp-a"></div></div><div class="petit" style="font-size:28px;margin:14px 0 8px">Margabal · 1,5 t</div><div class="barre" style="height:26px"><div class="barre-plein" id="comp-b" style="width:0.250%;background:var(--uranium)"></div></div></div>
+      </div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      // lente avancée de caméra sur toute la séquence
+      tl.fromTo("#scene", { scale: 1 }, { scale: 1.03, duration: 10.93, ease: "none" }, 0);
+      tl.fromTo("#tete", { opacity: 0, y: -26 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.15);
+
+      tl.fromTo("#mesure", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 4.87);
+      const nombre = { v: 0 };
+      tl.fromTo(nombre, { v: 0 }, { v: 1.5, duration: 2.20, ease: "power2.out",
+        onUpdate: () => { const v = nombre.v; document.querySelector("#nombre").textContent = "" + v.toFixed(1).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '\u202f') + ""; } }, 4.97);
+      tl.fromTo("#per", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 5.07);
+      tl.fromTo("#per-plein", { scaleX: 0 }, { scaleX: 1, duration: 2.20, ease: "power2.out" }, 5.17);
+      tl.fromTo("#comp", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 7.47);
+      tl.fromTo("#comp-a", { scaleX: 0 }, { scaleX: 1, duration: 1.2, ease: "power2.out" }, 7.57);
+      tl.fromTo("#comp-b", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power2.out" }, 8.37);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

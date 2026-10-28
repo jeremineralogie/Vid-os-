@@ -25,6 +25,12 @@ Lire avant toute nouvelle vidéo. Ces choix ont été validés par l'auteur sur 
   - Les **informations chiffrées** et les **compositions chimiques** sont animées avec **HyperFrames**. Chaque séquence est composée à la durée exacte de son plan, puis insérée comme `Plan(..., "video")`. Voir `projets/montebras/hyperframes_scenes.py`.
   - Les éléments animés restent dans la zone x 110-970, y 250-1120. Aucun texte ne recouvre un autre texte, et aucun texte n'entre dans les marges des réseaux.
   - **Chaque fait affiché est vérifié** et consigné dans `SOURCES.md`, avec la source à citer en description.
+- **Depuis Uranium (oct. 2026) :**
+  - Le karaoké est un peu plus rapide : `mots_lecture(par_mot=0.32, base=0.75)`.
+  - Les fiches chimiques ont la photo du minéral en fond (assombrie), sous une carte translucide.
+  - Un compteur HyperFrames accompagne chaque chiffre affiché.
+  - Fin sur le logo avec **jeremineralogie.fr** en dessous (`Projet(texte_logo=...)`).
+  - L'auteur ne veut pas de vues aériennes IGN. Archives privilégiées : rapports du CEA numérisés (OSTI/ETDEWEB).
 - **Plans :** photos en plein cadre pour les formats portrait, en « carte » arrondie sur fond de charte pour les formats paysage. Zooms lents et doux, fondus de 0,4 s, titres courts en haut de l'écran.
 - **Faits :** ne rien ajouter qui ne figure pas dans l'article. Formulations prudentes (« nommée par », non « découverte par », sans preuve). Toute image générée ou illustrative doit être annoncée comme telle.
 

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+:root { --fond-haut:#0b0710; --fond-bas:#1a0f2a; --violet:#7b2cbf; --violet-clair:#c77dff; --gris:#c3bdd0; --uranium:#d4f25a; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:1080px; height:1920px; overflow:hidden; background:var(--fond-haut); }
+#root { position:relative; width:100%; height:100%; font-family:"Montserrat", sans-serif; color:#fff; }
+#fond { position:absolute; inset:0;
+  background: radial-gradient(900px 700px at 50% 34%, rgba(123,44,191,0.22), rgba(0,0,0,0) 70%),
+              linear-gradient(180deg, var(--fond-haut), var(--fond-bas)); }
+#photo { position:absolute; inset:0; overflow:hidden; }
+#photo img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(0.5) saturate(1.05); }
+#photo-voile { position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(11,7,16,0.55) 0%, rgba(11,7,16,0.15) 30%, rgba(11,7,16,0.25) 60%, rgba(11,7,16,0.75) 100%); }
+/* zone utile : x 110-970, y 250-1120 (au-dessus des sous-titres, hors marges des réseaux) */
+.tete { position:absolute; top:250px; left:110px; width:860px; text-align:center; }
+.surtitre { font-size:30px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--violet-clair); }
+.titre { margin-top:14px; font-size:80px; font-weight:800; letter-spacing:-0.01em; text-shadow:0 4px 18px rgba(0,0,0,0.6); }
+.filet { width:120px; height:8px; margin:22px auto 0; border-radius:4px; background:var(--violet-clair); }
+.grand { font-weight:800; line-height:1; color:var(--violet-clair); font-variant-numeric:tabular-nums; letter-spacing:-0.03em; }
+.unite { font-size:50px; font-weight:700; }
+.petit { font-size:34px; font-weight:600; color:var(--gris); }
+.periode { position:absolute; left:150px; width:780px; }
+.barre { position:relative; height:22px; border-radius:11px; background:rgba(255,255,255,0.12); overflow:hidden; }
+.barre-plein { position:absolute; inset:0; border-radius:11px; background:linear-gradient(90deg, var(--violet), var(--violet-clair)); transform-origin:left center; }
+.bornes { display:flex; justify-content:space-between; margin-top:14px; font-size:36px; font-weight:700; color:var(--gris); }
+.badge { display:inline-block; padding:12px 26px; border-radius:40px; font-size:32px; font-weight:700;
+  background:rgba(123,44,191,0.28); border:2px solid rgba(199,125,255,0.7); }
+
+#carte { position:absolute; top:470px; left:90px; width:900px; padding:40px 30px 36px; border-radius:34px;
+  background:rgba(11,7,16,0.66); border:2px solid rgba(199,125,255,0.55); box-shadow:0 24px 60px rgba(0,0,0,0.55); }
+#formule { text-align:center; font-weight:700; white-space:nowrap; }
+#formule sub { font-size:0.55em; vertical-align:-0.25em; }
+#fluo { margin-top:22px; text-align:center; font-size:34px; font-weight:600; color:var(--uranium); }
+#elements { margin-top:30px; display:flex; justify-content:center; gap:18px; }
+.el { width:150px; text-align:center; }
+.rond { width:100px; height:100px; margin:0 auto; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-size:44px; font-weight:800; background:var(--violet); box-shadow:0 0 24px rgba(123,44,191,0.6); }
+.rond.u { background:#3d5a12; border:3px solid var(--uranium); color:var(--uranium); box-shadow:0 0 26px rgba(212,242,90,0.55); }
+.el-nom { margin-top:10px; font-size:27px; font-weight:600; color:var(--gris); }
+#mohs { margin-top:34px; padding:0 30px; }
+#mohs-titre { display:flex; justify-content:space-between; font-size:30px; font-weight:600; color:var(--gris); margin-bottom:12px; }
+#mohs-titre b { color:#fff; font-weight:800; }
+#graduation { position:relative; height:18px; border-radius:9px; background:rgba(255,255,255,0.14); overflow:hidden; }
+#graduation-plein { position:absolute; left:0; top:0; height:100%; border-radius:9px; background:linear-gradient(90deg, var(--violet), var(--violet-clair)); transform-origin:left center; }
+</style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="6.70" data-width="1080" data-height="1920">
+      <div id="photo" class="clip" data-start="0" data-duration="6.70" data-track-index="0" style="z-index:1"><img id="photo-img" src="assets/fond.jpg" alt="" /><div id="photo-voile"></div></div>
+      <div id="scene" class="clip" data-start="0" data-duration="6.70" data-track-index="1" style="z-index:2">
+        <div class="tete" id="tete"><div class="surtitre">Composition</div><div class="titre">Autunite</div><div class="filet"></div></div>
+        <div id="carte"><div id="formule" style="font-size:56px">Ca(UO<sub>2</sub>)<sub>2</sub>(PO<sub>4</sub>)<sub>2</sub>·10-12H<sub>2</sub>O</div><div id="fluo">Fluorescence vert vif sous ultraviolet</div><div id="elements"><div class="el"><div class="rond">Ca</div><div class="el-nom">calcium</div></div><div class="el"><div class="rond u">U</div><div class="el-nom">uranium</div></div><div class="el"><div class="rond">P</div><div class="el-nom">phosphore</div></div><div class="el"><div class="rond">O</div><div class="el-nom">oxygène</div></div><div class="el"><div class="rond">H</div><div class="el-nom">hydrogène</div></div></div><div id="mohs"><div id="mohs-titre"><span>Dureté (échelle de Mohs, 1 à 10)</span><b>2 à 2,5</b></div><div id="graduation"><div id="graduation-plein" style="width:25%"></div></div></div></div>
+      </div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      // lente avancée de caméra sur toute la séquence
+      tl.fromTo("#scene", { scale: 1 }, { scale: 1.03, duration: 6.70, ease: "none" }, 0);
+      tl.fromTo("#photo-img", { scale: 1.0 }, { scale: 1.08, duration: 6.70, ease: "none" }, 0);
+      tl.fromTo("#tete", { opacity: 0, y: -26 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.15);
+
+      tl.fromTo("#carte", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.25);
+      tl.fromTo("#formule", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.80, ease: "power2.inOut" }, 0.40);
+      tl.fromTo("#fluo", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 0.90);
+      tl.fromTo("#elements .el:nth-child(1)", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 1.05);
+      tl.fromTo("#elements .el:nth-child(2)", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 1.13);
+      tl.fromTo("#elements .el:nth-child(3)", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 1.21);
+      tl.fromTo("#elements .el:nth-child(4)", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 1.29);
+      tl.fromTo("#elements .el:nth-child(5)", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 1.37);
+      tl.fromTo("#mohs", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 1.55);
+      tl.fromTo("#graduation-plein", { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "power2.out" }, 1.65);
+      tl.fromTo(".rond.u", { boxShadow: "0 0 10px rgba(212,242,90,0.3)" }, { boxShadow: "0 0 34px rgba(212,242,90,0.85)", duration: 0.7, yoyo: true, repeat: 1, ease: "sine.inOut" }, 1.85);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

@@ -82,6 +82,7 @@ class Projet:
     sortie: Path = None
     duree_generique: float = 12.0
     karaoke: bool = False  # sous-titres mot à mot
+    texte_logo: str = None  # ligne écrite sous le logo final (ex. adresse du site)
 
 
 # ---------------------------------------------------------------- sous-titres
@@ -431,7 +432,7 @@ Y_TITRE = 250
 
 def poser_titre(cadre, texte, alpha):
     # voile sombre dégradé derrière le titre, pour rester lisible sur une photo claire
-    voile = np.concatenate([np.linspace(0.55, 0.55, 260), np.linspace(0.55, 0, 260)]).astype(np.float32)
+    voile = np.concatenate([np.linspace(0, 0.55, 110) ** 0.8, np.linspace(0.55, 0.55, 150), np.linspace(0.55, 0, 260)]).astype(np.float32)
     zone = cadre[Y_TITRE - 150:Y_TITRE - 150 + voile.size]
     cadre[Y_TITRE - 150:Y_TITRE - 150 + voile.size] = zone * (1 - voile[:, None, None] * alpha)
     c = titre_rgba(texte)
@@ -483,7 +484,17 @@ def _couper(texte, police, largeur):
     return lignes + [cour]
 
 
-def cadre_generique(t, duree, toile, logo, fond):
+def texte_sous_logo(texte):
+    """Ligne centrée sous le logo final, en violet clair."""
+    police = _police(POLICE_TITRE, 54)
+    calque = Image.new("RGBA", (W, 110), (0, 0, 0, 0))
+    d = ImageDraw.Draw(calque)
+    lw = police.getlength(texte)
+    d.text(((W - lw) / 2, 20), texte, font=police, fill=VIOLET_CLAIR + (255,))
+    return np.asarray(calque, np.float32) / 255
+
+
+def cadre_generique(t, duree, toile, logo, fond, sous_logo=None):
     """Défilement du texte, puis logo seul sur les 3,5 dernières secondes."""
     cadre = fond.copy()
     duree_defil = duree - 3.5
@@ -501,6 +512,11 @@ def cadre_generique(t, duree, toile, logo, fond):
         a = logo[..., 3:4] * max(alpha, 0)
         zone = cadre[y:y + 620, x:x + 620]
         cadre[y:y + 620, x:x + 620] = zone * (1 - a) + logo[..., :3] * 255 * a
+        if sous_logo is not None:  # sous le logo, avec un léger retard
+            b = sous_logo[..., 3:4] * max(0, min(1, (tl - 0.4) / 0.6, (3.5 - tl) / 0.6))
+            y2 = y + 620 + 10
+            zone = cadre[y2:y2 + sous_logo.shape[0]]
+            cadre[y2:y2 + sous_logo.shape[0]] = zone * (1 - b) + sous_logo[..., :3] * 255 * b
     return cadre
 
 
@@ -560,10 +576,11 @@ def rendre(projet, apercu=None):
     rendus = [Rendu(p, projet.dossier / "sources") for p in projet.plans]
     toile, logo = image_generique(projet.generique, projet.dossier / "sources" / projet.logo)
     fond = fond_degrade()
+    sous_logo = texte_sous_logo(projet.texte_logo) if projet.texte_logo else None
 
     def cadre_a(t):
         if t >= fin_visuel:
-            return cadre_generique(t - fin_visuel, projet.duree_generique, toile, logo, fond)
+            return cadre_generique(t - fin_visuel, projet.duree_generique, toile, logo, fond, sous_logo)
         cadre = None
         for i, (r, d, f) in enumerate(zip(rendus, debuts, fins)):
             entree = 0 if (i == 0 or r.plan.coupe_franche) else FONDU / 2
