@@ -15,7 +15,7 @@ Sources principales, toutes téléchargées depuis le serveur (non versionnées)
 - ✔ Les couleurs, par ordre de fréquence : vert, violet, bleu-vert, plus rarement jaune et bleu. Elles sont dues à des impuretés exposées ensuite à des rayonnements ionisants. *(Mémento 1999)*
 - ✔ « C'est historiquement dans la fluorine de Valzergues (Aveyron) que ce phénomène a été analysé pour la première fois. » *(Mémento 1999)* Thèse de Georges Calas, 1971. *(Notice 859)*
 - ✔ La France a produit environ 10,3 Mt de fluorine depuis 1861, avec un record de 370 000 t en 1972. *(Mémento 1999)*
-- ⚠ « Fluorine » est le nom français officiel (BRGM), « fluorite » le nom international. **Question à l'auteur : lequel afficher ?**
+- ⚠ « Fluorine » est le nom français officiel (BRGM), « fluorite » le nom international. Choix de l'auteur : **« fluorite » à l'écran.**
 
 ## Les gisements
 
@@ -41,7 +41,7 @@ Sources principales, toutes téléchargées depuis le serveur (non versionnées)
 
 ### Saint-Péray (Ardèche, 07)
 - ⚠ **Aucune source géologique fiable.** La notice 818 Valence ne cite que des filons barytiques voisins (Cornas, Courniaud, Ponsoye) et la fluorine stratiforme de Soyons. Seules des fiches de marchands décrivent des petits cristaux sur granite, et elles ne sont pas utilisables.
-- **Il faudra les observations de l'auteur, comme pour le Liauzun.**
+- ✔ Observation de l'auteur : carrière en Ardèche, connue pour ses fluorites violettes avec baryte et calcite (nom de la carrière non affiché).
 
 ### Valzergues (Aveyron, 12)
 - ✔ Valzergues est une commune de l'Aveyron. Gîte FRA-01319, « Ancienne mine ». *(GITES ; IGN)*

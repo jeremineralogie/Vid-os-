@@ -38,6 +38,10 @@ Lire avant toute nouvelle vidéo. Ces choix ont été validés par l'auteur sur 
   - Illustrer avec des portraits de savants et des documents anciens du domaine public : archive.org, Wellcome Collection, musée de Cleveland. Le serveur ne peut pas télécharger Wikimedia Commons ni Gallica.
   - Cartes géologiques : services WMS du BRGM (`geoservices.brgm.fr/geologie`), cartes scannées au 1/50 000, harmonisées et au 1/1 000 000. Données BRGM en Licence Ouverte, à citer en description.
   - Ne pas utiliser Planet-Terre (ENS Lyon).
+- **Depuis Fluorites (oct. 2026) :**
+  - Pour une vidéo à plusieurs gisements dans plusieurs départements : **carte de France lisible, en relief** (estompage IGN, mer et voisins sombres, limites des départements), pas de carte géologique. Pour chaque gisement : dézoom, le point apparaît, zoom sur le département (fond détaillé), chiffres clés avec compteurs, puis les photos. Voir `projets/fluorites/` (`gisements.py`, `carte_fond.py`, `hyperframes_scenes.py`).
+  - Le minéral s'écrit **« fluorite »** à l'écran, et non « fluorine ».
+  - Les chiffres affichés viennent du mémento BRGM ou des notices à 1/50 000, pas de l'inventaire GITES, dont les productions ne concordent pas.
 - **Plans :** photos en plein cadre pour les formats portrait, en « carte » arrondie sur fond de charte pour les formats paysage. Zooms lents et doux, fondus de 0,4 s, titres courts en haut de l'écran.
 - **Faits :** ne rien ajouter qui ne figure pas dans l'article. Formulations prudentes (« nommée par », non « découverte par », sans preuve). Toute image générée ou illustrative doit être annoncée comme telle.
 

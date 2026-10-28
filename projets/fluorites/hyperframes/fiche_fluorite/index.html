@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+:root { --violet:#7b2cbf; --violet-clair:#c77dff; --gris:#d6d0e0; --or:#f2b544; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
+#root { position:relative; width:100%; height:100%; font-family:"Montserrat", sans-serif; color:#fff; }
+#photo { position:absolute; inset:0; overflow:hidden; }
+#photo img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(0.5) saturate(1.05); }
+#photo-voile { position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.12) 30%, rgba(0,0,0,0.22) 60%, rgba(0,0,0,0.75) 100%); }
+/* zone utile : x 110-970, y 250-1120 (au-dessus des sous-titres, hors marges des réseaux) */
+.tete { position:absolute; top:250px; left:110px; width:860px; text-align:center; }
+.surtitre { font-size:30px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--violet-clair);
+  text-shadow:0 2px 10px rgba(0,0,0,0.8); }
+.titre { margin-top:14px; font-size:80px; font-weight:800; letter-spacing:-0.01em; white-space:nowrap; text-shadow:0 4px 18px rgba(0,0,0,0.7); }
+.filet { width:120px; height:8px; margin:22px auto 0; border-radius:4px; background:var(--violet-clair); }
+.grand { font-weight:800; line-height:1; color:var(--or); font-variant-numeric:tabular-nums; letter-spacing:-0.02em;
+  text-shadow:0 6px 24px rgba(0,0,0,0.6); white-space:nowrap; }
+.unite { font-size:46px; font-weight:700; text-shadow:0 3px 14px rgba(0,0,0,0.8); }
+.petit { font-size:30px; font-weight:600; color:var(--gris); text-shadow:0 2px 10px rgba(0,0,0,0.8); }
+.badge { display:inline-block; padding:12px 26px; border-radius:40px; font-size:32px; font-weight:700;
+  background:rgba(0,0,0,0.6); border:2px solid rgba(199,125,255,0.75); }
+.panneau { background:rgba(8,6,12,0.7); border:2px solid rgba(199,125,255,0.55); border-radius:34px;
+  box-shadow:0 24px 60px rgba(0,0,0,0.55); }
+
+#carte { position:absolute; top:450px; left:110px; width:860px; padding:34px 30px 30px; }
+#formule { text-align:center; font-weight:800; font-size:110px; white-space:nowrap; }
+#formule sub { font-size:0.55em; vertical-align:-0.25em; }
+#nom-chimique { margin-top:8px; text-align:center; font-size:34px; font-weight:600; color:var(--or); }
+#elements { margin-top:24px; display:flex; justify-content:center; gap:40px; }
+.el { width:170px; text-align:center; }
+.rond { width:100px; height:100px; margin:0 auto; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-size:44px; font-weight:800; background:var(--violet); box-shadow:0 0 24px rgba(123,44,191,0.6); }
+.rond.f { background:#123a2a; border:3px solid #7fe0b0; color:#9ff0c6; box-shadow:0 0 26px rgba(127,224,176,0.5); }
+.el-nom { margin-top:10px; font-size:27px; font-weight:600; color:var(--gris); }
+#tuiles { position:absolute; top:880px; left:110px; width:860px; display:flex; gap:18px; }
+.tuile { flex:1; text-align:center; padding:20px 10px; }
+.tuile .grand { font-size:72px; }
+.tuile .petit { margin-top:8px; font-size:26px; }
+</style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="18.32" data-width="1080" data-height="1920">
+      <div id="photo" class="clip" data-start="0" data-duration="18.32" data-track-index="0" style="z-index:1"><img id="photo-img" src="assets/fond.jpg" alt="" /><div id="photo-voile"></div></div>
+      <div id="scene" class="clip" data-start="0" data-duration="18.32" data-track-index="1" style="z-index:2">
+        <div class="tete" id="tete"><div class="surtitre">Composition</div><div class="titre" style="font-size:80px">La fluorite</div><div class="filet"></div></div>
+        <div id="carte" class="panneau"><div id="formule">CaF<sub>2</sub></div><div id="nom-chimique">Fluorure de calcium</div><div id="elements"><div class="el"><div class="rond">Ca</div><div class="el-nom">calcium</div></div><div class="el"><div class="rond f">F</div><div class="el-nom">fluor ×2</div></div></div></div>
+        <div id="tuiles"><div class="tuile panneau" id="t-mohs"><div id="mohs" class="grand">0</div><div class="petit">dureté, étalon de Mohs</div></div><div class="tuile panneau" id="t-nom"><div class="grand" style="font-size:58px;font-style:italic">fluere</div><div class="petit">« couler », en latin</div></div><div class="tuile panneau" id="t-fondant"><div class="grand" style="font-size:52px">fondant</div><div class="petit">en métallurgie</div></div></div>
+      </div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#photo-img", { scale: 1.0 }, { scale: 1.08, duration: 18.32, ease: "none" }, 0);
+      tl.fromTo("#tete", { opacity: 0, y: -26 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.15);
+      tl.fromTo("#carte", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.25);
+      tl.fromTo("#formule", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.8, ease: "power2.inOut" }, 0.4);
+      tl.fromTo("#nom-chimique", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 0.90);
+      tl.fromTo("#elements .el:nth-child(1)", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 1.1);
+      tl.fromTo("#elements .el:nth-child(2)", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 1.25);
+      tl.fromTo("#t-mohs", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 5.51);
+      const c_mohs = { v: 0 };
+      tl.fromTo(c_mohs, { v: 0 }, { v: 4, duration: 1.20, ease: "power2.out",
+        onUpdate: () => { const v = c_mohs.v; document.querySelector("#mohs").textContent = "" + Math.round(v).toString() + ""; } }, 5.61);
+      tl.fromTo("#t-nom", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 8.50);
+      tl.fromTo("#t-fondant", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 13.69);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
