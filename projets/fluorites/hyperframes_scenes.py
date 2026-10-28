@@ -298,7 +298,7 @@ def carte(k, duree, instants, assets, fin=False):
                     script.append(compteur(f"#{sid}", mor[0], mor[1], t + 0.1, 1.3, separateur=mor[1] >= 10000))
                 else:
                     spans.append(mor)
-            taille = 64 if len(blocs) == 1 else (54 if len(blocs) == 2 else 46)
+            taille = 64 if len(blocs) == 1 else (46 if len(blocs) == 2 else 42)
             cases.append(f'<div id="chiffre{j}" style="flex:auto;text-align:center;padding:16px 12px;border-radius:24px;background:rgba(255,255,255,0.06)">'
                          f'<div class="grand" style="font-size:{taille}px">{"".join(spans)}</div>'
                          f'<div class="petit" style="margin-top:8px;font-size:26px">{legende}</div></div>')
