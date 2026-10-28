@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      /* Charte jeremineralogie (charte/CHARTE.md) */
+      :root {
+        --fond-haut: #0b0710;
+        --fond-bas: #1a0f2a;
+        --violet: #7b2cbf;
+        --violet-clair: #c77dff;
+        --vert: #8bcd3c;
+        --ink: #ffffff;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: var(--fond-haut);
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        font-family: "Montserrat", sans-serif;
+        color: var(--ink);
+      }
+      #fond {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, var(--fond-haut), var(--fond-bas));
+      }
+
+      /* Titre en haut, sous la barre d'onglets */
+      #titre {
+        position: absolute;
+        top: 250px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+      }
+      #titre-texte {
+        font-size: 56px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+      #titre-filet {
+        width: 120px;
+        height: 8px;
+        margin: 22px auto 0;
+        border-radius: 4px;
+        background: var(--violet-clair);
+      }
+
+      /* Carte image : la coupe de sol */
+      #carte {
+        position: absolute;
+        left: 50px;
+        top: 420px;
+        width: 980px;
+        height: 560px;
+        border-radius: 22px;
+        overflow: hidden;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+      }
+      #carte-zoom {
+        position: absolute;
+        inset: 0;
+      }
+      .sol {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Compteur et jauge */
+      #mesure {
+        position: absolute;
+        left: 90px;
+        top: 1010px;
+        width: 900px;
+      }
+      #mesure-ligne {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+      }
+      #mesure-label {
+        font-size: 34px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.82);
+      }
+      #compteur {
+        font-size: 112px;
+        font-weight: 800;
+        font-variant-numeric: tabular-nums;
+        color: var(--violet-clair);
+        letter-spacing: -0.02em;
+      }
+      #jauge {
+        position: relative;
+        height: 30px;
+        margin-top: 10px;
+        border-radius: 15px;
+        background: rgba(255, 255, 255, 0.12);
+        overflow: hidden;
+      }
+      #jauge-plein {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 15px;
+        background: linear-gradient(90deg, #8e939c, #b6bac2);
+        transform-origin: left center;
+      }
+
+      /* Sous-titres : taille M, centrés, ligne de base vers 1 400 px */
+      .sous-titre {
+        position: absolute;
+        left: 150px;
+        width: 780px;
+        bottom: 520px;
+        text-align: center;
+        font-size: 48px;
+        font-weight: 600;
+        line-height: 1.22;
+        color: #fff;
+        text-shadow:
+          -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000,
+          0 -3px 0 #000, 0 3px 0 #000, -3px 0 0 #000, 3px 0 0 #000,
+          3px 5px 4px rgba(0, 0, 0, 0.6);
+      }
+      .cle {
+        color: var(--violet-clair);
+      }
+      .mention {
+        position: absolute;
+        right: 22px;
+        bottom: 16px;
+        font-size: 28px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.85);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="9"
+      data-width="1080"
+      data-height="1920"
+    >
+      <div id="fond" class="clip" data-start="0" data-duration="9" data-track-index="0" style="z-index: 1"></div>
+
+      <div id="titre" class="clip" data-start="0" data-duration="9" data-track-index="1" style="z-index: 5">
+        <div id="titre-in">
+          <div id="titre-texte">Plomb dissous</div>
+          <div id="titre-filet"></div>
+        </div>
+      </div>
+
+      <div id="carte" class="clip" data-start="0" data-duration="9" data-track-index="2" style="z-index: 3">
+        <div id="carte-zoom"><div id="carte-echelle" style="position:absolute;inset:0">
+          <img id="sol-a" class="sol" src="assets/sol_A.jpg" alt="" />
+          <img id="sol-b" class="sol" src="assets/sol_B.jpg" alt="" />
+          <img id="sol-c" class="sol" src="assets/sol_C.jpg" alt="" />
+        </div></div>
+        <div class="mention">Schéma</div>
+      </div>
+
+      <div id="mesure" class="clip" data-start="0" data-duration="9" data-track-index="3" style="z-index: 4">
+        <div id="mesure-in">
+          <div id="mesure-ligne">
+            <span id="mesure-label">Plomb dissous dans l'eau</span>
+            <span id="compteur">0 %</span>
+          </div>
+          <div id="jauge"><div id="jauge-plein"></div></div>
+        </div>
+      </div>
+
+      <div id="st1" class="clip sous-titre" data-start="0.3" data-duration="4.6" data-track-index="4" style="z-index: 6">
+        <div id="st1-in">Le <span class="cle">plomb</span> dissous chute<br />de plus de 96&nbsp;%.</div>
+      </div>
+      <div id="st2" class="clip sous-titre" data-start="5.1" data-duration="3.6" data-track-index="4" style="z-index: 6">
+        <div id="st2-in">Il précipite…<br />en <span class="cle">pyromorphite</span>.</div>
+      </div>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      // Entrées
+      tl.fromTo("#titre-in", { opacity: 0, y: -24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.1);
+      tl.fromTo("#carte-zoom", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 0);
+      tl.fromTo("#mesure-in", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.6);
+
+      // Lent zoom continu sur la coupe de sol
+      tl.fromTo("#carte-echelle", { scale: 1.0 }, { scale: 1.12, duration: 8.6, ease: "sine.inOut" }, 0.2);
+
+      // Étapes du schéma : plomb seul -> phosphate -> pyromorphite
+      tl.fromTo("#sol-b", { opacity: 0 }, { opacity: 1, duration: 0.7, ease: "power1.inOut" }, 0.9);
+      tl.fromTo("#sol-c", { opacity: 0 }, { opacity: 1, duration: 0.8, ease: "power1.inOut" }, 4.9);
+
+      // Compteur 0 % -> −96 % et jauge 100 % -> 4 % (fonction du temps de la timeline)
+      const compte = { v: 0 };
+      tl.fromTo(
+        compte,
+        { v: 0 },
+        {
+          v: 96,
+          duration: 2.6,
+          ease: "power2.out",
+          onUpdate: () => {
+            const n = Math.round(compte.v);
+            document.getElementById("compteur").textContent = n === 0 ? "0 %" : "−" + n + " %";
+          },
+        },
+        1.8,
+      );
+      tl.fromTo("#jauge-plein", { scaleX: 1 }, { scaleX: 0.04, duration: 2.6, ease: "power2.out" }, 1.8);
+      // Le reste passe au vert : le plomb piégé
+      tl.fromTo("#jauge-plein", { background: "linear-gradient(90deg, #8e939c, #b6bac2)" }, { background: "linear-gradient(90deg, #6fae2a, #8bcd3c)", duration: 0.6 }, 4.9);
+      tl.fromTo("#compteur", { scale: 1 }, { scale: 1.08, duration: 0.18, ease: "power2.out", yoyo: true, repeat: 1 }, 4.4);
+
+      // Sous-titres : fondus courts
+      tl.set("#st1-in", { opacity: 0 }, 0);
+      tl.to("#st1-in", { opacity: 1, duration: 0.12 }, 0.3);
+      tl.to("#st1-in", { opacity: 0, duration: 0.12 }, 4.75);
+      tl.fromTo("#st2-in", { opacity: 0 }, { opacity: 1, duration: 0.12 }, 5.1);
+
+      // Sortie
+      tl.fromTo("#root", { opacity: 1 }, { opacity: 0, duration: 0.45, ease: "power1.in" }, 8.5);
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
