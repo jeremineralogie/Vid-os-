@@ -288,7 +288,7 @@ def carte(k, duree, instants, assets, fin=False):
         cases = []
         for j, (mots, morceaux, legende) in enumerate(blocs):
             spans = []
-            t = max(instants[j] if j < len(instants) else 0, t_arr + 0.3 + 0.5 * j)
+            t = max((instants[j] - 0.6) if j < len(instants) else 0, t_arr + 0.3 + 0.5 * j)  # le compteur tourne pendant la lecture
             t = min(t, duree - 1.6)
             script.append(apparition(f"#chiffre{j}", t, 16, 0.45))
             for m, mor in enumerate(morceaux):
@@ -305,7 +305,7 @@ def carte(k, duree, instants, assets, fin=False):
         corps.append('        <div id="chiffres" class="panneau" style="position:absolute;left:110px;top:900px;width:860px;padding:18px;'
                      'display:flex;gap:16px">' + "".join(cases) + '</div>')
         script.append(f'      tl.fromTo("#chiffres", {{ opacity: 0 }}, {{ opacity: 1, duration: 0.3 }}, '
-                      f'{min(max(instants[0] if instants else 0, t_arr + 0.3), duree - 1.6) - 0.1:.2f});')
+                      f'{min(max((instants[0] - 0.6) if instants else 0, t_arr + 0.3), duree - 1.6) - 0.1:.2f});')
     return page(duree, "\n".join(corps), "#photo img { filter:none; } #photo-voile { display:none; }", "\n".join(script), zoom_fond=False)
 
 
@@ -396,7 +396,7 @@ def production(duree, t_tonnes, assets):
         '        <div id="annee-bloc" style="position:absolute;top:470px;width:100%;text-align:center"><span id="annee" class="badge">1800</span></div>',
     ])
     script = [entree("#tete", 0.15), apparition("#annee-bloc", 0.3, 12, 0.4), compteur("#annee", 1800, 1861, 0.35, 1.0),
-              apparition("#bloc", min(t_tonnes, duree - 2), 30), compteur("#tonnes", 0, 10.3, min(t_tonnes, duree - 2) + 0.1, 1.5, decimales=1)]
+              apparition("#bloc", max(1.0, t_tonnes - 1.4), 30), compteur("#tonnes", 0, 10.3, max(1.0, t_tonnes - 1.4) + 0.1, 1.6, decimales=1)]
     return page(duree, corps, "#annee-bloc .badge { font-size:40px; }", "\n".join(script))
 
 

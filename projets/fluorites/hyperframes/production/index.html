@@ -47,10 +47,10 @@ html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
       const c_annee = { v: 1800 };
       tl.fromTo(c_annee, { v: 1800 }, { v: 1861, duration: 1.00, ease: "power2.out",
         onUpdate: () => { const v = c_annee.v; document.querySelector("#annee").textContent = "" + Math.round(v).toString() + ""; } }, 0.35);
-      tl.fromTo("#bloc", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 3.31);
+      tl.fromTo("#bloc", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 1.91);
       const c_tonnes = { v: 0 };
-      tl.fromTo(c_tonnes, { v: 0 }, { v: 10.3, duration: 1.50, ease: "power2.out",
-        onUpdate: () => { const v = c_tonnes.v; document.querySelector("#tonnes").textContent = "" + v.toFixed(1).replace('.', ',') + ""; } }, 3.41);
+      tl.fromTo(c_tonnes, { v: 0 }, { v: 10.3, duration: 1.60, ease: "power2.out",
+        onUpdate: () => { const v = c_tonnes.v; document.querySelector("#tonnes").textContent = "" + v.toFixed(1).replace('.', ',') + ""; } }, 2.01);
       window.__timelines["main"] = tl;
       tl.seek(0);
     </script>

@@ -108,18 +108,18 @@ html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
       tl.fromTo("#commune", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 3.60);
       tl.fromTo("#trait", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 3.80);
       tl.fromTo("#vignette", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.8)" }, 3.85);
-      tl.fromTo("#chiffre0", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 4.72);
+      tl.fromTo("#chiffre0", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 4.12);
       const c_n0_0 = { v: 1920 };
       tl.fromTo(c_n0_0, { v: 1920 }, { v: 1959, duration: 1.30, ease: "power2.out",
-        onUpdate: () => { const v = c_n0_0.v; document.querySelector("#n0_0").textContent = "" + Math.round(v).toString() + ""; } }, 4.82);
-      tl.fromTo("#chiffre1", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 6.92);
+        onUpdate: () => { const v = c_n0_0.v; document.querySelector("#n0_0").textContent = "" + Math.round(v).toString() + ""; } }, 4.22);
+      tl.fromTo("#chiffre1", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 6.32);
       const c_n1_0 = { v: 0 };
       tl.fromTo(c_n1_0, { v: 0 }, { v: 150000, duration: 1.30, ease: "power2.out",
-        onUpdate: () => { const v = c_n1_0.v; document.querySelector("#n1_0").textContent = "" + Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '\u202f') + ""; } }, 7.02);
+        onUpdate: () => { const v = c_n1_0.v; document.querySelector("#n1_0").textContent = "" + Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '\u202f') + ""; } }, 6.42);
       const c_n1_2 = { v: 0 };
       tl.fromTo(c_n1_2, { v: 0 }, { v: 200000, duration: 1.30, ease: "power2.out",
-        onUpdate: () => { const v = c_n1_2.v; document.querySelector("#n1_2").textContent = "" + Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '\u202f') + ""; } }, 7.02);
-      tl.fromTo("#chiffres", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 4.62);
+        onUpdate: () => { const v = c_n1_2.v; document.querySelector("#n1_2").textContent = "" + Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '\u202f') + ""; } }, 6.42);
+      tl.fromTo("#chiffres", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 4.02);
       window.__timelines["main"] = tl;
       tl.seek(0);
     </script>
