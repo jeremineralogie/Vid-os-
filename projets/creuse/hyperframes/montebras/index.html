@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+:root { --violet:#7b2cbf; --violet-clair:#c77dff; --gris:#d6d0e0; --or:#f2b544; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
+#root { position:relative; width:100%; height:100%; font-family:"Montserrat", sans-serif; color:#fff; }
+#photo { position:absolute; inset:0; overflow:hidden; }
+#photo img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(0.5) saturate(1.05); }
+#photo-voile { position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.12) 30%, rgba(0,0,0,0.22) 60%, rgba(0,0,0,0.75) 100%); }
+/* zone utile : x 110-970, y 250-1120 (au-dessus des sous-titres, hors marges des réseaux) */
+.tete { position:absolute; top:250px; left:110px; width:860px; text-align:center; }
+.surtitre { font-size:30px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--violet-clair);
+  text-shadow:0 2px 10px rgba(0,0,0,0.8); }
+.titre { margin-top:14px; font-size:80px; font-weight:800; letter-spacing:-0.01em; white-space:nowrap; text-shadow:0 4px 18px rgba(0,0,0,0.7); }
+.filet { width:120px; height:8px; margin:22px auto 0; border-radius:4px; background:var(--violet-clair); }
+.grand { font-weight:800; line-height:1; color:var(--or); font-variant-numeric:tabular-nums; letter-spacing:-0.02em;
+  text-shadow:0 6px 24px rgba(0,0,0,0.6); white-space:nowrap; }
+.petit { font-size:30px; font-weight:600; color:var(--gris); text-shadow:0 2px 10px rgba(0,0,0,0.8); }
+.panneau { background:rgba(8,6,12,0.7); border:2px solid rgba(199,125,255,0.55); border-radius:34px;
+  box-shadow:0 24px 60px rgba(0,0,0,0.55); }
+.archive { position:absolute; border-radius:22px; overflow:hidden; border:4px solid rgba(242,230,210,0.9);
+  box-shadow:0 20px 50px rgba(0,0,0,0.7); background:#1a1520; }
+.archive img { width:100%; height:100%; object-fit:contain; display:block; }
+</style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="16.27" data-width="1080" data-height="1920">
+      <div id="photo" class="clip" data-start="0" data-duration="16.27" data-track-index="0" style="z-index:1"><img id="photo-img" src="assets/fond.jpg" alt="" /><div id="photo-voile"></div></div>
+      <div id="scene" class="clip" data-start="0" data-duration="16.27" data-track-index="1" style="z-index:2">
+        <div id="a0" class="archive" style="left:110px;top:250px;width:860px;height:600px;opacity:0"><img src="assets/A1.jpg"/></div>
+        <div id="a1" class="archive" style="left:110px;top:250px;width:860px;height:600px;opacity:0"><img src="assets/A3.jpg"/></div>
+        <div id="a2" class="archive" style="left:110px;top:250px;width:860px;height:600px;opacity:0"><img src="assets/A5.jpg"/></div>
+        <div id="leg" class="petit" style="position:absolute;left:110px;top:870px;width:860px;text-align:center;font-size:26px">Mines de Montebras, cartes postales anciennes</div>
+        <div id="chiffres" class="panneau" style="position:absolute;left:110px;top:940px;width:860px;padding:16px;display:flex;gap:14px"><div id="chiffre0" style="flex:auto;text-align:center;padding:14px 10px;border-radius:22px;background:rgba(255,255,255,0.06)"><div class="grand" style="font-size:50px"><span id="n0_0">1800</span> – <span id="n0_2">1800</span></div><div class="petit" style="margin-top:8px;font-size:23px">exploitation des mines</div></div><div id="chiffre1" style="flex:auto;text-align:center;padding:14px 10px;border-radius:22px;background:rgba(255,255,255,0.06)"><div class="grand" style="font-size:50px">≈ <span id="n1_1">0</span> t</div><div class="petit" style="margin-top:8px;font-size:23px">d'étain</div></div></div>
+      </div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#photo-img", { scale: 1.0 }, { scale: 1.08, duration: 16.27, ease: "none" }, 0);
+      tl.fromTo("#a0", { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.45, ease: "power2.out" }, 0.05);
+      tl.fromTo("#a0 img", { scale: 1.0 }, { scale: 1.06, duration: 5.92, ease: "none" }, 0.00);
+      tl.to("#a0", { opacity: 0, duration: 0.45 }, 5.42);
+      tl.fromTo("#a1", { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.45, ease: "power2.out" }, 5.42);
+      tl.fromTo("#a1 img", { scale: 1.0 }, { scale: 1.06, duration: 5.92, ease: "none" }, 5.42);
+      tl.to("#a1", { opacity: 0, duration: 0.45 }, 10.85);
+      tl.fromTo("#a2", { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.45, ease: "power2.out" }, 10.85);
+      tl.fromTo("#a2 img", { scale: 1.0 }, { scale: 1.06, duration: 5.92, ease: "none" }, 10.85);
+      tl.fromTo("#leg", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 0.40);
+      tl.fromTo("#chiffre0", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 4.27);
+      const c_n0_0 = { v: 1800 };
+      tl.fromTo(c_n0_0, { v: 1800 }, { v: 1868, duration: 1.30, ease: "power2.out",
+        onUpdate: () => { document.querySelector("#n0_0").textContent = Math.round(c_n0_0.v).toString(); } }, 4.37);
+      const c_n0_2 = { v: 1800 };
+      tl.fromTo(c_n0_2, { v: 1800 }, { v: 1914, duration: 1.30, ease: "power2.out",
+        onUpdate: () => { document.querySelector("#n0_2").textContent = Math.round(c_n0_2.v).toString(); } }, 4.37);
+      tl.fromTo("#chiffre1", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 6.94);
+      const c_n1_1 = { v: 0 };
+      tl.fromTo(c_n1_1, { v: 0 }, { v: 300, duration: 1.30, ease: "power2.out",
+        onUpdate: () => { document.querySelector("#n1_1").textContent = Math.round(c_n1_1.v).toString(); } }, 7.04);
+      tl.fromTo("#chiffres", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 4.17);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

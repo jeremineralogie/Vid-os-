@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+:root { --violet:#7b2cbf; --violet-clair:#c77dff; --gris:#d6d0e0; --or:#f2b544; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
+#root { position:relative; width:100%; height:100%; font-family:"Montserrat", sans-serif; color:#fff; }
+#photo { position:absolute; inset:0; overflow:hidden; }
+#photo img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(0.5) saturate(1.05); }
+#photo-voile { position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.12) 30%, rgba(0,0,0,0.22) 60%, rgba(0,0,0,0.75) 100%); }
+/* zone utile : x 110-970, y 250-1120 (au-dessus des sous-titres, hors marges des réseaux) */
+.tete { position:absolute; top:250px; left:110px; width:860px; text-align:center; }
+.surtitre { font-size:30px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--violet-clair);
+  text-shadow:0 2px 10px rgba(0,0,0,0.8); }
+.titre { margin-top:14px; font-size:80px; font-weight:800; letter-spacing:-0.01em; white-space:nowrap; text-shadow:0 4px 18px rgba(0,0,0,0.7); }
+.filet { width:120px; height:8px; margin:22px auto 0; border-radius:4px; background:var(--violet-clair); }
+.grand { font-weight:800; line-height:1; color:var(--or); font-variant-numeric:tabular-nums; letter-spacing:-0.02em;
+  text-shadow:0 6px 24px rgba(0,0,0,0.6); white-space:nowrap; }
+.petit { font-size:30px; font-weight:600; color:var(--gris); text-shadow:0 2px 10px rgba(0,0,0,0.8); }
+.panneau { background:rgba(8,6,12,0.7); border:2px solid rgba(199,125,255,0.55); border-radius:34px;
+  box-shadow:0 24px 60px rgba(0,0,0,0.55); }
+.archive { position:absolute; border-radius:22px; overflow:hidden; border:4px solid rgba(242,230,210,0.9);
+  box-shadow:0 20px 50px rgba(0,0,0,0.7); background:#1a1520; }
+.archive img { width:100%; height:100%; object-fit:contain; display:block; }
+#photo img { filter:none; } #photo-voile { display:none; }</style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="5.91" data-width="1080" data-height="1920">
+      <div id="photo" class="clip" data-start="0" data-duration="5.91" data-track-index="0" style="z-index:1"><img id="photo-img" src="assets/fond.jpg" alt="" /><div id="photo-voile"></div></div>
+      <div id="scene" class="clip" data-start="0" data-duration="5.91" data-track-index="1" style="z-index:2">
+        <div id="monde" style="position:absolute;left:0;top:0;width:1080px;height:1920px;transform-origin:0 0"><img src="assets/creuse.png" style="position:absolute;left:0;top:0;width:1080px;height:1920px"/><img id="tuile0" src="assets/zoom_1.png" style="position:absolute;left:161.677px;top:298.337px;width:240.000px;height:426.667px;opacity:0"/><svg width="1080" height="1920" style="position:absolute;left:0;top:0;overflow:visible"><path id="com0" d="M306.13,434.27 L306.89,434.83 L307.32,435.02 L308.23,436.33 L308.53,436.37 L308.83,436.83 L309.04,437.49 L308.99,438.09 L309.47,438.63 L309.52,439.15 L310.07,439.39 L310.72,439.87 L310.77,440.74 L310.47,441.66 L308.03,439.82 L307.31,439.63 L306.67,439.63 L305.65,439.87 L303.91,440.57 L303.42,440.92 L302.42,442.02 L301.74,442.55 L302.02,442.95 L302.16,443.45 L302.39,443.77 L302.68,444.07 L303.67,444.80 L303.75,445.01 L303.78,445.52 L303.95,445.90 L304.16,446.20 L304.46,446.34 L304.72,446.58 L304.84,446.84 L304.90,447.43 L305.32,447.98 L306.55,450.11 L306.92,450.38 L307.74,450.62 L307.78,451.20 L307.88,451.45 L308.04,451.65 L308.32,451.78 L308.54,452.10 L308.56,452.47 L308.38,453.11 L308.29,454.01 L307.89,454.87 L307.68,456.07 L307.18,457.08 L306.89,457.42 L307.09,457.78 L307.46,459.00 L307.83,459.13 L308.29,460.71 L309.63,461.22 L310.52,462.35 L310.46,462.91 L312.40,463.17 L312.28,463.34 L312.02,463.81 L311.67,464.15 L311.37,464.57 L310.83,465.04 L310.48,465.22 L310.17,465.70 L310.38,467.03 L310.38,467.62 L309.26,468.62 L309.26,468.94 L308.91,469.30 L308.50,468.99 L308.40,468.72 L308.58,468.40 L308.31,468.27 L307.96,469.40 L307.73,469.28 L306.75,469.96 L306.28,469.86 L305.88,470.17 L305.57,470.36 L305.40,470.69 L305.04,471.09 L304.66,471.23 L304.24,471.59 L303.76,471.82 L303.63,471.97 L303.15,472.25 L303.30,472.84 L302.76,473.43 L302.40,473.29 L302.54,473.70 L302.09,474.12 L301.79,473.87 L301.43,473.89 L300.96,474.04 L300.38,474.61 L300.00,474.54 L299.73,474.64 L298.29,474.77 L298.50,475.64 L299.22,476.22 L299.77,476.90 L300.05,477.62 L300.46,478.07 L299.92,479.16 L299.88,479.43 L300.11,479.70 L300.34,479.83 L299.80,480.70 L298.99,480.16 L298.71,480.03 L297.95,479.45 L297.09,478.25 L296.88,478.19 L296.31,478.25 L295.69,478.14 L295.44,478.04 L295.18,477.70 L294.19,477.61 L293.59,477.45 L292.67,476.97 L291.84,476.67 L290.40,475.96 L290.37,474.93 L290.14,474.22 L289.55,474.32 L288.88,474.78 L287.68,475.34 L286.58,475.35 L285.02,474.95 L284.99,473.68 L284.58,473.37 L283.57,472.98 L283.34,472.09 L283.23,471.26 L283.25,470.78 L283.40,470.33 L283.02,470.17 L282.38,469.68 L282.03,470.00 L282.43,470.35 L282.35,470.58 L281.04,470.68 L280.99,470.33 L281.20,470.11 L280.48,468.98 L280.32,469.14 L279.69,469.74 L279.15,471.15 L278.52,471.88 L276.95,472.49 L276.69,472.69 L276.35,473.16 L276.27,473.65 L276.14,473.91 L275.48,474.49 L275.38,474.69 L275.37,475.36 L275.49,475.57 L275.74,475.77 L275.09,476.62 L274.56,477.08 L274.11,476.49 L273.88,476.83 L273.36,477.15 L271.60,477.63 L270.63,477.06 L271.12,476.12 L271.02,475.21 L271.70,475.11 L272.05,474.52 L271.37,474.12 L270.28,473.63 L268.74,472.74 L268.24,472.16 L268.15,471.71 L266.21,471.95 L266.21,471.48 L265.14,471.73 L264.83,471.87 L264.47,471.77 L264.62,470.37 L264.36,470.06 L263.94,469.77 L263.84,469.22 L263.88,468.95 L264.09,468.70 L264.23,467.39 L263.99,466.94 L263.89,466.26 L263.96,465.64 L264.09,465.34 L263.44,465.06 L262.79,465.03 L261.61,464.77 L260.40,463.86 L260.01,464.02 L259.35,463.67 L258.44,463.28 L257.83,462.61 L258.03,462.31 L256.83,461.24 L256.64,460.99 L256.59,460.66 L256.13,460.78 L255.68,461.06 L255.41,460.83 L255.76,459.97 L255.43,459.72 L255.18,459.22 L254.62,459.12 L254.02,458.75 L253.86,459.31 L253.06,459.64 L252.62,459.72 L251.15,458.39 L250.19,458.43 L249.44,457.89 L248.78,458.16 L248.93,457.55 L248.42,456.92 L248.06,456.69 L247.92,456.11 L247.37,455.61 L247.10,455.03 L246.82,454.71 L246.28,454.58 L246.11,454.04 L246.35,453.56 L245.38,453.12 L245.64,452.92 L246.01,451.16 L245.96,450.53 L245.58,449.54 L245.60,448.98 L245.82,448.47 L246.43,448.38 L246.99,448.44 L250.14,447.86 L250.32,447.75 L250.33,447.20 L250.52,446.47 L250.53,445.76 L250.38,444.17 L249.91,443.00 L249.69,442.64 L249.37,442.60 L249.27,442.19 L248.28,442.25 L247.92,441.98 L249.03,440.52 L248.73,440.31 L248.92,439.89 L249.02,439.15 L249.26,438.82 L249.37,438.34 L249.56,438.14 L249.69,437.55 L249.97,437.20 L250.51,436.12 L251.22,435.27 L251.10,434.87 L250.21,433.63 L249.46,432.08 L248.73,431.03 L249.37,429.37 L249.39,428.18 L249.47,427.81 L250.02,427.77 L250.04,427.04 L249.66,426.93 L249.78,426.16 L250.20,426.42 L250.64,425.83 L250.04,425.49 L250.24,425.28 L250.37,424.96 L250.29,423.99 L250.17,423.45 L250.10,423.06 L250.63,422.86 L250.90,422.49 L251.19,422.28 L251.33,421.78 L251.61,421.34 L251.74,420.93 L252.42,420.12 L252.89,419.22 L253.13,419.03 L253.43,419.51 L253.90,420.11 L254.22,419.71 L255.12,420.53 L254.75,420.91 L255.64,421.74 L256.02,421.34 L256.77,421.87 L257.83,421.25 L259.53,421.18 L259.34,422.16 L259.47,422.34 L262.01,422.34 L262.70,422.07 L262.95,421.86 L263.02,421.50 L263.38,421.45 L263.80,421.22 L264.80,421.02 L264.98,419.71 L265.50,417.57 L265.88,416.64 L266.38,415.73 L266.79,414.24 L266.83,413.87 L266.75,412.61 L266.89,411.73 L266.89,411.12 L267.10,409.90 L267.75,409.78 L268.82,409.42 L269.34,409.46 L269.65,409.08 L270.36,408.56 L271.48,408.27 L273.01,407.75 L274.34,406.38 L276.05,407.99 L276.71,408.42 L277.23,408.13 L278.32,406.81 L279.32,406.83 L280.66,407.37 L281.86,408.04 L282.45,408.52 L282.99,409.85 L283.59,410.86 L283.66,411.53 L283.50,413.69 L283.15,414.64 L282.38,415.38 L280.26,418.34 L279.49,419.64 L279.10,420.88 L278.48,421.98 L277.98,423.30 L277.85,424.75 L277.98,426.10 L277.94,430.19 L278.29,430.84 L278.71,431.21 L279.17,431.36 L279.63,431.35 L280.15,431.22 L281.33,430.74 L281.84,430.90 L282.47,431.44 L282.74,431.76 L282.86,432.08 L283.01,434.69 L283.25,435.39 L283.65,435.51 L284.65,434.89 L285.09,434.78 L285.66,434.92 L286.13,435.44 L286.31,436.07 L286.26,436.44 L285.54,438.24 L285.40,438.82 L285.41,439.23 L285.73,440.05 L286.40,441.06 L287.14,441.46 L287.68,441.53 L289.94,440.99 L290.90,440.68 L291.16,440.73 L291.78,441.00 L292.02,441.21 L292.28,442.09 L292.56,442.51 L293.33,443.37 L294.39,444.14 L296.01,445.08 L296.81,444.74 L297.71,444.52 L298.00,444.53 L298.45,444.12 L298.81,443.41 L299.14,441.63 L299.08,440.67 L299.22,440.37 L299.47,440.47 L299.88,440.32 L300.38,439.85 L301.14,439.35 L302.20,438.25 L303.15,437.11 L303.57,436.48 L304.49,435.76 L305.42,435.17 L305.93,434.64 L306.13,434.27 Z" fill="rgba(242,181,68,0.08)" stroke="#f2b544" stroke-width="1.000" stroke-linejoin="round" opacity="0"/></svg></div>
+        <div style="position:absolute;left:0;top:0;width:1080px;height:520px;background:linear-gradient(180deg,rgba(0,0,0,0.7),rgba(0,0,0,0))"></div>
+        <div id="ville0" style="position:absolute;left:451.5px;top:642.7px;display:flex;align-items:center;gap:8px;opacity:0"><span style="width:10px;height:10px;border-radius:2px;background:#e8e2f0"></span><span style="font-size:24px;font-weight:600;color:#e8e2f0;white-space:nowrap;text-shadow:0 2px 6px #000">Guéret</span></div>
+        <div id="ville1" style="position:absolute;left:657.4px;top:857.9px;display:flex;align-items:center;gap:8px;opacity:0"><span style="width:10px;height:10px;border-radius:2px;background:#e8e2f0"></span><span style="font-size:24px;font-weight:600;color:#e8e2f0;white-space:nowrap;text-shadow:0 2px 6px #000">Aubusson</span></div>
+        <div id="pt0" style="position:absolute;left:-15px;top:-15px;width:30px;height:30px;border-radius:50%;background:#f2b544;border:4px solid #fff;box-shadow:0 0 22px rgba(242,181,68,0.9)"></div>
+        <div id="nom-ensemble" style="position:absolute;top:415px;left:308px;padding:6px 18px;border-radius:24px;background:rgba(0,0,0,0.75);border:2px solid #f2b544;font-size:32px;font-weight:800;white-space:nowrap">Crozant</div>
+        <div class="tete" id="tete"><div class="surtitre">Creuse (23)</div><div class="titre" style="font-size:80px">Crozant</div><div class="filet"></div></div>
+        <div id="cp0" class="archive" style="left:110px;top:760px;width:450px;height:292px;transform:rotate(-3deg)"><img src="assets/C5.jpg"/></div>
+        <div id="cp1" class="archive" style="left:520px;top:790px;width:450px;height:292px;transform:rotate(3deg)"><img src="assets/C6.jpg"/></div>
+        <div id="cp-leg" class="petit" style="position:absolute;left:110px;top:1080px;width:860px;text-align:center;font-size:26px">Cartes postales anciennes</div>
+      </div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      gsap.set("#monde", { x: 0.00, y: 0.00, scale: 1.0 });
+      tl.to("#monde", { x: -727.55, y: -1342.51, scale: 4.5, duration: 1.4, ease: "power2.inOut" }, 0.95);
+      tl.fromTo("#ville0", { opacity: 0 }, { opacity: 0.85, duration: 0.35 }, 0.00);
+      tl.to("#ville0", { opacity: 0, duration: 0.25 }, 0.35);
+      tl.fromTo("#ville1", { opacity: 0 }, { opacity: 0.85, duration: 0.35 }, 0.00);
+      tl.to("#ville1", { opacity: 0, duration: 0.25 }, 0.35);
+      gsap.set("#pt0", { x: 281.7, y: 440.6 });
+      tl.fromTo("#pt0", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(3)" }, 0.40);
+      tl.to("#pt0", { x: 540.0, y: 640.0, duration: 1.4, ease: "power2.inOut" }, 0.95);
+      tl.fromTo("#nom-ensemble", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 0.50);
+      tl.to("#nom-ensemble", { opacity: 0, duration: 0.3 }, 1.05);
+      tl.to("#tuile0", { opacity: 1, duration: 0.5 }, 2.00);
+      tl.to("#com0", { opacity: 1, duration: 0.6 }, 2.15);
+      tl.fromTo("#tete", { opacity: 0, y: -26 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 1.65);
+      tl.fromTo("#cp0", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 2.45);
+      tl.fromTo("#cp1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 2.80);
+      tl.fromTo("#cp-leg", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 2.95);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+:root { --violet:#7b2cbf; --violet-clair:#c77dff; --gris:#d6d0e0; --or:#f2b544; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
+#root { position:relative; width:100%; height:100%; font-family:"Montserrat", sans-serif; color:#fff; }
+#photo { position:absolute; inset:0; overflow:hidden; }
+#photo img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(0.5) saturate(1.05); }
+#photo-voile { position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.12) 30%, rgba(0,0,0,0.22) 60%, rgba(0,0,0,0.75) 100%); }
+/* zone utile : x 110-970, y 250-1120 (au-dessus des sous-titres, hors marges des réseaux) */
+.tete { position:absolute; top:250px; left:110px; width:860px; text-align:center; }
+.surtitre { font-size:30px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--violet-clair);
+  text-shadow:0 2px 10px rgba(0,0,0,0.8); }
+.titre { margin-top:14px; font-size:80px; font-weight:800; letter-spacing:-0.01em; white-space:nowrap; text-shadow:0 4px 18px rgba(0,0,0,0.7); }
+.filet { width:120px; height:8px; margin:22px auto 0; border-radius:4px; background:var(--violet-clair); }
+.grand { font-weight:800; line-height:1; color:var(--or); font-variant-numeric:tabular-nums; letter-spacing:-0.02em;
+  text-shadow:0 6px 24px rgba(0,0,0,0.6); white-space:nowrap; }
+.petit { font-size:30px; font-weight:600; color:var(--gris); text-shadow:0 2px 10px rgba(0,0,0,0.8); }
+.panneau { background:rgba(8,6,12,0.7); border:2px solid rgba(199,125,255,0.55); border-radius:34px;
+  box-shadow:0 24px 60px rgba(0,0,0,0.55); }
+.archive { position:absolute; border-radius:22px; overflow:hidden; border:4px solid rgba(242,230,210,0.9);
+  box-shadow:0 20px 50px rgba(0,0,0,0.7); background:#1a1520; }
+.archive img { width:100%; height:100%; object-fit:contain; display:block; }
+#photo img { filter:none; } #photo-voile { display:none; }</style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="4.95" data-width="1080" data-height="1920">
+      <div id="photo" class="clip" data-start="0" data-duration="4.95" data-track-index="0" style="z-index:1"><img id="photo-img" src="assets/fond.jpg" alt="" /><div id="photo-voile"></div></div>
+      <div id="scene" class="clip" data-start="0" data-duration="4.95" data-track-index="1" style="z-index:2">
+        <div id="monde" style="position:absolute;left:0;top:0;width:1080px;height:1920px;transform-origin:0 0"><img src="assets/creuse.png" style="position:absolute;left:0;top:0;width:1080px;height:1920px"/><img id="tuile4" src="assets/zoom_5.png" style="position:absolute;left:487.035px;top:615.336px;width:240.000px;height:426.667px;opacity:0"/><img id="tuile6" src="assets/zoom_7.png" style="position:absolute;left:636.554px;top:717.512px;width:240.000px;height:426.667px;opacity:0"/><svg width="1080" height="1920" style="position:absolute;left:0;top:0;overflow:visible"><path id="com4" d="M597.95,755.52 L598.44,754.97 L598.26,754.66 L598.44,754.48 L598.66,754.61 L598.84,754.52 L599.15,753.98 L599.24,753.40 L599.46,752.99 L599.60,752.85 L600.09,752.99 L600.40,752.49 L600.98,751.95 L601.39,751.99 L601.61,752.22 L601.26,752.93 L601.39,753.12 L602.43,753.74 L602.61,753.65 L603.14,753.07 L603.50,753.43 L603.86,753.83 L604.45,753.47 L604.31,753.29 L604.09,753.15 L603.05,751.99 L603.32,751.69 L603.90,752.39 L604.87,753.11 L605.16,752.61 L604.12,750.95 L603.68,750.48 L602.82,748.97 L603.04,748.52 L602.90,748.34 L601.96,747.44 L601.24,747.54 L601.10,746.86 L601.52,746.06 L602.38,746.41 L602.49,745.87 L602.98,745.28 L603.43,744.92 L603.51,744.73 L604.71,744.07 L605.72,743.26 L606.27,742.73 L607.73,741.71 L607.96,743.28 L607.66,743.75 L607.83,744.14 L608.64,744.27 L609.85,743.86 L610.30,744.53 L609.54,745.39 L609.99,746.29 L610.30,746.29 L611.02,745.70 L611.29,745.61 L612.99,745.70 L613.04,746.60 L614.16,746.64 L614.66,747.72 L615.33,747.54 L615.51,747.18 L616.90,746.59 L617.13,746.94 L617.44,746.81 L617.80,747.17 L618.38,747.30 L618.69,748.27 L618.34,748.80 L617.58,749.19 L617.81,749.92 L617.84,750.95 L617.95,751.45 L618.26,752.08 L618.04,752.17 L617.32,752.21 L617.50,752.75 L619.52,752.57 L619.75,754.28 L619.26,754.46 L619.53,755.00 L619.93,755.09 L619.85,756.26 L620.30,756.26 L620.61,757.07 L621.42,757.51 L621.87,758.46 L621.96,758.82 L621.70,759.13 L621.20,758.82 L620.75,758.91 L620.44,759.45 L620.58,759.63 L621.61,760.30 L621.97,759.94 L622.33,761.02 L622.55,761.34 L622.96,761.56 L621.66,762.24 L620.81,762.87 L619.84,762.42 L619.29,762.71 L617.95,764.05 L617.80,764.63 L616.92,765.57 L616.06,767.14 L615.13,768.19 L614.51,769.36 L613.83,770.36 L613.56,769.69 L613.65,768.97 L613.38,768.88 L613.29,768.30 L612.53,768.88 L610.95,767.76 L610.43,766.98 L609.25,767.01 L608.93,767.34 L608.31,767.30 L607.65,767.13 L606.83,767.08 L606.76,766.58 L606.61,766.31 L605.54,765.23 L604.87,764.17 L603.92,762.59 L603.26,761.86 L602.89,761.13 L601.96,760.15 L601.67,759.40 L600.79,758.35 L600.69,758.15 L599.48,756.98 L599.27,756.85 L597.95,755.52 Z" fill="rgba(242,181,68,0.08)" stroke="#f2b544" stroke-width="1.000" stroke-linejoin="round" opacity="0"/><path id="com6" d="M732.70,860.87 L733.90,860.08 L734.40,859.92 L735.40,859.66 L736.02,859.67 L736.61,859.59 L737.15,859.68 L737.44,858.91 L737.63,857.09 L738.89,855.01 L739.31,854.65 L740.01,854.21 L742.03,853.12 L742.51,852.94 L744.12,852.57 L744.55,852.38 L745.11,851.99 L745.75,852.31 L746.08,852.32 L746.33,852.53 L746.63,852.58 L746.37,853.04 L746.18,853.67 L746.21,854.63 L746.44,854.96 L746.99,854.76 L746.98,855.63 L746.32,857.15 L746.57,856.96 L747.36,857.06 L747.64,857.27 L748.74,857.43 L749.14,857.11 L749.47,856.99 L751.09,856.83 L751.36,856.89 L752.18,857.32 L752.23,856.85 L752.37,856.52 L752.97,855.69 L753.56,855.16 L754.17,855.79 L754.80,856.14 L755.31,856.62 L756.29,856.06 L756.54,855.72 L757.29,856.16 L758.10,856.85 L758.16,856.55 L758.70,856.03 L758.78,855.76 L758.58,854.78 L758.55,854.16 L758.33,853.85 L758.60,853.81 L758.82,852.57 L758.90,851.38 L759.34,851.30 L759.62,850.58 L759.35,850.23 L759.14,849.41 L759.50,849.13 L759.56,848.90 L759.35,846.73 L759.11,845.56 L758.81,845.30 L758.58,844.96 L759.48,844.66 L760.35,844.19 L760.65,843.94 L761.02,843.94 L761.59,843.62 L761.38,843.37 L761.43,843.07 L761.13,842.65 L759.99,841.67 L759.58,841.44 L758.79,841.53 L758.38,841.19 L758.07,841.53 L758.22,841.93 L757.95,842.35 L757.61,842.58 L757.79,843.11 L757.38,843.03 L756.51,843.18 L756.36,843.72 L756.11,844.00 L755.61,844.10 L755.20,844.43 L754.29,844.98 L753.92,845.18 L753.58,845.24 L753.30,844.74 L753.06,843.86 L752.93,843.64 L753.11,842.27 L753.61,839.75 L753.74,839.34 L754.06,838.88 L753.34,838.99 L752.00,838.73 L751.35,838.92 L750.44,840.04 L750.44,840.43 L750.16,841.91 L749.68,841.85 L748.59,841.93 L747.51,842.07 L747.09,842.20 L746.38,842.65 L746.14,843.44 L745.65,844.47 L744.85,843.93 L744.28,843.43 L742.43,843.38 L741.88,843.29 L741.64,843.93 L740.81,845.19 L740.37,845.42 L740.63,846.02 L740.68,846.34 L739.77,846.39 L739.08,846.63 L739.01,846.44 L739.12,846.06 L738.98,845.91 L739.19,845.06 L739.00,844.92 L739.58,843.75 L739.43,843.35 L738.83,843.19 L739.05,842.43 L739.19,841.55 L739.13,841.18 L738.91,840.92 L738.91,840.59 L738.56,840.02 L738.54,839.32 L739.59,839.27 L740.07,839.14 L740.61,838.74 L741.24,838.41 L741.82,837.86 L742.71,837.34 L742.35,837.09 L742.20,836.66 L742.29,836.46 L742.53,836.29 L742.55,835.95 L742.77,835.61 L742.83,835.18 L743.13,835.04 L743.41,834.96 L743.68,835.21 L744.59,835.31 L744.77,834.88 L745.37,835.12 L745.58,834.81 L746.82,834.75 L747.01,834.89 L747.35,834.97 L747.15,834.63 L747.46,834.15 L748.26,834.04 L748.79,833.71 L749.06,833.89 L749.33,834.33 L750.00,834.30 L750.50,834.50 L750.70,834.60 L750.96,834.98 L751.58,834.71 L751.41,834.33 L751.19,834.06 L751.73,833.68 L752.31,834.05 L752.92,834.00 L753.23,834.50 L753.62,834.81 L754.68,835.27 L755.14,835.33 L755.57,835.65 L755.07,836.39 L754.56,837.56 L755.12,837.38 L755.45,837.13 L755.51,836.67 L755.99,836.66 L756.18,836.36 L756.68,836.31 L756.73,836.10 L757.74,836.41 L758.20,836.40 L758.30,836.57 L758.83,836.53 L759.03,836.64 L759.24,837.05 L760.11,836.76 L761.39,836.68 L761.72,837.18 L761.91,837.67 L762.22,838.10 L763.09,837.64 L764.03,837.01 L765.17,837.42 L765.86,837.83 L766.16,837.53 L767.02,838.00 L768.00,838.34 L768.41,838.44 L769.30,838.49 L770.20,839.08 L770.08,840.51 L769.66,841.30 L770.27,841.69 L770.63,841.82 L770.55,842.95 L771.23,843.68 L771.51,843.85 L771.33,844.08 L771.15,843.98 L771.31,844.29 L771.21,845.28 L771.55,845.86 L771.35,846.06 L771.47,847.10 L771.19,847.31 L772.84,847.37 L772.65,847.86 L773.55,849.31 L775.03,850.57 L775.36,850.65 L775.74,850.54 L775.97,850.74 L776.16,851.43 L775.75,851.80 L776.10,852.25 L776.28,852.80 L776.50,853.11 L776.59,853.49 L776.66,855.05 L777.83,855.77 L777.76,856.16 L778.75,857.53 L778.98,858.20 L778.93,859.03 L779.27,859.86 L779.53,860.00 L779.49,860.29 L779.66,860.48 L780.05,862.07 L780.34,862.47 L780.31,862.82 L781.31,867.70 L781.19,867.93 L781.38,868.48 L782.31,868.74 L782.72,868.65 L782.59,869.58 L783.09,869.84 L782.51,870.31 L782.83,870.85 L782.96,871.30 L782.95,871.71 L783.07,872.05 L784.04,872.91 L784.22,873.17 L784.34,873.96 L784.13,874.85 L783.63,876.15 L783.23,876.26 L782.62,876.00 L782.31,876.13 L782.38,876.63 L782.72,876.69 L782.72,876.99 L781.89,877.67 L782.01,878.08 L781.63,878.08 L781.19,878.32 L780.94,878.86 L780.64,879.30 L780.65,879.88 L780.96,880.53 L780.76,880.81 L780.12,881.12 L779.66,881.47 L779.30,881.47 L778.80,880.86 L778.52,881.15 L777.95,881.47 L777.72,881.75 L776.76,881.72 L776.50,881.65 L776.34,881.49 L776.26,880.79 L776.12,880.33 L775.18,880.58 L773.38,880.13 L773.02,879.83 L772.76,879.18 L772.49,879.10 L771.79,879.18 L771.29,878.98 L770.93,880.42 L771.09,880.97 L771.25,881.19 L770.92,881.91 L770.85,882.94 L770.31,883.81 L772.42,885.10 L771.76,885.73 L771.18,886.06 L770.45,886.26 L769.93,886.24 L769.70,886.17 L769.35,886.73 L768.89,886.61 L768.52,887.06 L767.98,887.37 L767.73,888.31 L767.15,888.72 L766.78,889.27 L765.64,889.55 L765.41,889.49 L764.98,889.11 L764.03,888.90 L762.87,888.54 L761.58,888.59 L761.25,887.68 L760.93,887.43 L760.68,887.32 L760.04,887.47 L759.64,886.16 L759.33,886.22 L759.06,886.68 L758.10,887.25 L757.31,888.05 L757.44,889.91 L756.88,889.74 L756.51,889.99 L756.05,890.18 L755.70,890.51 L755.45,891.08 L754.72,891.64 L754.37,891.68 L753.89,890.95 L753.58,891.18 L752.87,890.42 L752.52,890.23 L752.28,890.19 L751.89,890.25 L751.19,890.59 L751.18,891.24 L750.91,891.51 L750.69,891.43 L750.77,890.84 L750.68,890.60 L749.32,889.90 L748.11,889.15 L747.54,888.95 L747.20,889.50 L746.67,889.69 L746.65,890.03 L745.82,890.17 L745.26,890.44 L744.32,890.71 L743.72,889.77 L743.08,889.26 L743.36,889.05 L743.04,888.99 L743.32,888.32 L743.51,887.41 L743.99,887.45 L743.92,885.98 L744.30,885.86 L744.50,884.64 L744.25,883.93 L744.77,883.50 L744.53,883.18 L744.83,882.89 L744.64,882.52 L745.55,881.78 L744.11,879.73 L743.87,878.28 L743.32,876.78 L742.44,875.93 L741.28,875.30 L740.87,874.97 L741.17,874.61 L741.15,874.11 L741.38,873.81 L741.71,873.59 L742.82,873.56 L742.96,873.43 L743.28,872.72 L743.13,871.70 L743.13,871.22 L742.12,871.33 L742.01,870.74 L741.58,870.31 L741.55,869.66 L740.59,868.34 L740.26,867.67 L739.90,867.64 L740.16,866.76 L740.34,865.69 L740.36,864.85 L740.34,864.59 L739.76,864.36 L739.36,864.85 L739.00,864.99 L738.75,865.36 L738.43,865.65 L738.00,865.84 L737.34,866.31 L737.10,866.36 L736.75,866.32 L736.71,866.02 L736.13,865.74 L735.65,866.58 L735.24,866.70 L734.81,867.27 L734.37,867.22 L734.03,867.42 L733.83,867.23 L734.28,866.46 L733.35,866.03 L732.93,866.09 L732.51,865.68 L732.28,865.90 L732.09,865.14 L732.13,864.32 L732.22,864.05 L731.92,863.81 L731.41,863.76 L730.89,863.36 L730.75,862.95 L730.93,862.26 L732.17,861.20 L732.70,860.87 Z" fill="rgba(242,181,68,0.08)" stroke="#f2b544" stroke-width="1.000" stroke-linejoin="round" opacity="0"/></svg></div>
+        <div style="position:absolute;left:0;top:0;width:1080px;height:520px;background:linear-gradient(180deg,rgba(0,0,0,0.7),rgba(0,0,0,0))"></div>
+        <div id="ville0" style="position:absolute;left:451.5px;top:642.7px;display:flex;align-items:center;gap:8px;opacity:0"><span style="width:10px;height:10px;border-radius:2px;background:#e8e2f0"></span><span style="font-size:24px;font-weight:600;color:#e8e2f0;white-space:nowrap;text-shadow:0 2px 6px #000">Guéret</span></div>
+        <div id="ville1" style="position:absolute;left:657.4px;top:857.9px;display:flex;align-items:center;gap:8px;opacity:0"><span style="width:10px;height:10px;border-radius:2px;background:#e8e2f0"></span><span style="font-size:24px;font-weight:600;color:#e8e2f0;white-space:nowrap;text-shadow:0 2px 6px #000">Aubusson</span></div>
+        <div id="pt0" style="position:absolute;left:-9px;top:-9px;width:18px;height:18px;border-radius:50%;background:#f2b544;border:3px solid #fff;box-shadow:0 0 10px rgba(242,181,68,0.9)"></div>
+        <div id="pt1" style="position:absolute;left:-9px;top:-9px;width:18px;height:18px;border-radius:50%;background:#f2b544;border:3px solid #fff;box-shadow:0 0 10px rgba(242,181,68,0.9)"></div>
+        <div id="pt2" style="position:absolute;left:-9px;top:-9px;width:18px;height:18px;border-radius:50%;background:#f2b544;border:3px solid #fff;box-shadow:0 0 10px rgba(242,181,68,0.9)"></div>
+        <div id="pt3" style="position:absolute;left:-9px;top:-9px;width:18px;height:18px;border-radius:50%;background:#f2b544;border:3px solid #fff;box-shadow:0 0 10px rgba(242,181,68,0.9)"></div>
+        <div id="pt4" style="position:absolute;left:-9px;top:-9px;width:18px;height:18px;border-radius:50%;background:#f2b544;border:3px solid #fff;box-shadow:0 0 10px rgba(242,181,68,0.9)"></div>
+        <div id="pt5" style="position:absolute;left:-9px;top:-9px;width:18px;height:18px;border-radius:50%;background:#f2b544;border:3px solid #fff;box-shadow:0 0 10px rgba(242,181,68,0.9)"></div>
+        <div id="pt6" style="position:absolute;left:-15px;top:-15px;width:30px;height:30px;border-radius:50%;background:#f2b544;border:4px solid #fff;box-shadow:0 0 22px rgba(242,181,68,0.9)"></div>
+        <div id="nom-ensemble" style="position:absolute;top:834px;right:349px;padding:6px 18px;border-radius:24px;background:rgba(0,0,0,0.75);border:2px solid #f2b544;font-size:32px;font-weight:800;white-space:nowrap">Saint-Silvain-Bellegarde</div>
+        <div class="tete" id="tete"><div class="surtitre">Creuse (23)</div><div class="titre" style="font-size:62px">Saint-Silvain-Bellegarde</div><div class="filet"></div></div>
+        <svg width="1080" height="1920" style="position:absolute;left:0;top:0"><line id="trait" x1="540" y1="640" x2="850" y2="900" stroke="rgba(255,255,255,0.85)" stroke-width="3"/></svg>
+        <div id="vignette" style="position:absolute;left:735px;top:785px;width:230px;height:230px;border-radius:50%;overflow:hidden;border:6px solid #f2b544;box-shadow:0 12px 36px rgba(0,0,0,0.75)"><img src="assets/photo_07.jpg" style="width:100%;height:100%;object-fit:cover"/></div>
+      </div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      gsap.set("#monde", { x: -2191.66, y: -2769.01, scale: 4.5 });
+      tl.set("#tuile4", { opacity: 1 }, 0); tl.set("#com4", { opacity: 1 }, 0);
+      tl.to("#tuile4", { opacity: 0, duration: 0.5 }, 0.10);
+      tl.to("#com4", { opacity: 0, duration: 0.4 }, 0.10);
+      tl.to("#monde", { x: 0, y: 0, scale: 1, duration: 1.3, ease: "power2.inOut" }, 0.10);
+      tl.to("#monde", { x: -2864.49, y: -3228.81, scale: 4.5, duration: 1.4, ease: "power2.inOut" }, 2.10);
+      tl.fromTo("#ville0", { opacity: 0 }, { opacity: 0.85, duration: 0.35 }, 0.90);
+      tl.to("#ville0", { opacity: 0, duration: 0.25 }, 1.50);
+      tl.fromTo("#ville1", { opacity: 0 }, { opacity: 0.85, duration: 0.35 }, 0.90);
+      tl.to("#ville1", { opacity: 0, duration: 0.25 }, 1.50);
+      gsap.set("#pt0", { x: -924.1, y: -786.5 });
+      tl.to("#pt0", { x: 281.7, y: 440.6, duration: 1.3, ease: "power2.inOut" }, 0.10);
+      tl.to("#pt0", { x: -1596.9, y: -1246.3, duration: 1.4, ease: "power2.inOut" }, 2.10);
+      gsap.set("#pt1", { x: -214.7, y: -167.2 });
+      tl.to("#pt1", { x: 439.3, y: 578.2, duration: 1.3, ease: "power2.inOut" }, 0.10);
+      tl.to("#pt1", { x: -887.5, y: -627.0, duration: 1.4, ease: "power2.inOut" }, 2.10);
+      gsap.set("#pt2", { x: 1316.9, y: -373.7 });
+      tl.to("#pt2", { x: 779.7, y: 532.3, duration: 1.3, ease: "power2.inOut" }, 0.10);
+      tl.to("#pt2", { x: 644.1, y: -833.5, duration: 1.4, ease: "power2.inOut" }, 2.10);
+      gsap.set("#pt3", { x: -446.6, y: 755.1 });
+      tl.to("#pt3", { x: 387.8, y: 783.1, duration: 1.3, ease: "power2.inOut" }, 0.10);
+      tl.to("#pt3", { x: -1119.5, y: 295.3, duration: 1.4, ease: "power2.inOut" }, 2.10);
+      gsap.set("#pt4", { x: 540.0, y: 640.0 });
+      tl.to("#pt4", { x: 607.0, y: 757.6, duration: 1.3, ease: "power2.inOut" }, 0.10);
+      tl.to("#pt4", { x: -132.8, y: 180.2, duration: 1.4, ease: "power2.inOut" }, 2.10);
+      gsap.set("#pt5", { x: 331.9, y: 570.5 });
+      tl.to("#pt5", { x: 560.8, y: 742.1, duration: 1.3, ease: "power2.inOut" }, 0.10);
+      tl.to("#pt5", { x: -341.0, y: 110.7, duration: 1.4, ease: "power2.inOut" }, 2.10);
+      gsap.set("#pt6", { x: 1212.8, y: 1099.8 });
+      tl.to("#pt6", { x: 756.6, y: 859.7, duration: 1.3, ease: "power2.inOut" }, 0.10);
+      tl.fromTo("#pt6", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(3)" }, 1.55);
+      tl.to("#pt6", { x: 540.0, y: 640.0, duration: 1.4, ease: "power2.inOut" }, 2.10);
+      tl.fromTo("#nom-ensemble", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 1.65);
+      tl.to("#nom-ensemble", { opacity: 0, duration: 0.3 }, 2.20);
+      tl.to("#tuile6", { opacity: 1, duration: 0.5 }, 3.15);
+      tl.to("#com6", { opacity: 1, duration: 0.6 }, 3.30);
+      tl.fromTo("#tete", { opacity: 0, y: -26 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 2.80);
+      tl.fromTo("#trait", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 3.60);
+      tl.fromTo("#vignette", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.8)" }, 3.65);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
