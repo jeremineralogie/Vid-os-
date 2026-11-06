@@ -17,7 +17,7 @@ VERSION = "hyperframes@0.8.210"
 DOSSIER = ICI / "hyperframes"
 RENDUS = ICI / "sources" / "rendus"
 APERCUS = ICI / "exports" / "apercus_3d"
-DUREE = 10.0
+DUREE = 28.0  # aperçus ; au montage, la durée suit celle du texte lu
 
 CSS = """
 :root { --violet-clair:#c77dff; --gris:#d6d0e0; --or:#f2b544; }
@@ -109,46 +109,71 @@ def copie(nom, assets):
     return json.loads((RENDUS / f"{nom}.json").read_text())
 
 
+# ---------------------------------------------------------------- déroulé par étapes
+# Une seule information à la fois : chaque étape a sa légende, qui remplace la précédente, et dure au moins 4 s.
+
+def etapes(liste, duree, t0=0.0):
+    """liste : [(durée nominale, légende ou None, fonction(t) -> lignes de script)].
+    Les durées sont étirées si la séquence est plus longue que prévu. Renvoie (corps, script)."""
+    nominal = sum(d for d, _, _ in liste)
+    k = max(1.0, (duree - t0) / nominal)
+    corps, script, t = [], [], t0
+    for n, (d, legende, actions) in enumerate(liste):
+        d *= k
+        if legende:
+            corps.append(f'        <div id="leg{n}" class="legende" style="top:1000px;z-index:5;opacity:0">{legende}</div>')
+            script.append(f'      tl.fromTo("#leg{n}", {{ opacity: 0, y: 14 }}, {{ opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }}, {t + 0.2:.2f});')
+            if n < len(liste) - 1:
+                script.append(cache(f"#leg{n}", t + d - 0.45, 0.4))
+        if actions:
+            script += actions(t, d)
+        t += d
+    return corps, script
+
+
 # ---------------------------------------------------------------- 1. structure : un tétraèdre, puis le réseau
 
 def structure(duree, assets):
     p = copie("tetraedre", assets)
     copie("reseau", assets)
-    bascule = duree * 0.48
     corps = [
         '        <div id="p1" class="plan"><img id="i1" src="assets/tetraedre.png"/></div>',
         '        <div id="p2" class="plan" style="opacity:0"><img id="i2" src="assets/reseau.png"/></div>',
         tete("La structure", "Le quartz, SiO₂"),
         etiquette("e-si", p["si"], "Si", "silicium", dx=-190, dy=-40, cote="gauche"),
         etiquette("e-o", p["o1"], "O", "oxygène", dx=150, dy=-60, cote="droite"),
-        '        <div id="l1" class="legende" style="top:1010px;z-index:5;opacity:0">Un silicium au centre de 4 oxygènes : le tétraèdre SiO₄</div>',
-        '        <div id="l2" class="legende" style="top:980px;z-index:5;opacity:0">Chaque oxygène relie deux tétraèdres :<br/>le réseau forme des canaux hexagonaux</div>',
         '        <div class="mention" id="mention" style="z-index:5">Modèle 3D, d\'après la structure cristallographique du quartz α</div>',
     ]
-    script = [
-        '      tl.fromTo("#i1", { scale: 1.12 }, { scale: 1.0, duration: %.2f, ease: "power1.out" }, 0);' % (bascule + 0.6),
-        '      tl.fromTo("#i2", { scale: 1.0, rotation: -4 }, { scale: 1.12, rotation: 4, duration: %.2f, ease: "none" }, %.2f);' % (duree - bascule, bascule),
-        montre("#tete", 0.1, 0.6), montre("#mention", 0.6),
-        montre_etiquette("e-si", 0.9), montre_etiquette("e-o", 1.3), montre("#l1", 1.8, 0.5),
-        cache_etiquette("e-si", bascule - 0.3), cache_etiquette("e-o", bascule - 0.3), cache("#l1", bascule - 0.3),
-        f'      tl.to("#p2", {{ opacity: 1, duration: 0.9, ease: "power2.inOut" }}, {bascule:.2f});',
-        montre("#l2", bascule + 0.8, 0.5),
-    ]
-    return page(duree, "\n".join(corps), "\n".join(script))
+    bascule = []
+
+    def reseau(t, d):
+        bascule.append(t)
+        return [cache_etiquette("e-si", t), cache_etiquette("e-o", t),
+                f'      tl.to("#p2", {{ opacity: 1, duration: 1.4, ease: "power2.inOut" }}, {t:.2f});',
+                f'      tl.fromTo("#i2", {{ scale: 1.0, rotation: -3 }}, {{ scale: 1.1, rotation: 3, duration: {duree - t:.2f}, ease: "none" }}, {t:.2f});']
+
+    c, sc = etapes([
+        (3.0, None, None),
+        (4.5, "Au centre, un atome de <b>silicium</b>", lambda t, d: [montre_etiquette("e-si", t + 0.3)]),
+        (4.5, "Autour de lui, quatre atomes d'<b>oxygène</b>", lambda t, d: [montre_etiquette("e-o", t + 0.3)]),
+        (4.5, "Ensemble, ils forment un tétraèdre : SiO₄", None),
+        (5.0, "Les tétraèdres s'assemblent :<br/>chaque oxygène est partagé entre deux", reseau),
+        (5.0, "Ils dessinent des canaux hexagonaux", None),
+    ], duree)
+    script = ['      tl.fromTo("#i1", { scale: 1.1 }, { scale: 1.0, duration: 21.0, ease: "power1.out" }, 0);',
+              montre("#tete", 0.1, 0.6), montre("#mention", 0.6)] + sc
+    return page(duree, "\n".join(corps + c), "\n".join(script))
 
 
 # ---------------------------------------------------------------- 2. centre coloré de l'aluminium
 
 def centre_al(duree, assets):
+    import math
     p = copie("al_avant", assets)
     copie("al_apres", assets)
     al, trou, h = p["al"], p["trou"], p["h"]
-    t_rayon = duree * 0.38
-    t_apres = t_rayon + 1.3
-    # onde du rayonnement : du coin supérieur gauche jusqu'à l'oxygène
-    x0, y0 = 120, 470
+    x0, y0 = 120, 470  # le rayonnement vient du coin supérieur gauche
     dx, dy = trou[0] - x0, trou[1] - y0
-    import math
     long = math.hypot(dx, dy)
     n = int(long // 34)
     ang = math.degrees(math.atan2(dy, dx))
@@ -157,33 +182,35 @@ def centre_al(duree, assets):
         '        <div id="p1" class="plan"><img id="i1" src="assets/al_avant.png"/></div>',
         '        <div id="p2" class="plan" style="opacity:0"><img id="i2" src="assets/al_apres.png"/></div>',
         tete("Morion et quartz fumé", "Le centre coloré"),
-        etiquette("e-al", al, "Al³⁺", "à la place d'un Si⁴⁺", dx=-40, dy=-200),
-        etiquette("e-h", h, "H⁺", "compense la charge", dx=-30, dy=200),
+        etiquette("e-al", al, "Al³⁺", "aluminium", dx=-40, dy=-200),
+        etiquette("e-h", h, "H⁺", "hydrogène", dx=-150, dy=-10, cote="gauche"),
         f'        <svg id="rayon" width="1080" height="1920" style="position:absolute;left:0;top:0;z-index:4">'
         f'<path id="onde" d="M 0 0{vagues}" fill="none" stroke="#7fe0b0" stroke-width="6" stroke-linecap="round" '
         f'transform="translate({x0} {y0}) rotate({ang:.1f}) scale({long / (34 * n):.3f} 1)" style="filter:drop-shadow(0 0 8px #7fe0b0)"/></svg>',
         f'        <div id="electron" style="position:absolute;left:{trou[0] - 16}px;top:{trou[1] - 16}px;width:32px;height:32px;border-radius:50%;'
         'background:radial-gradient(circle,#e8fbff 0%,#5ec8ff 55%,rgba(94,200,255,0) 72%);z-index:5;opacity:0"></div>',
-        etiquette("e-e", (trou[0] + 160, trou[1] - 200), "e⁻", "électron arraché", dx=60, dy=-30, cote="droite"),
-        etiquette("e-trou", trou, "Centre coloré", "un oxygène a perdu<br/>un électron", dx=170, dy=-70, cote="droite"),
-        '        <div id="l1" class="legende" style="top:1000px;z-index:5;opacity:0">Le rayonnement arrache un électron<br/>à un oxygène voisin de l\'aluminium</div>',
+        etiquette("e-e", (trou[0] + 160, trou[1] - 200), "e⁻", "électron", dx=60, dy=-30, cote="droite"),
+        etiquette("e-trou", trou, "Centre coloré", "", dx=170, dy=-70, cote="droite"),
         '        <div class="mention" id="mention" style="z-index:5">Modèle 3D, d\'après la structure du quartz α</div>',
     ]
-    script = [
-        '      tl.fromTo("#i1", { scale: 1.0 }, { scale: 1.06, duration: %.2f, ease: "none" }, 0);' % duree,
-        '      tl.fromTo("#i2", { scale: 1.0 }, { scale: 1.06, duration: %.2f, ease: "none" }, 0);' % duree,
-        montre("#tete", 0.1, 0.6), montre("#mention", 0.6),
-        montre_etiquette("e-al", 0.8), montre_etiquette("e-h", 1.4),
-        '      tl.fromTo("#onde", { strokeDasharray: 3000, strokeDashoffset: 3000 }, { strokeDashoffset: 0, duration: 0.9, ease: "power2.in" }, %.2f);' % t_rayon,
-        cache_etiquette("e-h", t_rayon), montre("#l1", t_rayon, 0.5),
-        '      tl.fromTo("#electron", { opacity: 1, x: 0, y: 0, scale: 1 }, { x: 160, y: -200, scale: 0.7, duration: 1.1, ease: "power2.out" }, %.2f);' % (t_rayon + 0.9),
-        montre_etiquette("e-e", t_rayon + 1.6),
-        f'      tl.to("#p2", {{ opacity: 1, duration: 0.8, ease: "power2.inOut" }}, {t_apres:.2f});',
-        cache("#onde", t_apres + 0.3, 0.6),
-        cache_etiquette("e-e", t_apres + 2.0), cache("#electron", t_apres + 2.0),
-        montre_etiquette("e-trou", t_apres + 0.9),
-    ]
-    return page(duree, "\n".join(corps), "\n".join(script))
+    c, sc = etapes([
+        (3.0, None, None),
+        (5.0, "Parfois, un atome d'<b>aluminium</b><br/>prend la place d'un silicium", lambda t, d: [montre_etiquette("e-al", t + 0.3)]),
+        (5.0, "Il lui manque une charge :<br/>un ion <b>hydrogène</b> la compense", lambda t, d: [montre_etiquette("e-h", t + 0.3)]),
+        (4.5, "Un rayonnement naturel<br/>traverse le cristal", lambda t, d: [
+            '      tl.fromTo("#onde", { strokeDasharray: 3000, strokeDashoffset: 3000 }, { strokeDashoffset: 0, duration: 2.2, ease: "power1.inOut" }, %.2f);' % (t + 0.4)]),
+        (5.0, "Il arrache un <b>électron</b><br/>à un oxygène voisin", lambda t, d: [
+            cache_etiquette("e-h", t + 0.2), cache("#onde", t + 0.6, 1.0),
+            '      tl.fromTo("#electron", { opacity: 1, x: 0, y: 0, scale: 1 }, { opacity: 1, x: 160, y: -200, scale: 0.7, duration: 2.0, ease: "power1.inOut", immediateRender: false }, %.2f);' % (t + 0.4),
+            montre_etiquette("e-e", t + 2.2),
+            f'      tl.to("#p2", {{ opacity: 1, duration: 1.5, ease: "power2.inOut" }}, {t + 0.5:.2f});']),
+        (5.5, "Cet oxygène devient un <b>centre coloré</b> :<br/>il absorbe la lumière, le quartz fonce", lambda t, d: [
+            cache_etiquette("e-e", t), cache("#electron", t), montre_etiquette("e-trou", t + 0.4)]),
+    ], duree)
+    script = ['      tl.fromTo("#i1", { scale: 1.0 }, { scale: 1.06, duration: %.2f, ease: "none" }, 0);' % duree,
+              '      tl.fromTo("#i2", { scale: 1.0 }, { scale: 1.06, duration: %.2f, ease: "none" }, 0);' % duree,
+              montre("#tete", 0.1, 0.6), montre("#mention", 0.6)] + sc
+    return page(duree, "\n".join(corps + c), "\n".join(script))
 
 
 SCENES = {"structure_3d": structure, "centre_al_3d": centre_al}
@@ -203,7 +230,7 @@ if __name__ == "__main__":
     APERCUS.mkdir(parents=True, exist_ok=True)
     for nom in [a for a in sys.argv[1:] if not a.startswith("-")] or list(SCENES):
         d = composer(nom)
-        for t in (2.5, 4.6, 6.0, 9.5):
+        for t in (2.0, 6.0, 10.5, 15.0, 19.5, 26.5):
             subprocess.run(["npx", "--yes", VERSION, "snapshot", str(d), "--at", str(t), "--no-end", "-o", str(APERCUS / f"{nom}_{t}")],
                            capture_output=True)
         if "--rendre" in sys.argv:
