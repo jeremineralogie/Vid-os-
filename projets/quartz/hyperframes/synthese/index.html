@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+:root { --violet:#7b2cbf; --violet-clair:#c77dff; --gris:#d6d0e0; --or:#f2b544; --o:#ff6b6b; --si:#9d7bff; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
+#root { position:relative; width:100%; height:100%; font-family:"Montserrat", sans-serif; color:#fff; }
+#photo { position:absolute; inset:0; overflow:hidden; }
+#photo img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(0.42) saturate(1.0); }
+#photo-voile { position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.15) 30%, rgba(0,0,0,0.25) 60%, rgba(0,0,0,0.8) 100%); }
+.tete { position:absolute; top:250px; left:110px; width:860px; text-align:center; }
+.surtitre { font-size:30px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--violet-clair);
+  text-shadow:0 2px 10px rgba(0,0,0,0.8); }
+.titre { margin-top:14px; font-size:76px; font-weight:800; white-space:nowrap; text-shadow:0 4px 18px rgba(0,0,0,0.7); }
+.filet { width:120px; height:8px; margin:22px auto 0; border-radius:4px; background:var(--violet-clair); }
+.panneau { position:absolute; left:110px; top:430px; width:860px; height:640px; background:rgba(8,6,12,0.72);
+  border:2px solid rgba(199,125,255,0.55); border-radius:34px; box-shadow:0 24px 60px rgba(0,0,0,0.55); overflow:hidden; }
+.schema { position:absolute; left:110px; top:1086px; width:860px; text-align:right; font-size:20px; font-weight:600; color:rgba(214,208,224,0.8); font-style:italic; text-shadow:0 2px 6px #000; }
+svg text { font-family:"Montserrat", sans-serif; }
+.leg { font-size:26px; font-weight:600; fill:#e8e2f0; }
+.leg-or { font-size:28px; font-weight:800; fill:#f2b544; }
+</style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="9.00" data-width="1080" data-height="1920">
+      <div id="photo" class="clip" data-start="0" data-duration="9.00" data-track-index="0" style="z-index:1"><img id="photo-img" src="assets/fond.jpg" alt="" /><div id="photo-voile"></div></div>
+      <div id="scene" class="clip" data-start="0" data-duration="9.00" data-track-index="1" style="z-index:2">
+        <div class="tete" id="tete"><div class="surtitre">Une même formule, SiO₂</div><div class="titre" style="font-size:76px">Cinq histoires</div><div class="filet"></div></div>
+        <div class="panneau" id="panneau"><svg width="860" height="640" viewBox="0 0 860 640"><g id="c0"><clipPath id="cp0"><circle cx="90" cy="80" r="46"/></clipPath><image href="assets/photo_01.jpg" x="44" y="34" width="92" height="92" preserveAspectRatio="xMidYMid slice" clip-path="url(#cp0)"/><circle cx="90" cy="80" r="46" fill="none" stroke="#f2b544" stroke-width="4"/><text x="170" y="72" font-size="32" font-weight="800" fill="#fff">Morion</text><text x="170" y="110" font-size="25" font-weight="600" fill="#f2b544">rayonnement + aluminium</text></g><g id="c1"><clipPath id="cp1"><circle cx="90" cy="198" r="46"/></clipPath><image href="assets/photo_04.jpg" x="44" y="152" width="92" height="92" preserveAspectRatio="xMidYMid slice" clip-path="url(#cp1)"/><circle cx="90" cy="198" r="46" fill="none" stroke="#f2b544" stroke-width="4"/><text x="170" y="190" font-size="32" font-weight="800" fill="#fff">Fumé</text><text x="170" y="228" font-size="25" font-weight="600" fill="#f2b544">rayonnement + aluminium</text></g><g id="c2"><clipPath id="cp2"><circle cx="90" cy="316" r="46"/></clipPath><image href="assets/photo_06.jpg" x="44" y="270" width="92" height="92" preserveAspectRatio="xMidYMid slice" clip-path="url(#cp2)"/><circle cx="90" cy="316" r="46" fill="none" stroke="#f2b544" stroke-width="4"/><text x="170" y="308" font-size="32" font-weight="800" fill="#fff">Améthyste</text><text x="170" y="346" font-size="25" font-weight="600" fill="#f2b544">rayonnement + fer</text></g><g id="c3"><clipPath id="cp3"><circle cx="90" cy="434" r="46"/></clipPath><image href="assets/photo_11.jpg" x="44" y="388" width="92" height="92" preserveAspectRatio="xMidYMid slice" clip-path="url(#cp3)"/><circle cx="90" cy="434" r="46" fill="none" stroke="#f2b544" stroke-width="4"/><text x="170" y="426" font-size="32" font-weight="800" fill="#fff">Laiteux</text><text x="170" y="464" font-size="25" font-weight="600" fill="#f2b544">inclusions fluides</text></g><g id="c4"><clipPath id="cp4"><circle cx="90" cy="552" r="46"/></clipPath><image href="assets/photo_09.jpg" x="44" y="506" width="92" height="92" preserveAspectRatio="xMidYMid slice" clip-path="url(#cp4)"/><circle cx="90" cy="552" r="46" fill="none" stroke="#f2b544" stroke-width="4"/><text x="170" y="544" font-size="32" font-weight="800" fill="#fff">Cristal de roche</text><text x="170" y="582" font-size="25" font-weight="600" fill="#f2b544">pureté</text></g></svg></div>
+        <div class="schema" id="schema">Illustration schématique</div>
+      </div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#photo-img", { scale: 1.0 }, { scale: 1.07, duration: 9.00, ease: "none" }, 0);
+      tl.fromTo("#tete", { opacity: 0, y: -26 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.1);
+      tl.fromTo("#panneau", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.25);
+      tl.fromTo("#schema", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.6);
+      tl.fromTo("#c0", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 0.80);
+      tl.fromTo("#c1", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 1.30);
+      tl.fromTo("#c2", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 1.80);
+      tl.fromTo("#c3", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 2.30);
+      tl.fromTo("#c4", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 2.80);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+:root { --violet:#7b2cbf; --violet-clair:#c77dff; --gris:#d6d0e0; --or:#f2b544; --o:#ff6b6b; --si:#9d7bff; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
+#root { position:relative; width:100%; height:100%; font-family:"Montserrat", sans-serif; color:#fff; }
+#photo { position:absolute; inset:0; overflow:hidden; }
+#photo img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(0.42) saturate(1.0); }
+#photo-voile { position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.15) 30%, rgba(0,0,0,0.25) 60%, rgba(0,0,0,0.8) 100%); }
+.tete { position:absolute; top:250px; left:110px; width:860px; text-align:center; }
+.surtitre { font-size:30px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--violet-clair);
+  text-shadow:0 2px 10px rgba(0,0,0,0.8); }
+.titre { margin-top:14px; font-size:76px; font-weight:800; white-space:nowrap; text-shadow:0 4px 18px rgba(0,0,0,0.7); }
+.filet { width:120px; height:8px; margin:22px auto 0; border-radius:4px; background:var(--violet-clair); }
+.panneau { position:absolute; left:110px; top:430px; width:860px; height:640px; background:rgba(8,6,12,0.72);
+  border:2px solid rgba(199,125,255,0.55); border-radius:34px; box-shadow:0 24px 60px rgba(0,0,0,0.55); overflow:hidden; }
+.schema { position:absolute; left:110px; top:1086px; width:860px; text-align:right; font-size:20px; font-weight:600; color:rgba(214,208,224,0.8); font-style:italic; text-shadow:0 2px 6px #000; }
+svg text { font-family:"Montserrat", sans-serif; }
+.leg { font-size:26px; font-weight:600; fill:#e8e2f0; }
+.leg-or { font-size:28px; font-weight:800; fill:#f2b544; }
+</style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="9.00" data-width="1080" data-height="1920">
+      <div id="photo" class="clip" data-start="0" data-duration="9.00" data-track-index="0" style="z-index:1"><img id="photo-img" src="assets/fond.jpg" alt="" /><div id="photo-voile"></div></div>
+      <div id="scene" class="clip" data-start="0" data-duration="9.00" data-track-index="1" style="z-index:2">
+        <div class="tete" id="tete"><div class="surtitre">Quartz fumé</div><div class="titre" style="font-size:76px">Du gris au noir</div><div class="filet"></div></div>
+        <div class="panneau" id="panneau"><svg width="860" height="640" viewBox="0 0 860 640"><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#d9d4cc"/><stop offset="0.35" stop-color="#9a8268"/><stop offset="0.7" stop-color="#4a3424"/><stop offset="1" stop-color="#0c0908"/></linearGradient></defs><rect id="barre" x="60" y="90" width="740" height="110" rx="22" fill="url(#g)" stroke="rgba(255,255,255,0.6)" stroke-width="2"/><g id="eti"><text x="110" y="250" text-anchor="middle" class="leg">gris clair</text><text x="430" y="250" text-anchor="middle" class="leg">brun</text><text x="750" y="250" text-anchor="middle" class="leg">noir</text><text x="250" y="295" text-anchor="middle" class="leg-or">quartz fumé</text><text x="720" y="295" text-anchor="middle" class="leg-or">morion</text></g><text id="q" x="430" y="370" text-anchor="middle" font-size="30" font-weight="800" fill="#fff">L'intensité dépend :</text><g id="i0"><circle cx="120" cy="421" r="10" fill="#c77dff"/><text x="150" y="430" class="leg">de la composition du cristal</text></g><g id="i1"><circle cx="120" cy="483" r="10" fill="#c77dff"/><text x="150" y="492" class="leg">de la dose de rayonnement reçue</text></g><g id="i2"><circle cx="120" cy="545" r="10" fill="#c77dff"/><text x="150" y="554" class="leg">de son histoire géologique</text></g></svg></div>
+        <div class="schema" id="schema">Illustration schématique</div>
+      </div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#photo-img", { scale: 1.0 }, { scale: 1.07, duration: 9.00, ease: "none" }, 0);
+      tl.fromTo("#tete", { opacity: 0, y: -26 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.1);
+      tl.fromTo("#panneau", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.25);
+      tl.fromTo("#schema", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.6);
+      tl.fromTo("#barre", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 1.4, ease: "power2.inOut" }, 0.6);
+      tl.fromTo("#eti", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 1.80);
+      tl.fromTo("#q", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 2.60);
+      tl.fromTo("#i0", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 3.00);
+      tl.fromTo("#i1", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 3.50);
+      tl.fromTo("#i2", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 4.00);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

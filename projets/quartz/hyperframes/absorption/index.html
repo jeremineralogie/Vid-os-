@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+:root { --violet:#7b2cbf; --violet-clair:#c77dff; --gris:#d6d0e0; --or:#f2b544; --o:#ff6b6b; --si:#9d7bff; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
+#root { position:relative; width:100%; height:100%; font-family:"Montserrat", sans-serif; color:#fff; }
+#photo { position:absolute; inset:0; overflow:hidden; }
+#photo img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(0.42) saturate(1.0); }
+#photo-voile { position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.15) 30%, rgba(0,0,0,0.25) 60%, rgba(0,0,0,0.8) 100%); }
+.tete { position:absolute; top:250px; left:110px; width:860px; text-align:center; }
+.surtitre { font-size:30px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--violet-clair);
+  text-shadow:0 2px 10px rgba(0,0,0,0.8); }
+.titre { margin-top:14px; font-size:76px; font-weight:800; white-space:nowrap; text-shadow:0 4px 18px rgba(0,0,0,0.7); }
+.filet { width:120px; height:8px; margin:22px auto 0; border-radius:4px; background:var(--violet-clair); }
+.panneau { position:absolute; left:110px; top:430px; width:860px; height:640px; background:rgba(8,6,12,0.72);
+  border:2px solid rgba(199,125,255,0.55); border-radius:34px; box-shadow:0 24px 60px rgba(0,0,0,0.55); overflow:hidden; }
+.schema { position:absolute; left:110px; top:1086px; width:860px; text-align:right; font-size:20px; font-weight:600; color:rgba(214,208,224,0.8); font-style:italic; text-shadow:0 2px 6px #000; }
+svg text { font-family:"Montserrat", sans-serif; }
+.leg { font-size:26px; font-weight:600; fill:#e8e2f0; }
+.leg-or { font-size:28px; font-weight:800; fill:#f2b544; }
+</style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="9.00" data-width="1080" data-height="1920">
+      <div id="photo" class="clip" data-start="0" data-duration="9.00" data-track-index="0" style="z-index:1"><img id="photo-img" src="assets/fond.jpg" alt="" /><div id="photo-voile"></div></div>
+      <div id="scene" class="clip" data-start="0" data-duration="9.00" data-track-index="1" style="z-index:2">
+        <div class="tete" id="tete"><div class="surtitre">Améthyste</div><div class="titre" style="font-size:68px">L'absorption sélective</div><div class="filet"></div></div>
+        <div class="panneau" id="panneau"><svg width="860" height="640" viewBox="0 0 860 640"><defs><linearGradient id="sp" x1="0" x2="1"><stop offset="0" stop-color="#7a2cff"/><stop offset="0.18" stop-color="#2e5bff"/><stop offset="0.36" stop-color="#22c7d6"/><stop offset="0.5" stop-color="#3ddc5a"/><stop offset="0.64" stop-color="#e8e23a"/><stop offset="0.8" stop-color="#ff9a2e"/><stop offset="1" stop-color="#ff3b3b"/></linearGradient></defs><g id="entree"><rect x="40" y="150" width="210" height="44" rx="10" fill="#fff"/><polygon points="248,132 288,172 248,212" fill="#fff"/><text x="155" y="130" text-anchor="middle" class="leg">lumière blanche</text></g><polygon id="cri" points="300,320 300,110 360,40 420,110 420,320" fill="rgba(157,92,220,0.55)" stroke="#e8e2f0" stroke-width="4"/><g id="sortie"><rect x="450" y="150" width="230" height="44" rx="10" fill="#9b5de5"/><polygon points="680,132 720,172 680,212" fill="#9b5de5"/><text x="580" y="130" text-anchor="middle" class="leg">violet</text></g><rect id="spectre" x="80" y="400" width="700" height="70" rx="12" fill="url(#sp)"/><g id="abs"><rect x="370" y="392" width="170" height="86" rx="10" fill="rgba(0,0,0,0.78)" stroke="#f2b544" stroke-width="3" stroke-dasharray="8 6"/><text x="455" y="443" text-anchor="middle" font-size="24" font-weight="800" fill="#f2b544">absorbé</text></g><g id="l"><text x="430" y="530" text-anchor="middle" class="leg">Le centre coloré absorbe le jaune-vert ;</text><text x="430" y="572" text-anchor="middle" class="leg">le rouge et le bleu restants donnent le violet.</text></g><text x="80" y="505" font-size="20" fill="#d6d0e0">violet</text><text x="780" y="505" text-anchor="end" font-size="20" fill="#d6d0e0">rouge</text></svg></div>
+        <div class="schema" id="schema">Illustration schématique</div>
+      </div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#photo-img", { scale: 1.0 }, { scale: 1.07, duration: 9.00, ease: "none" }, 0);
+      tl.fromTo("#tete", { opacity: 0, y: -26 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.1);
+      tl.fromTo("#panneau", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.25);
+      tl.fromTo("#schema", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.6);
+      tl.fromTo("#cri", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 0.50);
+      tl.fromTo("#entree", { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.6 }, 1.0);
+      tl.fromTo("#spectre", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 1.80);
+      tl.fromTo("#abs", { opacity: 0, scale: 0.3, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 2.80);
+      tl.fromTo("#sortie", { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.6 }, 3.6);
+      tl.fromTo("#l", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 4.40);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

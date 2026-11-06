@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+:root { --violet:#7b2cbf; --violet-clair:#c77dff; --gris:#d6d0e0; --or:#f2b544; --o:#ff6b6b; --si:#9d7bff; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
+#root { position:relative; width:100%; height:100%; font-family:"Montserrat", sans-serif; color:#fff; }
+#photo { position:absolute; inset:0; overflow:hidden; }
+#photo img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(0.42) saturate(1.0); }
+#photo-voile { position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.15) 30%, rgba(0,0,0,0.25) 60%, rgba(0,0,0,0.8) 100%); }
+.tete { position:absolute; top:250px; left:110px; width:860px; text-align:center; }
+.surtitre { font-size:30px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--violet-clair);
+  text-shadow:0 2px 10px rgba(0,0,0,0.8); }
+.titre { margin-top:14px; font-size:76px; font-weight:800; white-space:nowrap; text-shadow:0 4px 18px rgba(0,0,0,0.7); }
+.filet { width:120px; height:8px; margin:22px auto 0; border-radius:4px; background:var(--violet-clair); }
+.panneau { position:absolute; left:110px; top:430px; width:860px; height:640px; background:rgba(8,6,12,0.72);
+  border:2px solid rgba(199,125,255,0.55); border-radius:34px; box-shadow:0 24px 60px rgba(0,0,0,0.55); overflow:hidden; }
+.schema { position:absolute; left:110px; top:1086px; width:860px; text-align:right; font-size:20px; font-weight:600; color:rgba(214,208,224,0.8); font-style:italic; text-shadow:0 2px 6px #000; }
+svg text { font-family:"Montserrat", sans-serif; }
+.leg { font-size:26px; font-weight:600; fill:#e8e2f0; }
+.leg-or { font-size:28px; font-weight:800; fill:#f2b544; }
+</style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="9.00" data-width="1080" data-height="1920">
+      <div id="photo" class="clip" data-start="0" data-duration="9.00" data-track-index="0" style="z-index:1"><img id="photo-img" src="assets/fond.jpg" alt="" /><div id="photo-voile"></div></div>
+      <div id="scene" class="clip" data-start="0" data-duration="9.00" data-track-index="1" style="z-index:2">
+        <div class="tete" id="tete"><div class="surtitre">Quartz laiteux</div><div class="titre" style="font-size:76px">La diffusion</div><div class="filet"></div></div>
+        <div class="panneau" id="panneau"><svg width="860" height="640" viewBox="0 0 860 640"><polygon id="cri" points="250,560 250,200 430,70 610,200 610,560" fill="rgba(235,235,240,0.22)" stroke="#e8e2f0" stroke-width="4"/><path id="ray0" d="M 40 260 L 250 260 L 480 230" fill="none" stroke="#fff6c8" stroke-width="6" stroke-linecap="round"/><line id="d0_0" x1="480" y1="230" x2="521" y2="117" stroke="rgba(255,246,200,0.75)" stroke-width="3" stroke-linecap="round"/><line id="d0_1" x1="480" y1="230" x2="593" y2="189" stroke="rgba(255,246,200,0.75)" stroke-width="3" stroke-linecap="round"/><line id="d0_2" x1="480" y1="230" x2="578" y2="299" stroke="rgba(255,246,200,0.75)" stroke-width="3" stroke-linecap="round"/><line id="d0_3" x1="480" y1="230" x2="501" y2="348" stroke="rgba(255,246,200,0.75)" stroke-width="3" stroke-linecap="round"/><line id="d0_4" x1="480" y1="230" x2="388" y2="307" stroke="rgba(255,246,200,0.75)" stroke-width="3" stroke-linecap="round"/><path id="ray1" d="M 40 340 L 250 340 L 540 350" fill="none" stroke="#fff6c8" stroke-width="6" stroke-linecap="round"/><line id="d1_0" x1="540" y1="350" x2="632" y2="273" stroke="rgba(255,246,200,0.75)" stroke-width="3" stroke-linecap="round"/><line id="d1_1" x1="540" y1="350" x2="658" y2="371" stroke="rgba(255,246,200,0.75)" stroke-width="3" stroke-linecap="round"/><line id="d1_2" x1="540" y1="350" x2="591" y2="459" stroke="rgba(255,246,200,0.75)" stroke-width="3" stroke-linecap="round"/><line id="d1_3" x1="540" y1="350" x2="499" y2="463" stroke="rgba(255,246,200,0.75)" stroke-width="3" stroke-linecap="round"/><line id="d1_4" x1="540" y1="350" x2="422" y2="371" stroke="rgba(255,246,200,0.75)" stroke-width="3" stroke-linecap="round"/><path id="ray2" d="M 40 420 L 250 420 L 450 450" fill="none" stroke="#fff6c8" stroke-width="6" stroke-linecap="round"/><line id="d2_0" x1="450" y1="450" x2="568" y2="429" stroke="rgba(255,246,200,0.75)" stroke-width="3" stroke-linecap="round"/><line id="d2_1" x1="450" y1="450" x2="542" y2="527" stroke="rgba(255,246,200,0.75)" stroke-width="3" stroke-linecap="round"/><line id="d2_2" x1="450" y1="450" x2="440" y2="570" stroke="rgba(255,246,200,0.75)" stroke-width="3" stroke-linecap="round"/><line id="d2_3" x1="450" y1="450" x2="358" y2="527" stroke="rgba(255,246,200,0.75)" stroke-width="3" stroke-linecap="round"/><line id="d2_4" x1="450" y1="450" x2="337" y2="409" stroke="rgba(255,246,200,0.75)" stroke-width="3" stroke-linecap="round"/><path id="ray3" d="M 40 500 L 250 500 L 360 510" fill="none" stroke="#fff6c8" stroke-width="6" stroke-linecap="round"/><line id="d3_0" x1="360" y1="510" x2="473" y2="551" stroke="rgba(255,246,200,0.75)" stroke-width="3" stroke-linecap="round"/><line id="d3_1" x1="360" y1="510" x2="401" y2="623" stroke="rgba(255,246,200,0.75)" stroke-width="3" stroke-linecap="round"/><line id="d3_2" x1="360" y1="510" x2="291" y2="608" stroke="rgba(255,246,200,0.75)" stroke-width="3" stroke-linecap="round"/><line id="d3_3" x1="360" y1="510" x2="242" y2="531" stroke="rgba(255,246,200,0.75)" stroke-width="3" stroke-linecap="round"/><line id="d3_4" x1="360" y1="510" x2="283" y2="418" stroke="rgba(255,246,200,0.75)" stroke-width="3" stroke-linecap="round"/><g id="bu0"><circle cx="330" cy="250" r="16" fill="rgba(160,210,255,0.35)" stroke="#fff" stroke-width="2"/><circle cx="335" cy="245" r="5" fill="rgba(255,255,255,0.9)"/></g><g id="bu1"><circle cx="480" cy="230" r="16" fill="rgba(160,210,255,0.35)" stroke="#fff" stroke-width="2"/><circle cx="485" cy="225" r="5" fill="rgba(255,255,255,0.9)"/></g><g id="bu2"><circle cx="390" cy="330" r="16" fill="rgba(160,210,255,0.35)" stroke="#fff" stroke-width="2"/><circle cx="395" cy="325" r="5" fill="rgba(255,255,255,0.9)"/></g><g id="bu3"><circle cx="540" cy="350" r="16" fill="rgba(160,210,255,0.35)" stroke="#fff" stroke-width="2"/><circle cx="545" cy="345" r="5" fill="rgba(255,255,255,0.9)"/></g><g id="bu4"><circle cx="300" cy="420" r="16" fill="rgba(160,210,255,0.35)" stroke="#fff" stroke-width="2"/><circle cx="305" cy="415" r="5" fill="rgba(255,255,255,0.9)"/></g><g id="bu5"><circle cx="450" cy="450" r="16" fill="rgba(160,210,255,0.35)" stroke="#fff" stroke-width="2"/><circle cx="455" cy="445" r="5" fill="rgba(255,255,255,0.9)"/></g><g id="bu6"><circle cx="560" cy="480" r="16" fill="rgba(160,210,255,0.35)" stroke="#fff" stroke-width="2"/><circle cx="565" cy="475" r="5" fill="rgba(255,255,255,0.9)"/></g><g id="bu7"><circle cx="360" cy="510" r="16" fill="rgba(160,210,255,0.35)" stroke="#fff" stroke-width="2"/><circle cx="365" cy="505" r="5" fill="rgba(255,255,255,0.9)"/></g><g id="bu8"><circle cx="500" cy="300" r="16" fill="rgba(160,210,255,0.35)" stroke="#fff" stroke-width="2"/><circle cx="505" cy="295" r="5" fill="rgba(255,255,255,0.9)"/></g><g id="bu9"><circle cx="420" cy="400" r="16" fill="rgba(160,210,255,0.35)" stroke="#fff" stroke-width="2"/><circle cx="425" cy="395" r="5" fill="rgba(255,255,255,0.9)"/></g><g id="l"><text x="430" y="40" text-anchor="middle" class="leg">Inclusions fluides : du liquide et une bulle de gaz</text><text x="430" y="610" text-anchor="middle" class="leg-or">La lumière est diffusée : le quartz paraît blanc</text></g></svg></div>
+        <div class="schema" id="schema">Illustration schématique</div>
+      </div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#photo-img", { scale: 1.0 }, { scale: 1.07, duration: 9.00, ease: "none" }, 0);
+      tl.fromTo("#tete", { opacity: 0, y: -26 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.1);
+      tl.fromTo("#panneau", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.25);
+      tl.fromTo("#schema", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.6);
+      tl.fromTo("#cri", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 0.50);
+      tl.fromTo("#bu0", { opacity: 0, scale: 0.3, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)" }, 1.00);
+      tl.fromTo("#bu1", { opacity: 0, scale: 0.3, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)" }, 1.12);
+      tl.fromTo("#bu2", { opacity: 0, scale: 0.3, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)" }, 1.24);
+      tl.fromTo("#bu3", { opacity: 0, scale: 0.3, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)" }, 1.36);
+      tl.fromTo("#bu4", { opacity: 0, scale: 0.3, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)" }, 1.48);
+      tl.fromTo("#bu5", { opacity: 0, scale: 0.3, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)" }, 1.60);
+      tl.fromTo("#bu6", { opacity: 0, scale: 0.3, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)" }, 1.72);
+      tl.fromTo("#bu7", { opacity: 0, scale: 0.3, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)" }, 1.84);
+      tl.fromTo("#bu8", { opacity: 0, scale: 0.3, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)" }, 1.96);
+      tl.fromTo("#bu9", { opacity: 0, scale: 0.3, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2)" }, 2.08);
+      tl.fromTo("#ray0", { strokeDasharray: 1000, strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 0.9, ease: "power2.out" }, 2.40);
+      tl.fromTo("#d0_0", { strokeDasharray: 1000, strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 3.20);
+      tl.fromTo("#d0_1", { strokeDasharray: 1000, strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 3.20);
+      tl.fromTo("#d0_2", { strokeDasharray: 1000, strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 3.20);
+      tl.fromTo("#d0_3", { strokeDasharray: 1000, strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 3.20);
+      tl.fromTo("#d0_4", { strokeDasharray: 1000, strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 3.20);
+      tl.fromTo("#ray1", { strokeDasharray: 1000, strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 0.9, ease: "power2.out" }, 2.75);
+      tl.fromTo("#d1_0", { strokeDasharray: 1000, strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 3.55);
+      tl.fromTo("#d1_1", { strokeDasharray: 1000, strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 3.55);
+      tl.fromTo("#d1_2", { strokeDasharray: 1000, strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 3.55);
+      tl.fromTo("#d1_3", { strokeDasharray: 1000, strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 3.55);
+      tl.fromTo("#d1_4", { strokeDasharray: 1000, strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 3.55);
+      tl.fromTo("#ray2", { strokeDasharray: 1000, strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 0.9, ease: "power2.out" }, 3.10);
+      tl.fromTo("#d2_0", { strokeDasharray: 1000, strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 3.90);
+      tl.fromTo("#d2_1", { strokeDasharray: 1000, strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 3.90);
+      tl.fromTo("#d2_2", { strokeDasharray: 1000, strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 3.90);
+      tl.fromTo("#d2_3", { strokeDasharray: 1000, strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 3.90);
+      tl.fromTo("#d2_4", { strokeDasharray: 1000, strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 3.90);
+      tl.fromTo("#ray3", { strokeDasharray: 1000, strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 0.9, ease: "power2.out" }, 3.45);
+      tl.fromTo("#d3_0", { strokeDasharray: 1000, strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 4.25);
+      tl.fromTo("#d3_1", { strokeDasharray: 1000, strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 4.25);
+      tl.fromTo("#d3_2", { strokeDasharray: 1000, strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 4.25);
+      tl.fromTo("#d3_3", { strokeDasharray: 1000, strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 4.25);
+      tl.fromTo("#d3_4", { strokeDasharray: 1000, strokeDashoffset: 1000 }, { strokeDashoffset: 0, duration: 0.5, ease: "power2.out" }, 4.25);
+      tl.fromTo("#l", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 1.00);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
