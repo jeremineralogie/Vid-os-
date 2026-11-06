@@ -22,7 +22,7 @@ Passons maintenant à l’améthyste.
 
 C’est probablement l’une des variétés de quartz les plus reconnaissables, grâce à ses teintes violettes.
 
-Sa coloration est principalement liée à la présence de traces de fer dans le réseau cristallin. Sous l’effet de l’irradiation naturelle, certains ions ferreux prennent place dans des centres colorés qui absorbent certaines longueurs d’onde de la lumière.
+Sa coloration est principalement liée à la présence de traces de fer dans le réseau cristallin. Sous l’effet de l’irradiation naturelle, certains ions de fer perdent un électron et forment des centres colorés, qui absorbent certaines longueurs d’onde de la lumière.
 
 C’est cette absorption sélective qui donne naissance aux différentes nuances de violet, allant du lilas très pâle au violet intense.
 
