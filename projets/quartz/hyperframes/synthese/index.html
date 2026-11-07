@@ -27,9 +27,9 @@ svg text { font-family:"Montserrat", sans-serif; }
 </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="9.00" data-width="1080" data-height="1920">
-      <div id="photo" class="clip" data-start="0" data-duration="9.00" data-track-index="0" style="z-index:1"><img id="photo-img" src="assets/fond.jpg" alt="" /><div id="photo-voile"></div></div>
-      <div id="scene" class="clip" data-start="0" data-duration="9.00" data-track-index="1" style="z-index:2">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="11.25" data-width="1080" data-height="1920">
+      <div id="photo" class="clip" data-start="0" data-duration="11.25" data-track-index="0" style="z-index:1"><img id="photo-img" src="assets/fond.jpg" alt="" /><div id="photo-voile"></div></div>
+      <div id="scene" class="clip" data-start="0" data-duration="11.25" data-track-index="1" style="z-index:2">
         <div class="tete" id="tete"><div class="surtitre">Une même formule, SiO₂</div><div class="titre" style="font-size:76px">Cinq histoires</div><div class="filet"></div></div>
         <div class="panneau" id="panneau"><svg width="860" height="640" viewBox="0 0 860 640"><g id="c0"><clipPath id="cp0"><circle cx="90" cy="80" r="46"/></clipPath><image href="assets/photo_01.jpg" x="44" y="34" width="92" height="92" preserveAspectRatio="xMidYMid slice" clip-path="url(#cp0)"/><circle cx="90" cy="80" r="46" fill="none" stroke="#f2b544" stroke-width="4"/><text x="170" y="72" font-size="32" font-weight="800" fill="#fff">Morion</text><text x="170" y="110" font-size="25" font-weight="600" fill="#f2b544">rayonnement + aluminium</text></g><g id="c1"><clipPath id="cp1"><circle cx="90" cy="198" r="46"/></clipPath><image href="assets/photo_04.jpg" x="44" y="152" width="92" height="92" preserveAspectRatio="xMidYMid slice" clip-path="url(#cp1)"/><circle cx="90" cy="198" r="46" fill="none" stroke="#f2b544" stroke-width="4"/><text x="170" y="190" font-size="32" font-weight="800" fill="#fff">Fumé</text><text x="170" y="228" font-size="25" font-weight="600" fill="#f2b544">rayonnement + aluminium</text></g><g id="c2"><clipPath id="cp2"><circle cx="90" cy="316" r="46"/></clipPath><image href="assets/photo_06.jpg" x="44" y="270" width="92" height="92" preserveAspectRatio="xMidYMid slice" clip-path="url(#cp2)"/><circle cx="90" cy="316" r="46" fill="none" stroke="#f2b544" stroke-width="4"/><text x="170" y="308" font-size="32" font-weight="800" fill="#fff">Améthyste</text><text x="170" y="346" font-size="25" font-weight="600" fill="#f2b544">rayonnement + fer</text></g><g id="c3"><clipPath id="cp3"><circle cx="90" cy="434" r="46"/></clipPath><image href="assets/photo_11.jpg" x="44" y="388" width="92" height="92" preserveAspectRatio="xMidYMid slice" clip-path="url(#cp3)"/><circle cx="90" cy="434" r="46" fill="none" stroke="#f2b544" stroke-width="4"/><text x="170" y="426" font-size="32" font-weight="800" fill="#fff">Laiteux</text><text x="170" y="464" font-size="25" font-weight="600" fill="#f2b544">inclusions fluides</text></g><g id="c4"><clipPath id="cp4"><circle cx="90" cy="552" r="46"/></clipPath><image href="assets/photo_09.jpg" x="44" y="506" width="92" height="92" preserveAspectRatio="xMidYMid slice" clip-path="url(#cp4)"/><circle cx="90" cy="552" r="46" fill="none" stroke="#f2b544" stroke-width="4"/><text x="170" y="544" font-size="32" font-weight="800" fill="#fff">Cristal de roche</text><text x="170" y="582" font-size="25" font-weight="600" fill="#f2b544">pureté</text></g></svg></div>
         <div class="schema" id="schema">Illustration schématique</div>
@@ -38,7 +38,7 @@ svg text { font-family:"Montserrat", sans-serif; }
     <script>
       window.__timelines = window.__timelines || {};
       const tl = gsap.timeline({ paused: true });
-      tl.fromTo("#photo-img", { scale: 1.0 }, { scale: 1.07, duration: 9.00, ease: "none" }, 0);
+      tl.fromTo("#photo-img", { scale: 1.0 }, { scale: 1.07, duration: 11.25, ease: "none" }, 0);
       tl.fromTo("#tete", { opacity: 0, y: -26 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.1);
       tl.fromTo("#panneau", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.25);
       tl.fromTo("#schema", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.6);

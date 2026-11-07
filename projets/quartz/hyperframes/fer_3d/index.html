@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+:root { --violet-clair:#c77dff; --gris:#d6d0e0; --or:#f2b544; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
+#root { position:relative; width:100%; height:100%; font-family:"Montserrat", sans-serif; color:#fff; }
+.plan { position:absolute; inset:0; overflow:hidden; }
+.plan img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+#voile { position:absolute; inset:0; pointer-events:none;
+  background: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 16%, rgba(0,0,0,0) 27%, rgba(0,0,0,0) 62%, rgba(0,0,0,0.7) 100%); }
+.tete { position:absolute; top:250px; left:110px; width:860px; text-align:center; }
+.surtitre { font-size:30px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--violet-clair); text-shadow:0 2px 10px #000; }
+.titre { margin-top:14px; font-size:76px; font-weight:800; white-space:nowrap; text-shadow:0 4px 18px rgba(0,0,0,0.8); }
+.filet { width:120px; height:8px; margin:22px auto 0; border-radius:4px; background:var(--violet-clair); }
+.etiquette { position:absolute; padding:8px 18px; border-radius:22px; background:rgba(8,6,12,0.82); border:2px solid var(--or);
+  font-size:28px; font-weight:800; white-space:nowrap; box-shadow:0 8px 24px rgba(0,0,0,0.6); }
+.etiquette small { display:block; font-size:21px; font-weight:600; color:var(--gris); }
+.legende { position:absolute; left:110px; width:860px; text-align:center; font-size:30px; font-weight:700; line-height:1.35;
+  padding:16px 22px; border-radius:24px; background:rgba(8,6,12,0.78); border:2px solid rgba(199,125,255,0.5); }
+.mention { position:absolute; left:110px; top:1150px; width:860px; text-align:right; font-size:20px; font-weight:600; font-style:italic;
+  color:rgb(217,210,225); text-shadow:0 2px 6px #000, 0 0 12px #000; }
+</style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="21.50" data-width="1080" data-height="1920">
+      <div id="scene" class="clip" data-start="0" data-duration="21.50" data-track-index="0" style="z-index:1">
+        <div id="p1" class="plan"><img id="i1" src="assets/fe_avant.png"/></div>
+        <div id="p2" class="plan" style="opacity:0"><img id="i2" src="assets/fe_apres.png"/></div>
+        <div class="tete" id="tete" style="z-index:5"><div class="surtitre">Améthyste</div><div class="titre">Le rôle du fer</div><div class="filet"></div></div>
+        <div class="mention" id="mention" style="z-index:5">Modèle 3D, d'après la structure du quartz α</div>
+        <svg id="e-al-t" width="1080" height="1920" style="position:absolute;left:0;top:0;z-index:4;opacity:0"><line x1="508.4" y1="799.0" x2="468.4" y2="599.0" stroke="#f2b544" stroke-width="3"/><circle cx="508.4" cy="799.0" r="9" fill="none" stroke="#f2b544" stroke-width="3"/></svg><div id="e-al" class="etiquette" style="left:468.4px;top:599.0px;transform:translate(-50%,-100%);z-index:5;opacity:0">Fe³⁺<small>fer</small></div>
+        <svg width="1080" height="1920" style="position:absolute;left:0;top:0;z-index:4"><path id="onde" d="M 0 0 q 8.5 -14 17 0 q 8.5 14 17 0 q 8.5 -14 17 0 q 8.5 14 17 0 q 8.5 -14 17 0 q 8.5 14 17 0 q 8.5 -14 17 0 q 8.5 14 17 0 q 8.5 -14 17 0 q 8.5 14 17 0 q 8.5 -14 17 0 q 8.5 14 17 0 q 8.5 -14 17 0 q 8.5 14 17 0 q 8.5 -14 17 0 q 8.5 14 17 0 q 8.5 -14 17 0 q 8.5 14 17 0 q 8.5 -14 17 0 q 8.5 14 17 0 q 8.5 -14 17 0 q 8.5 14 17 0 q 8.5 -14 17 0 q 8.5 14 17 0 q 8.5 -14 17 0 q 8.5 14 17 0 q 8.5 -14 17 0 q 8.5 14 17 0" fill="none" stroke="#7fe0b0" stroke-width="6" stroke-linecap="round" transform="translate(120 470) rotate(40.3) scale(1.069 1)" style="filter:drop-shadow(0 0 8px #7fe0b0)"/></svg>
+        <div id="electron" style="position:absolute;left:492.4px;top:783.0px;width:32px;height:32px;border-radius:50%;background:radial-gradient(circle,#e8fbff 0%,#5ec8ff 55%,rgba(94,200,255,0) 72%);z-index:5;opacity:0"></div>
+        <svg id="e-e-t" width="1080" height="1920" style="position:absolute;left:0;top:0;z-index:4;opacity:0"><line x1="668.4" y1="599.0" x2="728.4" y2="569.0" stroke="#f2b544" stroke-width="3"/><circle cx="668.4" cy="599.0" r="9" fill="none" stroke="#f2b544" stroke-width="3"/></svg><div id="e-e" class="etiquette" style="left:728.4px;top:569.0px;transform:translate(0,-50%);z-index:5;opacity:0">e⁻<small>électron</small></div>
+        <svg id="e-trou-t" width="1080" height="1920" style="position:absolute;left:0;top:0;z-index:4;opacity:0"><line x1="508.4" y1="799.0" x2="678.4" y2="859.0" stroke="#f2b544" stroke-width="3"/><circle cx="508.4" cy="799.0" r="9" fill="none" stroke="#f2b544" stroke-width="3"/></svg><div id="e-trou" class="etiquette" style="left:678.4px;top:859.0px;transform:translate(0,-50%);z-index:5;opacity:0">Centre coloré<small>Fe⁴⁺</small></div>
+        <div id="leg1" class="legende" style="top:1000px;z-index:5;opacity:0">Des traces de <b>fer</b> prennent parfois<br/>la place du silicium</div>
+        <div id="leg2" class="legende" style="top:1000px;z-index:5;opacity:0">Un rayonnement naturel<br/>traverse le cristal</div>
+        <div id="leg3" class="legende" style="top:1000px;z-index:5;opacity:0">L'ion de fer perd un <b>électron</b></div>
+        <div id="leg4" class="legende" style="top:1000px;z-index:5;opacity:0">Il devient un <b>centre coloré</b> :<br/>il absorbe une partie de la lumière</div>
+        <div id="voile"></div>
+      </div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#i1", { scale: 1.0 }, { scale: 1.06, duration: 21.50, ease: "none" }, 0.00);
+      tl.fromTo("#i2", { scale: 1.0 }, { scale: 1.06, duration: 21.50, ease: "none" }, 0.00);
+      gsap.set("#onde", { strokeDasharray: 4000, strokeDashoffset: 4000 });
+      tl.fromTo("#tete", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 0.10);
+      tl.fromTo("#mention", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 0.60);
+      tl.fromTo("#leg1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 2.82);
+      tl.to("#leg1", { opacity: 0, duration: 0.4 }, 6.89);
+      tl.fromTo("#e-al-t", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 2.92);
+      tl.fromTo("#e-al", { opacity: 0 }, { opacity: 1, duration: 0.35 }, 3.02);
+      tl.fromTo("#leg2", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 7.54);
+      tl.to("#leg2", { opacity: 0, duration: 0.4 }, 11.09);
+      tl.fromTo("#onde", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 2.2, ease: "power1.inOut" }, 7.74);
+      tl.fromTo("#leg3", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 11.74);
+      tl.to("#leg3", { opacity: 0, duration: 0.4 }, 15.81);
+      tl.to("#onde", { opacity: 0, duration: 1.0 }, 12.14);
+      tl.fromTo("#electron", { opacity: 1, x: 0, y: 0, scale: 1 }, { opacity: 1, x: 160, y: -200, scale: 0.7, duration: 2.0, ease: "power1.inOut", immediateRender: false }, 11.94);
+      tl.fromTo("#e-e-t", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 13.74);
+      tl.fromTo("#e-e", { opacity: 0 }, { opacity: 1, duration: 0.35 }, 13.84);
+      tl.to("#p2", { opacity: 1, duration: 1.5, ease: "power2.inOut" }, 12.04);
+      tl.fromTo("#leg4", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 16.46);
+      tl.to("#e-e-t", { opacity: 0, duration: 0.4 }, 16.26);
+      tl.to("#e-e", { opacity: 0, duration: 0.4 }, 16.26);
+      tl.to("#electron", { opacity: 0, duration: 0.4 }, 16.26);
+      tl.fromTo("#e-trou-t", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 16.66);
+      tl.fromTo("#e-trou", { opacity: 0 }, { opacity: 1, duration: 0.35 }, 16.76);
+      tl.to("#e-al-t", { opacity: 0, duration: 0.4 }, 16.26);
+      tl.to("#e-al", { opacity: 0, duration: 0.4 }, 16.26);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

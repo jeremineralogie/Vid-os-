@@ -39,7 +39,7 @@ sc.cycles.adaptive_threshold = 0.01
 sc.cycles.use_denoising = False  # pas d'OpenImageDenoise ici : débruitage OpenCV après coup
 sc.cycles.max_bounces = 16
 sc.cycles.transmission_bounces = 16
-sc.cycles.volume_bounces = 1
+sc.cycles.volume_bounces = 8  # diffusion multiple : le quartz laiteux paraît blanc
 sc.cycles.caustics_reflective = False
 sc.render.resolution_x, sc.render.resolution_y = W, H
 sc.view_settings.view_transform = "Filmic"
@@ -156,7 +156,7 @@ def studio(cible=Vector((0, 0, 0.5)), fort=1.0):
     lampe("AREA", (0, -6, -3), 60 * fort, 1.5, cible)
 
 
-def fond(force=0.25):
+def fond(force=0.8):
     """Panneau lumineux derrière le sujet (dégradé violet sombre) : il révèle la transparence et la teinte des cristaux."""
     bpy.ops.mesh.primitive_plane_add(size=1, location=(0, 7, 0), rotation=(math.radians(90), 0, 0))
     ob = bpy.context.object
@@ -170,8 +170,8 @@ def fond(force=0.25):
     grad.gradient_type = "SPHERICAL"
     coord = t.nodes.new("ShaderNodeTexCoord")
     mapping = t.nodes.new("ShaderNodeMapping")
-    mapping.inputs["Location"].default_value = (-1.2, -0.95, 0)
-    mapping.inputs["Scale"].default_value = (2.4, 1.6, 1)
+    mapping.inputs["Location"].default_value = (-2.0, -1.55, 0)  # halo centré derrière le sujet
+    mapping.inputs["Scale"].default_value = (4.0, 3.0, 1)
     t.links.new(coord.outputs["UV"], mapping.inputs["Vector"])
     t.links.new(mapping.outputs["Vector"], grad.inputs["Vector"])
     rampe = t.nodes.new("ShaderNodeValToRGB")
@@ -231,7 +231,7 @@ if SCENE == "morion_roche":
     roche()
     studio(fort=1.4)
     fond()
-    camera((0, -17.0, 0.6), (0, 0, -1.2), lens=55, decalage=-0.02)
+    camera((0, -20.0, 0.6), (0, 0, -0.6), lens=55, decalage=-0.04)
     REPERES.update(cristal=point(q, (0, 0, HP * 0.55)), g1=Vector((-3.4, -1.4, -3.0)), g2=Vector((3.3, -1.4, -3.2)),
                    g3=Vector((-1.6, -2.2, -3.5)), g4=Vector((2.0, -2.0, -2.9)))
 
@@ -242,7 +242,7 @@ elif SCENE == "gamme":
         REPERES[nom] = point(q, (0, 0, -0.35))
     studio(fort=1.3)
     fond()
-    camera((0, -19.0, 0.5), (0, 0, -0.6), lens=55, decalage=-0.02)
+    camera((0, -21.0, 0.5), (0, 0, 0.2), lens=55, decalage=-0.2)
 
 elif SCENE in ("amethyste_faisceau", "transparent"):
     teinte = "amethyste" if SCENE == "amethyste_faisceau" else "incolore"
@@ -250,14 +250,15 @@ elif SCENE in ("amethyste_faisceau", "transparent"):
     studio(fort=0.8)
     entree = point(q, (-0.95, 0, 1.7))
     fond()
-    camera((0, -16.0, 0.4), (0, 0, -0.6), lens=55, decalage=-0.02)
+    camera((0, -19.0, 0.4), (0, 0, 0.6), lens=55, decalage=-0.165)
     REPERES.update(cristal=point(q, (0, 0, 1.7)), entree=entree, sortie=point(q, (0.95, 0, 1.6)))
 
 elif SCENE == "laiteux":
     q = cristal("incolore", loc=(0, 0, -2.4), rot=(-6, 10, 8), diffusion=5.0)
     studio(fort=3.0)
+    lampe("AREA", (0, -10, 1.5), 900, 8, Vector((0, 0, 0)))  # grande source frontale : le quartz laiteux renvoie une lumière blanche
     fond()
-    camera((0, -16.0, 0.4), (0, 0, -0.6), lens=55, decalage=-0.02)
+    camera((0, -19.0, 0.4), (0, 0, 0.6), lens=55, decalage=-0.165)
     REPERES.update(cristal=point(q, (0, 0, 1.6)))
 
 elif SCENE == "laiteux_zoom":

@@ -23,18 +23,18 @@ html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
 .legende { position:absolute; left:110px; width:860px; text-align:center; font-size:30px; font-weight:700; line-height:1.35;
   padding:16px 22px; border-radius:24px; background:rgba(8,6,12,0.78); border:2px solid rgba(199,125,255,0.5); }
 .mention { position:absolute; left:110px; top:1150px; width:860px; text-align:right; font-size:20px; font-weight:600; font-style:italic;
-  color:rgba(214,208,224,0.85); text-shadow:0 2px 6px #000; }
+  color:rgb(217,210,225); text-shadow:0 2px 6px #000, 0 0 12px #000; }
 </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="28.00" data-width="1080" data-height="1920">
-      <div id="scene" class="clip" data-start="0" data-duration="28.00" data-track-index="0" style="z-index:1">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="24.00" data-width="1080" data-height="1920">
+      <div id="scene" class="clip" data-start="0" data-duration="24.00" data-track-index="0" style="z-index:1">
         <div id="p1" class="plan"><img id="i1" src="assets/tetraedre.png"/></div>
         <div id="p2" class="plan" style="opacity:0"><img id="i2" src="assets/reseau.png"/></div>
         <div class="tete" id="tete" style="z-index:5"><div class="surtitre">La structure</div><div class="titre">Le quartz, SiO₂</div><div class="filet"></div></div>
+        <div class="mention" id="mention" style="z-index:5">Modèle 3D, d'après la structure cristallographique du quartz α</div>
         <svg id="e-si-t" width="1080" height="1920" style="position:absolute;left:0;top:0;z-index:4;opacity:0"><line x1="540.0" y1="844.8" x2="350.0" y2="804.8" stroke="#f2b544" stroke-width="3"/><circle cx="540.0" cy="844.8" r="9" fill="none" stroke="#f2b544" stroke-width="3"/></svg><div id="e-si" class="etiquette" style="left:350.0px;top:804.8px;transform:translate(-100%,-50%);z-index:5;opacity:0">Si<small>silicium</small></div>
         <svg id="e-o-t" width="1080" height="1920" style="position:absolute;left:0;top:0;z-index:4;opacity:0"><line x1="674.5" y1="845.8" x2="824.5" y2="785.8" stroke="#f2b544" stroke-width="3"/><circle cx="674.5" cy="845.8" r="9" fill="none" stroke="#f2b544" stroke-width="3"/></svg><div id="e-o" class="etiquette" style="left:824.5px;top:785.8px;transform:translate(0,-50%);z-index:5;opacity:0">O<small>oxygène</small></div>
-        <div class="mention" id="mention" style="z-index:5">Modèle 3D, d'après la structure cristallographique du quartz α</div>
         <div id="leg1" class="legende" style="top:1000px;z-index:5;opacity:0">Au centre, un atome de <b>silicium</b></div>
         <div id="leg2" class="legende" style="top:1000px;z-index:5;opacity:0">Autour de lui, quatre atomes d'<b>oxygène</b></div>
         <div id="leg3" class="legende" style="top:1000px;z-index:5;opacity:0">Ensemble, ils forment un tétraèdre : SiO₄</div>
@@ -46,28 +46,28 @@ html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
     <script>
       window.__timelines = window.__timelines || {};
       const tl = gsap.timeline({ paused: true });
-      tl.fromTo("#i1", { scale: 1.1 }, { scale: 1.0, duration: 21.0, ease: "power1.out" }, 0);
+      tl.fromTo("#i1", { scale: 1.1 }, { scale: 1.0, duration: 24.00, ease: "none" }, 0.00);
       tl.fromTo("#tete", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 0.10);
       tl.fromTo("#mention", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 0.60);
-      tl.fromTo("#leg1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 3.37);
-      tl.to("#leg1", { opacity: 0, duration: 0.4 }, 7.47);
-      tl.fromTo("#e-si-t", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 3.47);
-      tl.fromTo("#e-si", { opacity: 0 }, { opacity: 1, duration: 0.35 }, 3.57);
-      tl.fromTo("#leg2", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 8.12);
-      tl.to("#leg2", { opacity: 0, duration: 0.4 }, 12.23);
-      tl.fromTo("#e-o-t", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 8.22);
-      tl.fromTo("#e-o", { opacity: 0 }, { opacity: 1, duration: 0.35 }, 8.32);
-      tl.fromTo("#leg3", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 12.88);
-      tl.to("#leg3", { opacity: 0, duration: 0.4 }, 16.98);
-      tl.fromTo("#leg4", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 17.63);
-      tl.to("#leg4", { opacity: 0, duration: 0.4 }, 22.27);
-      tl.to("#e-si-t", { opacity: 0, duration: 0.4 }, 17.43);
-      tl.to("#e-si", { opacity: 0, duration: 0.4 }, 17.43);
-      tl.to("#e-o-t", { opacity: 0, duration: 0.4 }, 17.43);
-      tl.to("#e-o", { opacity: 0, duration: 0.4 }, 17.43);
-      tl.to("#p2", { opacity: 1, duration: 1.4, ease: "power2.inOut" }, 17.43);
-      tl.fromTo("#i2", { scale: 1.0, rotation: -3 }, { scale: 1.1, rotation: 3, duration: 10.57, ease: "none" }, 17.43);
-      tl.fromTo("#leg5", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 22.92);
+      tl.fromTo("#leg1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 2.81);
+      tl.to("#leg1", { opacity: 0, duration: 0.4 }, 6.33);
+      tl.fromTo("#e-si-t", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 2.91);
+      tl.fromTo("#e-si", { opacity: 0 }, { opacity: 1, duration: 0.35 }, 3.01);
+      tl.fromTo("#leg2", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 6.98);
+      tl.to("#leg2", { opacity: 0, duration: 0.4 }, 10.51);
+      tl.fromTo("#e-o-t", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 7.08);
+      tl.fromTo("#e-o", { opacity: 0 }, { opacity: 1, duration: 0.35 }, 7.18);
+      tl.fromTo("#leg3", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 11.16);
+      tl.to("#leg3", { opacity: 0, duration: 0.4 }, 14.68);
+      tl.fromTo("#leg4", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 15.33);
+      tl.to("#leg4", { opacity: 0, duration: 0.4 }, 19.38);
+      tl.to("#e-si-t", { opacity: 0, duration: 0.4 }, 15.13);
+      tl.to("#e-si", { opacity: 0, duration: 0.4 }, 15.13);
+      tl.to("#e-o-t", { opacity: 0, duration: 0.4 }, 15.13);
+      tl.to("#e-o", { opacity: 0, duration: 0.4 }, 15.13);
+      tl.to("#p2", { opacity: 1, duration: 1.4, ease: "power2.inOut" }, 15.13);
+      tl.fromTo("#i2", { scale: 1.0, rotation: -3 }, { scale: 1.1, rotation: 3, duration: 8.87, ease: "none" }, 15.13);
+      tl.fromTo("#leg5", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 20.03);
       window.__timelines["main"] = tl;
       tl.seek(0);
     </script>

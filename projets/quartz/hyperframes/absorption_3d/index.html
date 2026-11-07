@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+:root { --violet-clair:#c77dff; --gris:#d6d0e0; --or:#f2b544; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
+#root { position:relative; width:100%; height:100%; font-family:"Montserrat", sans-serif; color:#fff; }
+.plan { position:absolute; inset:0; overflow:hidden; }
+.plan img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+#voile { position:absolute; inset:0; pointer-events:none;
+  background: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 16%, rgba(0,0,0,0) 27%, rgba(0,0,0,0) 62%, rgba(0,0,0,0.7) 100%); }
+.tete { position:absolute; top:250px; left:110px; width:860px; text-align:center; }
+.surtitre { font-size:30px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--violet-clair); text-shadow:0 2px 10px #000; }
+.titre { margin-top:14px; font-size:76px; font-weight:800; white-space:nowrap; text-shadow:0 4px 18px rgba(0,0,0,0.8); }
+.filet { width:120px; height:8px; margin:22px auto 0; border-radius:4px; background:var(--violet-clair); }
+.etiquette { position:absolute; padding:8px 18px; border-radius:22px; background:rgba(8,6,12,0.92); border:2px solid var(--or);
+  font-size:28px; font-weight:800; white-space:nowrap; box-shadow:0 8px 24px rgba(0,0,0,0.6); }
+.etiquette small { display:block; font-size:21px; font-weight:600; color:#ede9f2; }
+.legende { position:absolute; left:110px; width:860px; text-align:center; font-size:30px; font-weight:700; line-height:1.35;
+  padding:16px 22px; border-radius:24px; background:rgba(8,6,12,0.78); border:2px solid rgba(199,125,255,0.5); }
+.mention { position:absolute; left:110px; top:1150px; width:860px; text-align:right; font-size:20px; font-weight:600; font-style:italic;
+  color:#fff; text-shadow:0 2px 6px #000, 0 0 12px #000; }
+</style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="16.50" data-width="1080" data-height="1920">
+      <div id="scene" class="clip" data-start="0" data-duration="16.50" data-track-index="0" style="z-index:1">
+        <div class="plan"><img id="i1" src="assets/amethyste_faisceau.png"/></div>
+        <div class="tete" id="tete" style="z-index:5"><div class="surtitre">Améthyste</div><div class="titre">L'absorption sélective</div><div class="filet"></div></div>
+        <div class="mention" id="mention" style="z-index:5">Illustration 3D</div>
+        <svg width="1080" height="1920" style="position:absolute;left:0;top:0;z-index:4"><path id="r-in" d="M 0 793 L 438 823" fill="none" stroke="#fffbe8" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 10px #fffbe8)"/><path id="r-dans" d="M 438 823 L 719 886" fill="none" stroke="#e9d6ff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 10px #e9d6ff)"/><path id="r-out" d="M 719 886 L 1080 916" fill="none" stroke="#b86bff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 10px #b86bff)"/></svg>
+        <div id="spectre" style="position:absolute;left:190px;top:880px;width:700px;height:56px;border-radius:12px;background:linear-gradient(90deg,#7a2cff 0%,#2e5bff 16%,#22c7d6 32%,#3ddc5a 46%,#e8e23a 60%,#ff9a2e 78%,#ff3b3b 100%);box-shadow:0 8px 24px rgba(0,0,0,0.6);z-index:5;opacity:0"></div>
+        <div id="absorbe" style="position:absolute;left:470px;top:872px;width:150px;height:72px;border-radius:10px;background:rgba(6,4,10,0.85);border:3px dashed #f2b544;z-index:6;opacity:0;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:#f2b544">absorbé</div>
+        <div id="sp-l" style="position:absolute;left:190px;top:946px;width:700px;display:flex;justify-content:space-between;font-size:20px;font-weight:600;color:#d6d0e0;text-shadow:0 2px 6px #000;z-index:5;opacity:0"><span>violet</span><span>rouge</span></div>
+        <div id="leg1" class="legende" style="top:1000px;z-index:5;opacity:0">La lumière blanche contient<br/>toutes les couleurs</div>
+        <div id="leg2" class="legende" style="top:1000px;z-index:5;opacity:0">Les centres colorés absorbent<br/>surtout le <b>jaune-vert</b></div>
+        <div id="leg3" class="legende" style="top:1000px;z-index:5;opacity:0">Le rouge et le bleu qui ressortent<br/>donnent le <b>violet</b></div>
+        <div id="voile"></div>
+      </div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      gsap.set("#r-in", { strokeDasharray: 4000, strokeDashoffset: 4000 });
+      gsap.set("#r-dans", { strokeDasharray: 4000, strokeDashoffset: 4000 });
+      gsap.set("#r-out", { strokeDasharray: 4000, strokeDashoffset: 4000 });
+      tl.fromTo("#i1", { scale: 1.0 }, { scale: 1.06, duration: 16.50, ease: "none" }, 0.00);
+      tl.fromTo("#tete", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 0.10);
+      tl.fromTo("#mention", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 0.60);
+      tl.fromTo("#leg1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 2.70);
+      tl.to("#leg1", { opacity: 0, duration: 0.4 }, 6.55);
+      tl.fromTo("#r-in", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 1.2, ease: "power1.inOut" }, 2.80);
+      tl.fromTo("#spectre", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 3.70);
+      tl.fromTo("#sp-l", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 3.80);
+      tl.fromTo("#leg2", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 7.20);
+      tl.to("#leg2", { opacity: 0, duration: 0.4 }, 11.05);
+      tl.fromTo("#r-dans", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 1.0, ease: "power1.inOut" }, 7.30);
+      tl.fromTo("#absorbe", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 7.80);
+      tl.fromTo("#leg3", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 11.70);
+      tl.fromTo("#r-out", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 1.2, ease: "power1.inOut" }, 11.80);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

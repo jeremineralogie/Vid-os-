@@ -35,13 +35,13 @@ html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
 .surtitre { font-size:30px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--violet-clair); text-shadow:0 2px 10px #000; }
 .titre { margin-top:14px; font-size:76px; font-weight:800; white-space:nowrap; text-shadow:0 4px 18px rgba(0,0,0,0.8); }
 .filet { width:120px; height:8px; margin:22px auto 0; border-radius:4px; background:var(--violet-clair); }
-.etiquette { position:absolute; padding:8px 18px; border-radius:22px; background:rgba(8,6,12,0.82); border:2px solid var(--or);
+.etiquette { position:absolute; padding:8px 18px; border-radius:22px; background:rgba(8,6,12,0.92); border:2px solid var(--or);
   font-size:28px; font-weight:800; white-space:nowrap; box-shadow:0 8px 24px rgba(0,0,0,0.6); }
-.etiquette small { display:block; font-size:21px; font-weight:600; color:var(--gris); }
+.etiquette small { display:block; font-size:21px; font-weight:600; color:#ede9f2; }
 .legende { position:absolute; left:110px; width:860px; text-align:center; font-size:30px; font-weight:700; line-height:1.35;
   padding:16px 22px; border-radius:24px; background:rgba(8,6,12,0.78); border:2px solid rgba(199,125,255,0.5); }
-.mention { position:absolute; left:110px; top:1150px; width:860px; text-align:right; font-size:20px; font-weight:600; font-style:italic;
-  color:rgb(217,210,225); text-shadow:0 2px 6px #000, 0 0 12px #000; }
+.mention { position:absolute; left:110px; top:1176px; width:860px; text-align:right; font-size:20px; font-weight:600; font-style:italic;
+  color:#fff; text-shadow:0 2px 6px #000, 0 0 12px #000; }
 """
 
 
@@ -144,7 +144,7 @@ def calque(contenu):
 # ---------------------------------------------------------------- déroulé par étapes
 # Une seule information à la fois : chaque étape a sa légende, qui remplace la précédente, et dure au moins 4 s.
 
-def etapes(liste, duree, t0=0.0):
+def etapes(liste, duree, t0=0.0, haut=1000):
     """liste : [(durée nominale, légende ou None, fonction(t, d) -> lignes de script)].
     Les durées sont étirées si la séquence est plus longue que prévu. Renvoie (corps, script)."""
     nominal = sum(d for d, _, _ in liste)
@@ -153,7 +153,7 @@ def etapes(liste, duree, t0=0.0):
     for n, (d, legende, actions) in enumerate(liste):
         d *= k
         if legende:
-            corps.append(f'        <div id="leg{n}" class="legende" style="top:1000px;z-index:5;opacity:0">{legende}</div>')
+            corps.append(f'        <div id="leg{n}" class="legende" style="top:{haut}px;z-index:5;opacity:0">{legende}</div>')
             script.append(f'      tl.fromTo("#leg{n}", {{ opacity: 0, y: 14 }}, {{ opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }}, {t + 0.2:.2f});')
             if n < len(liste) - 1:
                 script.append(cache(f"#leg{n}", t + d - 0.45, 0.4))
@@ -310,7 +310,7 @@ def gamme(duree, assets):
     corps = ['        <div class="plan"><img id="i1" src="assets/gamme.png"/></div>', *c0]
     for nom, texte in (("clair", "fumé clair"), ("fume", "fumé"), ("morion", "morion")):
         x, y = p[nom]
-        corps.append(f'        <div id="n-{nom}" class="etiquette" style="left:{x}px;top:{y + 20}px;transform:translate(-50%,0);font-size:24px;'
+        corps.append(f'        <div id="n-{nom}" class="etiquette" style="left:{x}px;top:{y - 10}px;transform:translate(-50%,0);font-size:24px;'
                      f'z-index:5;opacity:0">{texte}</div>')
     noms = ("clair", "fume", "morion")
     c, sc = etapes([
@@ -320,7 +320,7 @@ def gamme(duree, assets):
         (4.5, "Cela dépend de sa teneur en <b>aluminium</b>…", None),
         (4.5, "… et de la <b>dose de rayonnement</b> reçue", None),
         (4.5, "La chaleur, au cours de son histoire,<br/>peut aussi l'éclaircir", None),
-    ], duree)
+    ], duree, haut=1050)
     script = [zoom_lent("#i1", duree)] + s0 + sc
     return page(duree, "\n".join(corps + c), "\n".join(script))
 
@@ -373,7 +373,7 @@ def laiteux(duree, assets):
     corps = ['        <div id="p1" class="plan"><img id="i1" src="assets/laiteux.png"/></div>',
              '        <div id="p2" class="plan" style="opacity:0"><img id="i2" src="assets/laiteux_zoom.png"/></div>', *c0,
              etiquette("e-liq", inc, "Liquide", "piégé pendant la croissance", dx=-60, dy=-170),
-             etiquette("e-gaz", bulle, "Bulle de gaz", "", dx=170, dy=60, cote="droite"),
+             etiquette("e-gaz", bulle, "Bulle de gaz", "", dx=-40, dy=190, cote="bas"),
              calque(rayon("r-in", [(0, inc[1] - 40), inc], "#fffbe8", 8) + eclats)]
     ids = ["r-in"] + [f"d{k}" for k in range(6)]
 

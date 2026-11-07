@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+:root { --violet-clair:#c77dff; --gris:#d6d0e0; --or:#f2b544; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
+#root { position:relative; width:100%; height:100%; font-family:"Montserrat", sans-serif; color:#fff; }
+.plan { position:absolute; inset:0; overflow:hidden; }
+.plan img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+#voile { position:absolute; inset:0; pointer-events:none;
+  background: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 16%, rgba(0,0,0,0) 27%, rgba(0,0,0,0) 62%, rgba(0,0,0,0.7) 100%); }
+.tete { position:absolute; top:250px; left:110px; width:860px; text-align:center; }
+.surtitre { font-size:30px; font-weight:600; letter-spacing:0.18em; text-transform:uppercase; color:var(--violet-clair); text-shadow:0 2px 10px #000; }
+.titre { margin-top:14px; font-size:76px; font-weight:800; white-space:nowrap; text-shadow:0 4px 18px rgba(0,0,0,0.8); }
+.filet { width:120px; height:8px; margin:22px auto 0; border-radius:4px; background:var(--violet-clair); }
+.etiquette { position:absolute; padding:8px 18px; border-radius:22px; background:rgba(8,6,12,0.92); border:2px solid var(--or);
+  font-size:28px; font-weight:800; white-space:nowrap; box-shadow:0 8px 24px rgba(0,0,0,0.6); }
+.etiquette small { display:block; font-size:21px; font-weight:600; color:#ede9f2; }
+.legende { position:absolute; left:110px; width:860px; text-align:center; font-size:30px; font-weight:700; line-height:1.35;
+  padding:16px 22px; border-radius:24px; background:rgba(8,6,12,0.78); border:2px solid rgba(199,125,255,0.5); }
+.mention { position:absolute; left:110px; top:1150px; width:860px; text-align:right; font-size:20px; font-weight:600; font-style:italic;
+  color:#fff; text-shadow:0 2px 6px #000, 0 0 12px #000; }
+</style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="17.00" data-width="1080" data-height="1920">
+      <div id="scene" class="clip" data-start="0" data-duration="17.00" data-track-index="0" style="z-index:1">
+        <div id="p1" class="plan"><img id="i1" src="assets/laiteux.png"/></div>
+        <div id="p2" class="plan" style="opacity:0"><img id="i2" src="assets/laiteux_zoom.png"/></div>
+        <div class="tete" id="tete" style="z-index:5"><div class="surtitre">Quartz laiteux</div><div class="titre">La diffusion</div><div class="filet"></div></div>
+        <div class="mention" id="mention" style="z-index:5">Illustration 3D</div>
+        <svg id="e-liq-t" width="1080" height="1920" style="position:absolute;left:0;top:0;z-index:4;opacity:0"><line x1="717.8" y1="686.2" x2="657.8" y2="516.2" stroke="#f2b544" stroke-width="3"/><circle cx="717.8" cy="686.2" r="9" fill="none" stroke="#f2b544" stroke-width="3"/></svg><div id="e-liq" class="etiquette" style="left:657.8px;top:516.2px;transform:translate(-50%,-100%);z-index:5;opacity:0">Liquide<small>piégé pendant la croissance</small></div>
+        <svg id="e-gaz-t" width="1080" height="1920" style="position:absolute;left:0;top:0;z-index:4;opacity:0"><line x1="778.4" y1="655.4" x2="738.4" y2="845.4" stroke="#f2b544" stroke-width="3"/><circle cx="778.4" cy="655.4" r="9" fill="none" stroke="#f2b544" stroke-width="3"/></svg><div id="e-gaz" class="etiquette" style="left:738.4px;top:845.4px;transform:translate(-50%,0);z-index:5;opacity:0">Bulle de gaz</div>
+        <svg width="1080" height="1920" style="position:absolute;left:0;top:0;z-index:4"><path id="r-in" d="M 0 646 L 718 686" fill="none" stroke="#fffbe8" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 10px #fffbe8)"/><path id="d0" d="M 718 686 L 493 556" fill="none" stroke="#fffbe8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 10px #fffbe8)"/><path id="d1" d="M 718 686 L 695 427" fill="none" stroke="#fffbe8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 10px #fffbe8)"/><path id="d2" d="M 718 686 L 917 519" fill="none" stroke="#fffbe8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 10px #fffbe8)"/><path id="d3" d="M 718 686 L 969 753" fill="none" stroke="#fffbe8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 10px #fffbe8)"/><path id="d4" d="M 718 686 L 807 931" fill="none" stroke="#fffbe8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 10px #fffbe8)"/><path id="d5" d="M 718 686 L 569 899" fill="none" stroke="#fffbe8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 10px #fffbe8)"/></svg>
+        <div id="leg1" class="legende" style="top:1000px;z-index:5;opacity:0">Il est rempli d'inclusions<br/>microscopiques</div>
+        <div id="leg2" class="legende" style="top:1000px;z-index:5;opacity:0">Ce sont surtout de minuscules<br/>gouttes de fluide</div>
+        <div id="leg3" class="legende" style="top:1000px;z-index:5;opacity:0">Chacune dévie la lumière :<br/>diffusée dans tous les sens, elle paraît blanche</div>
+        <div id="voile"></div>
+      </div>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      gsap.set("#r-in", { strokeDasharray: 4000, strokeDashoffset: 4000 });
+      gsap.set("#d0", { strokeDasharray: 4000, strokeDashoffset: 4000 });
+      gsap.set("#d1", { strokeDasharray: 4000, strokeDashoffset: 4000 });
+      gsap.set("#d2", { strokeDasharray: 4000, strokeDashoffset: 4000 });
+      gsap.set("#d3", { strokeDasharray: 4000, strokeDashoffset: 4000 });
+      gsap.set("#d4", { strokeDasharray: 4000, strokeDashoffset: 4000 });
+      gsap.set("#d5", { strokeDasharray: 4000, strokeDashoffset: 4000 });
+      tl.fromTo("#i1", { scale: 1.0 }, { scale: 1.06, duration: 17.00, ease: "none" }, 0.00);
+      tl.fromTo("#tete", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 0.10);
+      tl.fromTo("#mention", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 0.60);
+      tl.fromTo("#leg1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 2.70);
+      tl.to("#leg1", { opacity: 0, duration: 0.4 }, 6.55);
+      tl.fromTo("#leg2", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 7.20);
+      tl.to("#leg2", { opacity: 0, duration: 0.4 }, 11.55);
+      tl.to("#p2", { opacity: 1, duration: 1.4, ease: "power2.inOut" }, 7.00);
+      tl.fromTo("#i2", { scale: 1.15 }, { scale: 1.0, duration: 11.00, ease: "power1.out" }, 7.00);
+      tl.fromTo("#e-liq-t", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 8.60);
+      tl.fromTo("#e-liq", { opacity: 0 }, { opacity: 1, duration: 0.35 }, 8.70);
+      tl.fromTo("#e-gaz-t", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 9.40);
+      tl.fromTo("#e-gaz", { opacity: 0 }, { opacity: 1, duration: 0.35 }, 9.50);
+      tl.fromTo("#leg3", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 12.20);
+      tl.to("#e-liq-t", { opacity: 0, duration: 0.4 }, 12.00);
+      tl.to("#e-liq", { opacity: 0, duration: 0.4 }, 12.00);
+      tl.to("#e-gaz-t", { opacity: 0, duration: 0.4 }, 12.00);
+      tl.to("#e-gaz", { opacity: 0, duration: 0.4 }, 12.00);
+      tl.fromTo("#r-in", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 1.0, ease: "power1.inOut" }, 12.30);
+      tl.fromTo("#d0", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 0.8, ease: "power1.inOut" }, 13.30);
+      tl.fromTo("#d1", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 0.8, ease: "power1.inOut" }, 13.40);
+      tl.fromTo("#d2", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 0.8, ease: "power1.inOut" }, 13.50);
+      tl.fromTo("#d3", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 0.8, ease: "power1.inOut" }, 13.60);
+      tl.fromTo("#d4", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 0.8, ease: "power1.inOut" }, 13.70);
+      tl.fromTo("#d5", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 0.8, ease: "power1.inOut" }, 13.80);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
