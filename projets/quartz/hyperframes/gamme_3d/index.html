@@ -27,8 +27,8 @@ html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
 </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="20.50" data-width="1080" data-height="1920">
-      <div id="scene" class="clip" data-start="0" data-duration="20.50" data-track-index="0" style="z-index:1">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="21.50" data-width="1080" data-height="1920">
+      <div id="scene" class="clip" data-start="0" data-duration="21.50" data-track-index="0" style="z-index:1">
         <div class="plan"><img id="i1" src="assets/gamme.png"/></div>
         <div class="tete" id="tete" style="z-index:5"><div class="surtitre">Quartz fumé</div><div class="titre">Du gris au noir</div><div class="filet"></div></div>
         <div class="mention" id="mention" style="z-index:5">Illustration 3D</div>
@@ -45,19 +45,19 @@ html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
     <script>
       window.__timelines = window.__timelines || {};
       const tl = gsap.timeline({ paused: true });
-      tl.fromTo("#i1", { scale: 1.0 }, { scale: 1.06, duration: 20.50, ease: "none" }, 0.00);
+      tl.fromTo("#i1", { scale: 1.0 }, { scale: 1.06, duration: 21.50, ease: "none" }, 0.00);
       tl.fromTo("#tete", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 0.10);
       tl.fromTo("#mention", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 0.60);
-      tl.fromTo("#leg1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 2.70);
-      tl.to("#leg1", { opacity: 0, duration: 0.4 }, 6.55);
-      tl.fromTo("#n-clair", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 2.80);
-      tl.fromTo("#n-fume", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 3.30);
-      tl.fromTo("#n-morion", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 3.80);
-      tl.fromTo("#leg2", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 7.20);
-      tl.to("#leg2", { opacity: 0, duration: 0.4 }, 11.05);
-      tl.fromTo("#leg3", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 11.70);
-      tl.to("#leg3", { opacity: 0, duration: 0.4 }, 15.55);
-      tl.fromTo("#leg4", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 16.20);
+      tl.fromTo("#leg1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 2.82);
+      tl.to("#leg1", { opacity: 0, duration: 0.4 }, 6.89);
+      tl.fromTo("#n-clair", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 2.92);
+      tl.fromTo("#n-fume", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 3.42);
+      tl.fromTo("#n-morion", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 3.92);
+      tl.fromTo("#leg2", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 7.54);
+      tl.to("#leg2", { opacity: 0, duration: 0.4 }, 11.61);
+      tl.fromTo("#leg3", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 12.26);
+      tl.to("#leg3", { opacity: 0, duration: 0.4 }, 16.33);
+      tl.fromTo("#leg4", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 16.98);
       window.__timelines["main"] = tl;
       tl.seek(0);
     </script>

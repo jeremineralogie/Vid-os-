@@ -22,13 +22,13 @@ html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
 .etiquette small { display:block; font-size:21px; font-weight:600; color:#ede9f2; }
 .legende { position:absolute; left:110px; width:860px; text-align:center; font-size:30px; font-weight:700; line-height:1.35;
   padding:16px 22px; border-radius:24px; background:rgba(8,6,12,0.78); border:2px solid rgba(199,125,255,0.5); }
-.mention { position:absolute; left:110px; top:1150px; width:860px; text-align:right; font-size:20px; font-weight:600; font-style:italic;
+.mention { position:absolute; left:110px; top:1176px; width:860px; text-align:right; font-size:20px; font-weight:600; font-style:italic;
   color:#fff; text-shadow:0 2px 6px #000, 0 0 12px #000; }
 </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="12.00" data-width="1080" data-height="1920">
-      <div id="scene" class="clip" data-start="0" data-duration="12.00" data-track-index="0" style="z-index:1">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="16.44" data-width="1080" data-height="1920">
+      <div id="scene" class="clip" data-start="0" data-duration="16.44" data-track-index="0" style="z-index:1">
         <div class="plan"><img id="i1" src="assets/transparent.png"/></div>
         <div class="tete" id="tete" style="z-index:5"><div class="surtitre">Cristal de roche</div><div class="titre">La transparence</div><div class="filet"></div></div>
         <div class="mention" id="mention" style="z-index:5">Illustration 3D</div>
@@ -42,13 +42,13 @@ html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
       window.__timelines = window.__timelines || {};
       const tl = gsap.timeline({ paused: true });
       gsap.set("#r", { strokeDasharray: 4000, strokeDashoffset: 4000 });
-      tl.fromTo("#i1", { scale: 1.0 }, { scale: 1.06, duration: 12.00, ease: "none" }, 0.00);
+      tl.fromTo("#i1", { scale: 1.0 }, { scale: 1.06, duration: 16.44, ease: "none" }, 0.00);
       tl.fromTo("#tete", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 0.10);
       tl.fromTo("#mention", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 0.60);
-      tl.fromTo("#leg1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 2.70);
-      tl.to("#leg1", { opacity: 0, duration: 0.4 }, 6.55);
-      tl.fromTo("#leg2", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 7.20);
-      tl.fromTo("#r", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 2.2, ease: "power1.inOut" }, 7.30);
+      tl.fromTo("#leg1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 3.63);
+      tl.to("#leg1", { opacity: 0, duration: 0.4 }, 9.14);
+      tl.fromTo("#leg2", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 9.79);
+      tl.fromTo("#r", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 2.2, ease: "power1.inOut" }, 9.89);
       window.__timelines["main"] = tl;
       tl.seek(0);
     </script>

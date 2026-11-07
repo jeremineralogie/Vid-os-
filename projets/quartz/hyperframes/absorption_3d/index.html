@@ -22,13 +22,13 @@ html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
 .etiquette small { display:block; font-size:21px; font-weight:600; color:#ede9f2; }
 .legende { position:absolute; left:110px; width:860px; text-align:center; font-size:30px; font-weight:700; line-height:1.35;
   padding:16px 22px; border-radius:24px; background:rgba(8,6,12,0.78); border:2px solid rgba(199,125,255,0.5); }
-.mention { position:absolute; left:110px; top:1150px; width:860px; text-align:right; font-size:20px; font-weight:600; font-style:italic;
+.mention { position:absolute; left:110px; top:1176px; width:860px; text-align:right; font-size:20px; font-weight:600; font-style:italic;
   color:#fff; text-shadow:0 2px 6px #000, 0 0 12px #000; }
 </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="16.50" data-width="1080" data-height="1920">
-      <div id="scene" class="clip" data-start="0" data-duration="16.50" data-track-index="0" style="z-index:1">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="17.50" data-width="1080" data-height="1920">
+      <div id="scene" class="clip" data-start="0" data-duration="17.50" data-track-index="0" style="z-index:1">
         <div class="plan"><img id="i1" src="assets/amethyste_faisceau.png"/></div>
         <div class="tete" id="tete" style="z-index:5"><div class="surtitre">Améthyste</div><div class="titre">L'absorption sélective</div><div class="filet"></div></div>
         <div class="mention" id="mention" style="z-index:5">Illustration 3D</div>
@@ -48,20 +48,20 @@ html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
       gsap.set("#r-in", { strokeDasharray: 4000, strokeDashoffset: 4000 });
       gsap.set("#r-dans", { strokeDasharray: 4000, strokeDashoffset: 4000 });
       gsap.set("#r-out", { strokeDasharray: 4000, strokeDashoffset: 4000 });
-      tl.fromTo("#i1", { scale: 1.0 }, { scale: 1.06, duration: 16.50, ease: "none" }, 0.00);
+      tl.fromTo("#i1", { scale: 1.0 }, { scale: 1.06, duration: 17.50, ease: "none" }, 0.00);
       tl.fromTo("#tete", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 0.10);
       tl.fromTo("#mention", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 0.60);
-      tl.fromTo("#leg1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 2.70);
-      tl.to("#leg1", { opacity: 0, duration: 0.4 }, 6.55);
-      tl.fromTo("#r-in", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 1.2, ease: "power1.inOut" }, 2.80);
-      tl.fromTo("#spectre", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 3.70);
-      tl.fromTo("#sp-l", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 3.80);
-      tl.fromTo("#leg2", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 7.20);
-      tl.to("#leg2", { opacity: 0, duration: 0.4 }, 11.05);
-      tl.fromTo("#r-dans", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 1.0, ease: "power1.inOut" }, 7.30);
-      tl.fromTo("#absorbe", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 7.80);
-      tl.fromTo("#leg3", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 11.70);
-      tl.fromTo("#r-out", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 1.2, ease: "power1.inOut" }, 11.80);
+      tl.fromTo("#leg1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 2.85);
+      tl.to("#leg1", { opacity: 0, duration: 0.4 }, 6.97);
+      tl.fromTo("#r-in", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 1.2, ease: "power1.inOut" }, 2.95);
+      tl.fromTo("#spectre", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 3.85);
+      tl.fromTo("#sp-l", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 3.95);
+      tl.fromTo("#leg2", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 7.62);
+      tl.to("#leg2", { opacity: 0, duration: 0.4 }, 11.75);
+      tl.fromTo("#r-dans", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 1.0, ease: "power1.inOut" }, 7.72);
+      tl.fromTo("#absorbe", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 8.22);
+      tl.fromTo("#leg3", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 12.40);
+      tl.fromTo("#r-out", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 1.2, ease: "power1.inOut" }, 12.50);
       window.__timelines["main"] = tl;
       tl.seek(0);
     </script>

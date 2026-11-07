@@ -22,13 +22,13 @@ html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
 .etiquette small { display:block; font-size:21px; font-weight:600; color:#ede9f2; }
 .legende { position:absolute; left:110px; width:860px; text-align:center; font-size:30px; font-weight:700; line-height:1.35;
   padding:16px 22px; border-radius:24px; background:rgba(8,6,12,0.78); border:2px solid rgba(199,125,255,0.5); }
-.mention { position:absolute; left:110px; top:1150px; width:860px; text-align:right; font-size:20px; font-weight:600; font-style:italic;
+.mention { position:absolute; left:110px; top:1176px; width:860px; text-align:right; font-size:20px; font-weight:600; font-style:italic;
   color:#fff; text-shadow:0 2px 6px #000, 0 0 12px #000; }
 </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="17.00" data-width="1080" data-height="1920">
-      <div id="scene" class="clip" data-start="0" data-duration="17.00" data-track-index="0" style="z-index:1">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="24.17" data-width="1080" data-height="1920">
+      <div id="scene" class="clip" data-start="0" data-duration="24.17" data-track-index="0" style="z-index:1">
         <div id="p1" class="plan"><img id="i1" src="assets/laiteux.png"/></div>
         <div id="p2" class="plan" style="opacity:0"><img id="i2" src="assets/laiteux_zoom.png"/></div>
         <div class="tete" id="tete" style="z-index:5"><div class="surtitre">Quartz laiteux</div><div class="titre">La diffusion</div><div class="filet"></div></div>
@@ -52,31 +52,31 @@ html, body { width:1080px; height:1920px; overflow:hidden; background:#000; }
       gsap.set("#d3", { strokeDasharray: 4000, strokeDashoffset: 4000 });
       gsap.set("#d4", { strokeDasharray: 4000, strokeDashoffset: 4000 });
       gsap.set("#d5", { strokeDasharray: 4000, strokeDashoffset: 4000 });
-      tl.fromTo("#i1", { scale: 1.0 }, { scale: 1.06, duration: 17.00, ease: "none" }, 0.00);
+      tl.fromTo("#i1", { scale: 1.0 }, { scale: 1.06, duration: 24.17, ease: "none" }, 0.00);
       tl.fromTo("#tete", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 0.10);
       tl.fromTo("#mention", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 0.60);
-      tl.fromTo("#leg1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 2.70);
-      tl.to("#leg1", { opacity: 0, duration: 0.4 }, 6.55);
-      tl.fromTo("#leg2", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 7.20);
-      tl.to("#leg2", { opacity: 0, duration: 0.4 }, 11.55);
-      tl.to("#p2", { opacity: 1, duration: 1.4, ease: "power2.inOut" }, 7.00);
-      tl.fromTo("#i2", { scale: 1.15 }, { scale: 1.0, duration: 11.00, ease: "power1.out" }, 7.00);
-      tl.fromTo("#e-liq-t", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 8.60);
-      tl.fromTo("#e-liq", { opacity: 0 }, { opacity: 1, duration: 0.35 }, 8.70);
-      tl.fromTo("#e-gaz-t", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 9.40);
-      tl.fromTo("#e-gaz", { opacity: 0 }, { opacity: 1, duration: 0.35 }, 9.50);
-      tl.fromTo("#leg3", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 12.20);
-      tl.to("#e-liq-t", { opacity: 0, duration: 0.4 }, 12.00);
-      tl.to("#e-liq", { opacity: 0, duration: 0.4 }, 12.00);
-      tl.to("#e-gaz-t", { opacity: 0, duration: 0.4 }, 12.00);
-      tl.to("#e-gaz", { opacity: 0, duration: 0.4 }, 12.00);
-      tl.fromTo("#r-in", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 1.0, ease: "power1.inOut" }, 12.30);
-      tl.fromTo("#d0", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 0.8, ease: "power1.inOut" }, 13.30);
-      tl.fromTo("#d1", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 0.8, ease: "power1.inOut" }, 13.40);
-      tl.fromTo("#d2", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 0.8, ease: "power1.inOut" }, 13.50);
-      tl.fromTo("#d3", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 0.8, ease: "power1.inOut" }, 13.60);
-      tl.fromTo("#d4", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 0.8, ease: "power1.inOut" }, 13.70);
-      tl.fromTo("#d5", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 0.8, ease: "power1.inOut" }, 13.80);
+      tl.fromTo("#leg1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 3.75);
+      tl.to("#leg1", { opacity: 0, duration: 0.4 }, 9.50);
+      tl.fromTo("#leg2", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 10.15);
+      tl.to("#leg2", { opacity: 0, duration: 0.4 }, 16.61);
+      tl.to("#p2", { opacity: 1, duration: 1.4, ease: "power2.inOut" }, 9.95);
+      tl.fromTo("#i2", { scale: 1.15 }, { scale: 1.0, duration: 13.11, ease: "power1.out" }, 9.95);
+      tl.fromTo("#e-liq-t", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 11.55);
+      tl.fromTo("#e-liq", { opacity: 0 }, { opacity: 1, duration: 0.35 }, 11.65);
+      tl.fromTo("#e-gaz-t", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 12.35);
+      tl.fromTo("#e-gaz", { opacity: 0 }, { opacity: 1, duration: 0.35 }, 12.45);
+      tl.fromTo("#leg3", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 17.26);
+      tl.to("#e-liq-t", { opacity: 0, duration: 0.4 }, 17.06);
+      tl.to("#e-liq", { opacity: 0, duration: 0.4 }, 17.06);
+      tl.to("#e-gaz-t", { opacity: 0, duration: 0.4 }, 17.06);
+      tl.to("#e-gaz", { opacity: 0, duration: 0.4 }, 17.06);
+      tl.fromTo("#r-in", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 1.0, ease: "power1.inOut" }, 17.36);
+      tl.fromTo("#d0", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 0.8, ease: "power1.inOut" }, 18.36);
+      tl.fromTo("#d1", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 0.8, ease: "power1.inOut" }, 18.46);
+      tl.fromTo("#d2", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 0.8, ease: "power1.inOut" }, 18.56);
+      tl.fromTo("#d3", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 0.8, ease: "power1.inOut" }, 18.66);
+      tl.fromTo("#d4", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 0.8, ease: "power1.inOut" }, 18.76);
+      tl.fromTo("#d5", { strokeDasharray: 4000, strokeDashoffset: 4000 }, { strokeDashoffset: 0, duration: 0.8, ease: "power1.inOut" }, 18.86);
       window.__timelines["main"] = tl;
       tl.seek(0);
     </script>
