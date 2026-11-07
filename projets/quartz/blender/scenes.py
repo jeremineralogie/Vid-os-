@@ -74,6 +74,8 @@ M = {
     "al": matiere("Al", (0.95, 0.68, 0.22), 0.25, metal=0.3),
     "h": matiere("H", (0.92, 0.95, 1.0), 0.2),
     "trou": matiere("trou", (1.0, 0.55, 0.15), 0.3, emission=(1.0, 0.55, 0.15), force=2.0),
+    "fe": matiere("Fe", (0.72, 0.42, 0.30), 0.3, metal=0.4),
+    "fe_apres": matiere("Fe4", (0.80, 0.45, 1.0), 0.3, emission=(0.75, 0.35, 1.0), force=2.0),
     "tetra": matiere("tetra", (0.50, 0.30, 0.95), 0.15, transmission=0.55, alpha=0.85),
 }
 
@@ -173,7 +175,11 @@ elif SCENE == "reseau":
     camera(centre + Vector((0.0, -6.0, 60.0)), centre, ortho=2 * rayon * 1.02, decalage=0.0)
     REPERES.update(centre=centre)
 
-elif SCENE in ("al_avant", "al_apres"):
+elif SCENE in ("al_avant", "al_apres", "fe_avant", "fe_apres"):
+    # Al : un oxygène voisin perd un électron (centre [AlO4]⁰, quartz fumé et morion).
+    # Fe : l'ion de fer lui-même perd un électron (Fe³⁺ → Fe⁴⁺, améthyste) ; pas d'hydrogène représenté.
+    fer = SCENE.startswith("fe")
+    apres = SCENE.endswith("apres")
     # un amas de tétraèdres autour d'un silicium central, que l'on remplace par l'aluminium
     al = min(SI, key=lambda p: (p - Vector((7.5, 6.5, 2.7))).length)
     o_al = voisins_o(al, O)
@@ -187,6 +193,7 @@ elif SCENE in ("al_avant", "al_apres"):
     for i in si_amas:
         o_final.update(voisins_o(SI[i], O))
     o_trou = o_al[0]  # l'oxygène voisin de Al qui perd un électron (le « trou »)
+    dopant = M["fe"] if fer else M["al"]
     # H⁺ compensateur : lié à un O voisin de Al (liaison O–H d'environ 1 Å), pointant hors des liaisons Si
     o_h = o_al[0]
     si_lies = [SI[i] for i in voisins_si(O[o_h], SI)]
@@ -197,11 +204,13 @@ elif SCENE in ("al_avant", "al_apres"):
         for k in voisins_o(s, O):
             baton(s, O[k], 0.13, M["liaison"])
     for k in o_final:
-        m = M["trou"] if (SCENE == "al_apres" and k == o_trou) else M["o"]
+        m = M["trou"] if (apres and not fer and k == o_trou) else M["o"]
         sphere(O[k], 0.40 if k in o_al else 0.34, m)
     for i in si_amas:
-        sphere(SI[i], 0.46 if SI[i] is al else 0.30, M["al"] if SI[i] is al else M["si"])
-    if SCENE == "al_avant":
+        sphere(SI[i], 0.46 if SI[i] is al else 0.30, (M["fe_apres"] if (fer and apres) else dopant) if SI[i] is al else M["si"])
+    if fer:
+        pass
+    elif not apres:
         baton(O[o_h], h, 0.08, M["liaison"])
         sphere(h, 0.22, M["h"])
     else:
@@ -219,6 +228,20 @@ elif SCENE in ("al_avant", "al_apres"):
         t.links.new(em.outputs[0], mix.inputs[2])
         t.links.new(mix.outputs[0], t.nodes["Material Output"].inputs["Surface"])
         sphere(O[o_trou], 0.50, halo, 48)
+    if fer and apres:
+        halo = bpy.data.materials.new("halo_fe")
+        halo.use_nodes = True
+        t = halo.node_tree
+        t.nodes.remove(t.nodes["Principled BSDF"])
+        mix = t.nodes.new("ShaderNodeMixShader")
+        mix.inputs[0].default_value = 0.22
+        t.links.new(t.nodes.new("ShaderNodeBsdfTransparent").outputs[0], mix.inputs[1])
+        em = t.nodes.new("ShaderNodeEmission")
+        em.inputs["Color"].default_value = (0.75, 0.35, 1.0, 1)
+        em.inputs["Strength"].default_value = 0.8
+        t.links.new(em.outputs[0], mix.inputs[2])
+        t.links.new(mix.outputs[0], t.nodes["Material Output"].inputs["Surface"])
+        sphere(al, 0.62, halo, 48)
     eclairage(al, 18)
     # caméra du côté de l'oxygène concerné, pour qu'il soit au premier plan avec Al et H
     v = (O[o_trou] - al).normalized()
