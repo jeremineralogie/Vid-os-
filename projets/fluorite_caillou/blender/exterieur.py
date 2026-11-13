@@ -53,18 +53,21 @@ def construire():
     meilleur = max(me.vertices, key=lambda v: (mw @ v.co).normalized().dot(direction))
     p_geode = mw @ meilleur.co
     n_geode = (mw.to_3x3() @ meilleur.normal).normalized()
-    m_fl = fl.mat_fluorite("fl_ext", "#7650C9", rugosite=0.03)
+    m_fl = fl.mat_fluorite("fl_ext", "#6A44C0", rugosite=0.015, lueur=0.02, opacite=0.4)
     m_co = fl.mat_coeur("co_ext", "#35196F")
     rng = random.Random(2)
     for i in range(9):
         off = Vector((rng.uniform(-1, 1), rng.uniform(-1, 1), rng.uniform(-1, 1)))
         off -= n_geode * off.dot(n_geode)
         taille = rng.uniform(0.035, 0.075)
-        pos = p_geode + off.normalized() * rng.uniform(0, 0.09) - n_geode * 0.035
+        pos = p_geode + off.normalized() * rng.uniform(0, 0.09) + n_geode * taille * 0.15
+        rot = rng.uniform(0, 6.28)
+        from mathutils import Matrix
+        incl = Matrix.Rotation(rng.uniform(0.35, 0.75), 4, "X") @ Matrix.Rotation(rng.uniform(-0.6, 0.6), 4, "Y")
         for nom, mat, k in ((f"g{i}", m_fl, 1.0), (f"g{i}c", m_co, 0.55)):
             o = fl.cube_cristal(nom, taille * k, mat, chanfrein=0.004)
             o.location = pos
-            o.matrix_world = fl.oriente_normale(n_geode, rng.uniform(0, 6.28))
+            o.matrix_world = fl.oriente_normale(n_geode, rot) @ incl
             o.location = pos
             o.scale = (taille * k,) * 3
     # caméra
@@ -135,6 +138,9 @@ def construire():
     fl.cle(contre.data, "energy", [(1, 0.0), (90, 30.0), (226, 40.0), (1715, 40.0), (1950, 60.0)])
     blanc = fl.lampe("blanc_droite", "AREA", (3.0, -1.4, 0.6), 0.0, "#E6E6F0", taille=1.0, vers=(0, 0, 0.1))
     fl.cle(blanc.data, "energy", [(1, 0.0), (226, 0.0), (1715, 150.0), (1950, 170.0)])
+    # reflet sur les petits cubes de la géode
+    fl.lampe("eclat", "SPOT", tuple(p_geode + n_geode * 0.5 + Vector((-0.3, 0.0, 0.35))), 6.0, "#E6E6F0",
+             taille=0.05, vers=tuple(p_geode), angle=math.radians(25))
     # éclairage d'approche : on suit la caméra quand elle entre dans la cassure (pas de noir brutal)
     proche = fl.lampe("proche", "POINT", tuple(entree + n_geode * 0.4), 0.0, "#E6E6F0", taille=0.2)
     fl.cle(proche.data, "energy", [(150, 0.0), (205, 1.2), (226, 0.4), (1715, 0.4), (1765, 1.2), (1800, 0.0)])
