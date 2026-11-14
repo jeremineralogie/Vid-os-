@@ -200,6 +200,19 @@ def logo_cercle(taille=300):
     return chemin
 
 
+def voile_sous_titres():
+    """Bande sombre dégradée derrière les sous-titres (lisibilité sur la roche claire)."""
+    h = 520
+    y = np.arange(h)[:, None]
+    a = np.sin(np.pi * y / h) ** 1.6 * 0.55
+    rgba = np.zeros((h, 1080, 4), np.uint8)
+    rgba[..., 0:3] = (8, 8, 12)
+    rgba[..., 3] = (np.broadcast_to(a, (h, 1080)) * 255).astype(np.uint8)
+    chemin = TRAVAIL / "voile.png"
+    Image.fromarray(rgba, "RGBA").save(chemin)
+    return chemin
+
+
 def filtre_video(ass, logo_y=262):
     f = []
     for k, (pref, a, b) in enumerate(PLANS):
@@ -210,7 +223,8 @@ def filtre_video(ass, logo_y=262):
     # étalonnage : légère courbe, vignettage, grain fin (texture « cinéma »)
     f.append("[abc]eq=contrast=1.04:saturation=1.05,vignette=angle=PI/5:mode=forward,"
              "noise=c0s=5:c0f=t+u,unsharp=5:5:0.35,format=yuv420p[g]")
-    f.append(f"[g]subtitles='{ass}':fontsdir=/usr/share/fonts/opentype/montserrat[s]")
+    f.append("[g][4:v]overlay=x=0:y=1110:enable='between(t,2.5,63.2)'[gv]")
+    f.append(f"[gv]subtitles='{ass}':fontsdir=/usr/share/fonts/opentype/montserrat[s]")
     f.append("[3:v]format=rgba,fade=in:st=60:d=0.9:alpha=1[logo]")
     f.append(f"[s][logo]overlay=x=(W-w)/2:y={logo_y}:enable='gte(t,60)':shortest=0,"
              f"trim=duration={DUREE},format=yuv420p[v]")
@@ -218,7 +232,7 @@ def filtre_video(ass, logo_y=262):
 
 
 def filtre_audio():
-    n = 4  # entrées audio à partir de l'indice 4
+    n = 5  # entrées audio à partir de l'indice 5
     f = []
     for i, d in enumerate(VOIX):
         f.append(f"[{n + i}:a]aformat=sample_rates=48000:channel_layouts=stereo,adelay={int(d * 1000)}:all=1[v{i}]")
@@ -240,6 +254,7 @@ def entrees(logo):
     for pref, a, b in PLANS:
         e += ["-framerate", "30", "-start_number", str(a), "-i", str(RENDU / f"{pref}_%04d.png")]
     e += ["-loop", "1", "-framerate", "30", "-i", str(logo)]
+    e += ["-loop", "1", "-framerate", "30", "-i", str(voile_sous_titres())]
     for i in range(len(VOIX)):
         e += ["-i", str(ICI / f"audio/seg_{i + 1}.wav")]
     e += ["-i", str(ICI / "audio/musique.wav"), "-i", str(ICI / "audio/effets.wav")]
