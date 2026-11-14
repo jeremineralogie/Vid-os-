@@ -22,6 +22,7 @@ import fl  # noqa: E402
 ICI = Path(__file__).resolve().parents[1]
 RENDU = ICI / "sources/rendu"
 APERCUS = ICI / "sources/apercus"
+DIAG = "diag" in sys.argv
 
 Y0, Y1 = -2.0, 35.0
 CAV_A, CAV_B = 21.0, 31.5  # étendue de la cavité le long de y
@@ -478,9 +479,13 @@ def animer_camera(cam, heros, arbre, demo=None):
             v = Vector([g(t) for g in vis_f])
             foc = foc_f(t)
             # garde au sol : jamais dans la paroi (plancher bosselé de la cavité)
-            sol = arbre.ray_cast(p + Vector((0, 0, 1.2)), Vector((0, 0, -1)), 6)[0]
+            # rayon lancé depuis la caméra (un départ plus haut toucherait le dessus d'un plafond bas)
+            sol = arbre.ray_cast(p + Vector((0, 0, 0.05)), Vector((0, 0, -1)), 6)[0]
             if sol is not None and p.z < sol.z + 0.32:
                 p = Vector((p.x, p.y, sol.z + 0.32))
+            ancien = arbre.ray_cast(p + Vector((0, 0, 1.2)), Vector((0, 0, -1)), 6)[0]
+            if DIAG and ancien is not None and p.z < ancien.z + 0.32 - 1e-4:
+                print("DIAG", f)
         # micro-flottement « caméra portée » très doux
         p = p + Vector((0.006 * math.sin(t * 1.3), 0, 0.005 * math.sin(t * 0.9 + 1)))
         cam.location = p
@@ -503,6 +508,8 @@ def animer_camera(cam, heros, arbre, demo=None):
 def principal():
     args = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else ["apercu", "30"]
     s, cam = construire()
+    if args[0] == "diag":
+        return
     if args[0] == "apercu":
         APERCUS.mkdir(parents=True, exist_ok=True)
         ech = int(args[2]) if len(args) > 2 else 50
