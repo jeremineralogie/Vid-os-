@@ -44,6 +44,7 @@ Lire avant toute nouvelle vidéo. Ces choix ont été validés par l'auteur sur 
   - Le minéral s'écrit **« fluorite »** à l'écran, et non « fluorine ».
   - Les chiffres affichés viennent du mémento BRGM ou des notices à 1/50 000, pas de l'inventaire GITES, dont les productions ne concordent pas.
 - **Plans :** photos en plein cadre pour les formats portrait, en « carte » arrondie sur fond de charte pour les formats paysage. Zooms lents et doux, fondus de 0,4 s, titres courts en haut de l'écran.
+- **Illustrations fidèles aux paroles (exigence de l'auteur, nov. 2026) :** chaque image créée doit montrer réellement, et le plus fidèlement possible, ce que disent les mots qu'elle accompagne. Une fissure est une fissure (cassure plane et fine, bords qui se correspondent, échelle du millimètre au centimètre), pas une galerie ni un tunnel. Un fluide est un fluide qui remplit l'espace, pas une lueur dans le vide. Avant tout rendu, vérifier pour chaque illustration : l'échelle, la forme, le contenu et l'éclairage correspondent-ils à l'objet géologique réel ? Montrer un aperçu à l'auteur avant tout long calcul.
 - **Faits :** ne rien ajouter qui ne figure pas dans l'article. Formulations prudentes (« nommée par », non « découverte par », sans preuve). Toute image générée ou illustrative doit être annoncée comme telle.
 
 ## Fichiers
