@@ -279,6 +279,10 @@ def construire():
         poser_cristal("demo", DEMO_POS, n_d, 0.26, 24.3, 34.0, mats_moy, coeur_rel=0.55, enfonce=0.3,
                       inclinaison=0.2, graine=99)
         ions(DEMO_POS + n_d * 0.13, n_d)
+        # lumière de modelé du cristal de démonstration (faces et reflets lisibles)
+        fl.lampe("demo_cle", "AREA", tuple(DEMO_POS + Vector((0.7, -0.5, 0.9))), 25.0, "#E6E6F0", taille=0.6,
+                 vers=tuple(DEMO_POS))
+        fl.lampe("demo_contre", "POINT", tuple(DEMO_POS + Vector((-0.3, 0.6, 0.35))), 6.0, "#B49AEF", taille=0.2)
 
     # --------------------------------------------------------- fluide et particules
     fluide, map_fluide = fl.mat_fluide("fluide", densite=0.07, force=0.7)
@@ -447,8 +451,8 @@ def animer_camera(cam, heros, arbre, demo=None):
     # cavité : suite de positions clés (t, position, visée, focale, mise au point)
     cles = [
         (26.0, None, None, 22, None),
-        (30.0, dz + Vector((0.55, -1.35, 0.75)), dz + Vector((0, 0, 0.05)), 30, None),
-        (34.0, dz + Vector((0.35, -1.0, 0.6)), dz + Vector((0, 0, 0.08)), 35, None),
+        (30.0, dz + Vector((0.45, -0.8, 0.85)), dz + Vector((0, 0.05, 0.08)), 32, None),
+        (34.0, dz + Vector((0.2, -0.62, 0.62)), dz + Vector((0, 0.05, 0.1)), 38, None),
         (37.0, Vector((-0.6, 22.4, 0.9)), Vector((-0.1, 24.8, 0.0)), 28, None),
         (41.0, Vector((-1.7, 24.2, 0.6)), Vector((0.2, 26.6, -0.3)), 30, None),
         (45.5, Vector((1.2, 24.8, 0.6)), hz + Vector((0, 0, 0.25)), 35, None),
