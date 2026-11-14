@@ -456,10 +456,10 @@ def animer_camera(cam, heros, arbre, demo=None):
         (37.0, Vector((-0.6, 22.4, 0.9)), Vector((-0.1, 24.8, 0.0)), 28, None),
         (41.0, Vector((-1.7, 24.2, 0.6)), Vector((0.2, 26.6, -0.3)), 30, None),
         (45.5, Vector((1.2, 24.8, 0.6)), hz + Vector((0, 0, 0.25)), 35, None),
-        (48.0, hz + Vector((1.6, -1.6, 1.0)), hz + Vector((0, 0, 0.2)), 40, None),
-        (51.0, hz + Vector((0.9, -1.75, 0.6)), hz + Vector((0.0, 0, 0.2)), 45, None),
-        (54.0, hz + Vector((-0.9, -1.55, 0.8)), hz + Vector((0.0, 0.05, 0.22)), 50, None),
-        (56.5, hz + Vector((-1.5, -0.5, 1.1)), hz + Vector((0.0, 0.05, 0.2)), 50, None),
+        (48.0, hz + Vector((1.5, -1.5, 1.35)), hz + Vector((0, 0, 0.2)), 40, None),
+        (51.0, hz + Vector((0.85, -1.6, 1.1)), hz + Vector((0.0, 0, 0.2)), 45, None),
+        (54.0, hz + Vector((-0.85, -1.45, 1.15)), hz + Vector((0.0, 0.05, 0.22)), 50, None),
+        (56.5, hz + Vector((-1.5, -0.5, 1.15)), hz + Vector((0.0, 0.05, 0.2)), 50, None),
         (58.4, Vector((-0.1, 21.2, 1.0)), Vector((0.2, 26.0, 0.3)), 24, None),
     ]
     p0, v0 = corridor(26.0)
